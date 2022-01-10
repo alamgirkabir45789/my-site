@@ -1,15 +1,15 @@
-/*
-   Title: Critical Process Details
-   Description: Critical Process Details
-   Author: Iqbal Hossain
-   Date: 05-January-2022
-   Modified: 05-January-2022
-*/
+/**
+ * Title: Line Details
+ * Description: Detail page for Line
+ * Author: Nasir Ahmed
+ * Date: 21-November-2021
+ * Modified: 21-November-2021
+ */
 
 import React from 'react';
 
-const CriticalProcessDetails = () => {
-  return <div>Hello From Critical Process Details</div>;
+const LineDetails = () => {
+  return <div>Hello From LineDetails</div>;
 };
 
-export default CriticalProcessDetails;
+export default LineDetails;
