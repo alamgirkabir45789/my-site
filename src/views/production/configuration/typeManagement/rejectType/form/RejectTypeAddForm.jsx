@@ -8,17 +8,31 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import CreatableSelect from 'react-select/creatable';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
-import { isObjEmpty } from 'utility/Utils';
+import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { addRejectType } from '../store/actions';
+
+const productionProcesses = [
+  { id: 1, label: 'Cutting', value: 'Cutting' },
+  { id: 2, label: 'Print', value: 'Print' },
+  { id: 3, label: 'Wash', value: 'Wash' }
+];
 
 const RejectTypeAddForm = props => {
   const { open, toggleSidebar, lastPageInfo } = props;
   const dispatch = useDispatch();
+
+  // const { productionProcesses } = useSelector(
+  //   ({ productionProcessReducer }) => productionProcessReducer
+  // );
+  //#region State
+  const [productionProcess, setProductionProcess] = useState(null);
+  //#endregion
 
   const { register, errors, handleSubmit } = useForm();
 
@@ -65,6 +79,25 @@ const RejectTypeAddForm = props => {
           {errors && errors.rejectTypeName && <FormFeedback>Reject Type is Required!</FormFeedback>}
         </FormGroup>
         <FormGroup>
+          <Label for="productionProcess">Production Process</Label>
+          <CreatableSelect
+            id="role"
+            isSearchable
+            isClearable
+            theme={selectThemeColors}
+            options={productionProcesses}
+            classNamePrefix="select"
+            innerRef={register({ required: true })}
+            value={productionProcess}
+            onChange={data => {
+              setProductionProcess(data);
+            }}
+          />
+          {errors && errors.productionProcess && (
+            <FormFeedback>Production Process is Required!</FormFeedback>
+          )}
+        </FormGroup>
+        {/* <FormGroup>
           <Label for="productionProcess">
             <span>Production Process</span>
           </Label>
@@ -79,7 +112,7 @@ const RejectTypeAddForm = props => {
           {errors && errors.productionProcess && (
             <FormFeedback>Production Process is Required!</FormFeedback>
           )}
-        </FormGroup>
+        </FormGroup> */}
         <FormGroup>
           <Label for="status">
             <Input
