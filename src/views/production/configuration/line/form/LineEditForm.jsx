@@ -81,7 +81,7 @@ const LineEditForm = props => {
           {errors && errors.description && <FormFeedback>Description is Required!</FormFeedback>}
         </FormGroup>
         <FormGroup>
-          <Label for="description">
+          <Label for="status">
             <Input
               style={{ marginLeft: '5px' }}
               name="status"

@@ -26,7 +26,7 @@ const initialState = {
   isOpenSidebar: false
 };
 
-export const REJECT_TYPEReducer = (state = initialState, action) => {
+export const rejectTypeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_REJECT_TYPE:

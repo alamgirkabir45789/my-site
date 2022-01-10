@@ -1,6 +1,6 @@
 /*
-     Title: LINE API and fake Data
-     Description: LINE API and fake Data
+     Title: Reject Type API and fake Data
+     Description: Reject Type API and fake Data
      Author: Iqbal Hossain 
      Date: 10-January-2022
      Modified: 10-January-2022

@@ -52,7 +52,7 @@ const LineAddForm = props => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label for="lineNumber">
-            Line Number <span></span>
+            <span>Line Number</span>
           </Label>
           <Input
             name="lineNumber"
@@ -66,7 +66,7 @@ const LineAddForm = props => {
         </FormGroup>
         <FormGroup>
           <Label for="description">
-            Line Description <span></span>
+            <span>Description</span>
           </Label>
           <Input
             name="description"
