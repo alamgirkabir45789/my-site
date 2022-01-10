@@ -3,7 +3,7 @@
      Description: Reducers for REJECT_TYPE
      Author: Iqbal Hossain
      Date: 06-January-2022
-     Modified: 10January-2022
+     Modified: 10-January-2022
 */
 
 import {
@@ -56,5 +56,5 @@ export const rejectTypeReducer = (state = initialState, action) => {
 };
 
 /** Change Log
- * 10-Jan-2022(Iqbal):Add TOGGLE_REJECT_TYPE_SIDEBAR, FETCH_REJECT_TYPE_BY_QUERY, ADD_REJECT_TYPE, DELETE_REJECT_TYPE, FETCH_REJECT_TYPE_BY_ID, UPDATE_REJECT_TYPE, DELETE_REJECT_TYPE_BY_RANGE
+ * 10-Jan-2022(Iqbal): Add TOGGLE_REJECT_TYPE_SIDEBAR, FETCH_REJECT_TYPE_BY_QUERY, ADD_REJECT_TYPE, DELETE_REJECT_TYPE, FETCH_REJECT_TYPE_BY_ID, UPDATE_REJECT_TYPE, DELETE_REJECT_TYPE_BY_RANGE
  */

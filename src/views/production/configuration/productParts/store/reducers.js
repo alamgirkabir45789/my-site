@@ -49,7 +49,6 @@ export const productPartReducer = (state = initialState, action) => {
     case DELETE_PRODUCT_PART: {
       return { ...state, items: payload };
     }
-
     case DELETE_PRODUCT_PART_BY_RANGE: {
       return { ...state, items: payload };
     }

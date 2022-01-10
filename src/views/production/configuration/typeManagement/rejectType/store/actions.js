@@ -132,6 +132,7 @@ export const deleteRejectTypeByRange = ids => {
     if (e.isConfirmed) {
       try {
         const res = await baseAxios.delete(`${REJECT_TYPE_API.delete_by_range}`, { ids });
+        console.log(res);
         dispatch({
           type: DELETE_REJECT_TYPE_BY_RANGE,
           payload: res.data.data

@@ -69,7 +69,7 @@ mock.onGet(`${LINE_API.fetch_all}`).reply(200, data);
 mock.onGet(`${LINE_API.fetch_by_id}`).reply(config => {
   const { id } = config;
   const res = data.find(e => e.id === id);
-  return [200, res, { succeeded: true }];
+  return [200, { succeeded: true, data: res }];
 });
 
 //GET: get by query
@@ -131,7 +131,7 @@ mock.onDelete(`${LINE_API.delete_by_range}`).reply(config => {
   for (let index = 0; index < ids.length; index++) {
     const id = ids[index];
     const itemIndex = modifieddata.findIndex(item => item.id === id);
-    data.splice(itemIndex, 1);
+    modifieddata.splice(itemIndex, 1);
   }
   return [
     200,
