@@ -64,7 +64,7 @@ const ZoneEditForm = props => {
             invalid={errors.zoneOwnerName && true}
             className={classnames({ 'is-invalid': errors['zoneOwnerName'] })}
           />
-          {errors && errors.zoneOwnerName && <FormFeedback>Zonw Onwer is Required!</FormFeedback>}
+          {errors && errors.zoneOwnerName && <FormFeedback>Zone Owner is Required!</FormFeedback>}
         </FormGroup>
         <FormGroup>
           <Label for="employeeCode">

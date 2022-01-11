@@ -41,106 +41,108 @@ export const toggleZoneSidebar = condition => dispatch => {
 //Get Data by Query
 export const fetchZonesByQuery = params => {
   return async dispatch => {
-    await baseAxios.get(`${ZONE_API.fetch_by_query}`, params).then(response => {
+    try {
+      const res = await baseAxios.get(`${ZONE_API.fetch_by_query}`, params);
       dispatch({
         type: FETCH_ZONE_BY_QUERY,
         payload: {
-          zones: response.data.data,
-          totalRecords: response.data.totalRecords,
+          items: res.data.data,
+          totalRecords: res.data.totalRecords,
           params
         }
       });
-    });
+    } catch (error) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Get by id
 export const fetchZoneById = id => {
   return async dispatch => {
-    await baseAxios
-      .get(`${ZONE_API.fetch_by_id}`, { id })
-      .then(response => {
-        dispatch({
-          type: FETCH_ZONE_BY_ID,
-          payload: {
-            selectedZone: response.data ? response.data : null
-          }
-        });
-      })
-      .catch(err => console.log(err));
+    try {
+      const res = await baseAxios.get(`${ZONE_API.fetch_by_id}`, { id });
+      dispatch({
+        type: FETCH_ZONE_BY_ID,
+        payload: {
+          selectedItem: res.data.data ? res.data.data : null
+        }
+      });
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Add new
-export const addZone = (zone, params) => {
+export const addZone = (data, params) => {
   return async dispatch => {
-    await baseAxios
-      .post(`${ZONE_API.add}`, zone)
-      .then(() => {
-        dispatch({
-          type: ADD_ZONE,
-          payload: zone
-        });
-        notify('success', 'The Zone added Successfully!');
-        dispatch(fetchZonesByQuery(params));
-      })
-      .catch(err => console.log(err));
+    try {
+      const res = await baseAxios.post(`${ZONE_API.add}`, data);
+      dispatch({
+        type: ADD_ZONE,
+        payload: data
+      });
+      notify('success', res.data.message);
+      dispatch(fetchZonesByQuery(params));
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Update Zone
-export const updateZone = (zone, params) => {
-  return dispatch => {
-    baseAxios.post(`${ZONE_API.update}`, { zone }).then(() => {
+export const updateZone = (data, params) => {
+  return async dispatch => {
+    try {
+      const res = await baseAxios.post(`${ZONE_API.update}`, { data });
       dispatch({
         type: UPDATE_ZONE,
-        payload: zone
+        payload: data
       });
-      notify('success', 'The Zone Updated Successfully!');
+      notify('success', res.data.message);
       dispatch(fetchZonesByQuery(params));
-    });
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Delete Zone
 export const deleteZone = id => {
-  return dispatch => {
-    confirmDialog(confirmObj).then(async e => {
-      if (e.isConfirmed) {
-        await baseAxios
-          .delete(`${ZONE_API.delete}`, { id })
-          .then(() => {
-            dispatch({
-              type: DELETE_ZONE
-            });
-          })
-          .then(() => {
-            notify('success', 'Zone Deleted Successfully!');
-            dispatch(fetchZone());
-          });
+  return async dispatch => {
+    const e = await confirmDialog(confirmObj);
+    if (e.isConfirmed) {
+      try {
+        const res = await baseAxios.delete(`${ZONE_API.delete}`, { id });
+        dispatch({
+          type: DELETE_ZONE,
+          payload: res.data.data
+        });
+        notify('success', res.data.message);
+      } catch (err) {
+        notify('error', 'Something went wrong!!! Please tyr again');
       }
-    });
+    }
   };
 };
 
 //Delete by Range
 export const deleteZoneByRange = ids => {
-  return dispatch => {
-    confirmDialog(confirmObj).then(e => {
-      if (e.isConfirmed) {
-        baseAxios
-          .delete(`${ZONE_API.delete_by_range}`, { ids })
-          .then(() => {
-            dispatch({
-              type: DELETE_ZONE_BY_RANGE
-            });
-          })
-          .then(() => {
-            notify('success', 'Zones deleted Successfully!');
-            dispatch(fetchZone());
-          });
+  return async dispatch => {
+    const e = await confirmDialog(confirmObj);
+    if (e.isConfirmed) {
+      try {
+        const res = await baseAxios.delete(`${ZONE_API.delete_by_range}`, { ids });
+        dispatch({
+          type: DELETE_ZONE_BY_RANGE,
+          payload: res.data.data
+        });
+        notify('success', res.data.message);
+      } catch (err) {
+        notify('error', 'Something went wrong!!! Please tyr again');
       }
-    });
+    }
   };
 };
 

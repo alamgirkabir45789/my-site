@@ -41,16 +41,19 @@ export const toggleLineSidebar = condition => dispatch => {
 //Get Data by Query
 export const fetchLinesByQuery = params => {
   return async dispatch => {
-    await baseAxios.get(`${LINE_API.fetch_by_query}`, params).then(response => {
+    try {
+      const res = await baseAxios.get(`${LINE_API.fetch_by_query}`, params);
       dispatch({
         type: FETCH_LINE_BY_QUERY,
         payload: {
-          items: response.data.data,
-          totalRecords: response.data.totalRecords,
+          items: res.data.data,
+          totalRecords: res.data.totalRecords,
           params
         }
       });
-    });
+    } catch (error) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 

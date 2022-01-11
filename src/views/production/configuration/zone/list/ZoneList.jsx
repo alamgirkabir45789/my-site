@@ -32,7 +32,7 @@ const statusOptions = [
 
 const ZoneList = () => {
   const dispatch = useDispatch();
-  const { zones, isOpenZoneSidebar, total, selectedZone } = useSelector(
+  const { items, isOpenSidebar, total, selectedItem } = useSelector(
     ({ zoneReducer }) => zoneReducer
   );
 
@@ -51,7 +51,7 @@ const ZoneList = () => {
   //#endregion
 
   //Global Function to toggle Sidebar
-  const toggleSidebar = () => store.dispatch(toggleZoneSidebar(!isOpenZoneSidebar));
+  const toggleSidebar = () => store.dispatch(toggleZoneSidebar(!isOpenSidebar));
 
   //#region Effects
   useEffect(() => {
@@ -160,7 +160,7 @@ const ZoneList = () => {
         <DataTable
           onSelectedRowsChange={handleRowSelected}
           onSort={handleSort}
-          progressPending={!zones.length}
+          progressPending={!items.length}
           progressComponent={<CustomPreLoader />}
           contextActions={
             <Button.Ripple
@@ -184,7 +184,7 @@ const ZoneList = () => {
           columns={ZoneTableColumn}
           sortIcon={<ChevronDown />}
           className="react-dataTable"
-          data={zones}
+          data={items}
         />
         <CustomPagination
           count={Number(Math.ceil(total / rowsPerPage))}
@@ -193,16 +193,16 @@ const ZoneList = () => {
         />
       </Card>
 
-      {selectedZone !== null && isOpenZoneSidebar ? (
+      {selectedItem !== null && isOpenSidebar ? (
         <ZoneEditForm
-          data={selectedZone}
-          open={isOpenZoneSidebar}
+          data={selectedItem}
+          open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
-      ) : isOpenZoneSidebar ? (
+      ) : isOpenSidebar ? (
         <ZoneAddForm
-          open={isOpenZoneSidebar}
+          open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />

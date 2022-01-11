@@ -18,27 +18,27 @@ import {
 } from './actionType';
 
 const initialState = {
-  zones: [],
+  items: [],
   queryData: [],
   total: 1,
   params: {},
-  selectedZone: null,
-  isOpenZoneSidebar: false
+  selectedItem: null,
+  isOpenSidebar: false
 };
 
 export const zoneReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_ZONE:
-      return { ...state, zones: payload };
+      return { ...state, items: payload };
     case TOGGLE_ZONE_SIDEBAR:
-      return { ...state, isOpenZoneSidebar: payload };
+      return { ...state, isOpenSidebar: payload };
     case FETCH_ZONE_BY_ID:
-      return { ...state, selectedZone: payload.selectedZone };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_ZONE_BY_QUERY:
       return {
         ...state,
-        zones: payload.zones,
+        items: payload.items,
         total: payload.totalRecords,
         params: payload.params
       };
@@ -47,9 +47,9 @@ export const zoneReducer = (state = initialState, action) => {
     case UPDATE_ZONE:
       return { ...state, total: state.total + 1 };
     case DELETE_ZONE:
-      return { ...state };
+      return { ...state, items: payload };
     case DELETE_ZONE_BY_RANGE:
-      return { ...state };
+      return { ...state, items: payload };
     default:
       return state;
   }
