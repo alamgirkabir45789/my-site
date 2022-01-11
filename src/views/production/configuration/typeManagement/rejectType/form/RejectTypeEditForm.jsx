@@ -8,19 +8,37 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import CreatableSelect from 'react-select/creatable';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
-import { isObjEmpty } from 'utility/Utils';
+import { isObjEmpty, selectThemeColors } from 'utility/Utils';
+import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
 import { updateRejectType } from '../store/actions';
 
 const RejectTypeEditForm = props => {
   const { open, toggleSidebar, data, lastPageInfo } = props;
   const dispatch = useDispatch();
 
+  const { dropDownItems } = useSelector(({ productionProcessReducer }) => productionProcessReducer);
+
+  //#region State
+  const [productionProcess, setProductionProcess] = useState();
+  //#endregion
+
   const { register, errors, handleSubmit } = useForm();
+
+  //#region Effect
+  useEffect(() => {
+    dispatch(getDropDownProductinProcess());
+    if (dropDownItems.length) {
+      const filterPP = dropDownItems?.find(i => i.label === data.productionProcess);
+      setProductionProcess(filterPP);
+    }
+  }, [dispatch, dropDownItems.length]);
+  //#endregion
 
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
@@ -30,7 +48,7 @@ const RejectTypeEditForm = props => {
           {
             id: data.id,
             rejectTypeName: values.rejectTypeName,
-            productionProcess: values.productionProcess,
+            productionProcess: productionProcess.label,
             status: 'active'
           },
           lastPageInfo
@@ -69,6 +87,27 @@ const RejectTypeEditForm = props => {
           <Label for="productionProcess">
             <span>Production Process</span>
           </Label>
+          <CreatableSelect
+            id="productionProcess"
+            isSearchable
+            isClearable
+            theme={selectThemeColors}
+            options={dropDownItems}
+            classNamePrefix="select"
+            innerRef={register({ required: true })}
+            value={productionProcess}
+            onChange={data => {
+              setProductionProcess(data);
+            }}
+          />
+          {errors && errors.productionProcess && (
+            <FormFeedback>Production Process is Required!</FormFeedback>
+          )}
+        </FormGroup>
+        {/* <FormGroup>
+          <Label for="productionProcess">
+            <span>Production Process</span>
+          </Label>
           <Input
             name="productionProcess"
             id="productionProcess"
@@ -81,7 +120,7 @@ const RejectTypeEditForm = props => {
           {errors && errors.productionProcess && (
             <FormFeedback>Production Process is Required!</FormFeedback>
           )}
-        </FormGroup>
+        </FormGroup> */}
         <FormGroup>
           <Label for="status">
             <Input
