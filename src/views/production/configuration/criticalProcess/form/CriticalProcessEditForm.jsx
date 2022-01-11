@@ -1,41 +1,66 @@
 /*
-   Title: Edit page for Line
-   Description: Edit page for Line
-   Author: Iqbal Hossain
-   Date: 08-January-2022
-   Modified: 08-January-2022
+   Title: Edit page for Critical Process
+   Description: Edit page for Critical Process
+   Author: Nasir Ahmed
+   Date: 11-January-2022
+   Modified: 11-January-2022
 */
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
-import { isObjEmpty } from 'utility/Utils';
-import { updateCriticalProcess } from '../store/actions';
+import { isObjEmpty, selectThemeColors } from 'utility/Utils';
+import { TOGGLE_INCOMPLETE_TYPE_SIDEBAR } from '../../typeManagement/incompleteType/store/actionType';
 
-const LineEditForm = props => {
-  const { open, toggleSidebar, data, lastPageInfo } = props;
+const CriticalProcessTypeDDL = [
+  { value: 'Partial', label: 'Partial' },
+  { value: 'Complete', label: 'Complete' }
+];
+
+const CriticalProcessEditForm = props => {
+  // eslint-disable-next-line no-unused-vars
+  const { open, toggleSidebar, toggleCritcalProcessStatus, data, lastPageInfo } = props;
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
+
+  //#region State
+  const [criticalProcessType, setCriticalProcessType] = useState(null);
+  //#endregion
 
   const { register, errors, handleSubmit } = useForm();
 
+  //#region Effect
+  useEffect(() => {
+    if (data) {
+      const selectedProcessType = CriticalProcessTypeDDL.find(
+        item => item.value === data.processType
+      );
+      setCriticalProcessType(selectedProcessType);
+    }
+  }, [data]);
+  //#endregion
+
   const onSubmit = values => {
+    // eslint-disable-next-line no-console
+    console.log(values);
     if (isObjEmpty(errors)) {
       toggleSidebar();
-      dispatch(
-        updateCriticalProcess(
-          {
-            id: data.id,
-            lineNumber: values.lineNumber,
-            description: values.description,
-            status: 'active'
-          },
-          lastPageInfo
-        )
-      );
+      // dispatch(
+      //   updateCriticalProcess(
+      //     {
+      //       id: data.id,
+      //       lineNumber: values.lineNumber,
+      //       description: values.description,
+      //       status: 'active'
+      //     },
+      //     lastPageInfo
+      //   )
+      // );
     }
   };
 
@@ -43,7 +68,7 @@ const LineEditForm = props => {
     <Sidebar
       size="lg"
       open={open}
-      title="Edit Line"
+      title="Edit Critical Process"
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
@@ -51,42 +76,61 @@ const LineEditForm = props => {
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
-          <Label for="lineNumber">
-            <span>Line Name</span>
-          </Label>
+          <Label for="lineNumber">Process Name</Label>
           <Input
-            name="lineNumber"
-            id="lineNumber"
-            placeholder=" Line Name"
-            defaultValue={data.lineNumber}
+            name="processName"
+            id="processName"
+            placeholder="Process Name"
+            defaultValue={data.processName}
             innerRef={register({ required: true })}
-            invalid={errors.lineNumber && true}
-            className={classnames({ 'is-invalid': errors['lineNumber'] })}
+            invalid={errors.processName && true}
+            className={classnames({ 'is-invalid': errors['processName'] })}
           />
-          {errors && errors.lineNumber && <FormFeedback>Line Number is Required!</FormFeedback>}
+          {errors && errors.processName && <FormFeedback>Process name is Required!</FormFeedback>}
         </FormGroup>
+
         <FormGroup>
-          <Label for="description">
-            <span>Line Description</span>
-          </Label>
+          <Label for="processType">Process Type</Label>
+          <Select
+            name="processType"
+            id="role"
+            isSearchable
+            isClearable
+            theme={selectThemeColors}
+            options={CriticalProcessTypeDDL}
+            classNamePrefix="select"
+            innerRef={register({ required: true })}
+            value={criticalProcessType}
+            onChange={item => setCriticalProcessType(item)}
+          />
+          {errors && errors.description && <FormFeedback>Description is Required!</FormFeedback>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="description">Description</Label>
           <Input
             name="description"
             id="description"
             placeholder="Description"
             defaultValue={data.description}
-            innerRef={register({ required: true })}
+            innerRef={register({ required: false })}
             invalid={errors.description && true}
             className={classnames({ 'is-invalid': errors['description'] })}
           />
-          {errors && errors.description && <FormFeedback>Description is Required!</FormFeedback>}
+          {errors && errors.processName && <FormFeedback>Process name is Required!</FormFeedback>}
         </FormGroup>
+
         <FormGroup>
-          <Label for="description">
+          <Label for="status">
             <Input
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e =>
+                dispatch({ type: TOGGLE_INCOMPLETE_TYPE_SIDEBAR, payload: e.target.checked })
+              }
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>
@@ -106,4 +150,4 @@ const LineEditForm = props => {
   );
 };
 
-export default LineEditForm;
+export default CriticalProcessEditForm;

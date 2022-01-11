@@ -18,12 +18,13 @@ import CustomPagination from 'utility/custom/production/CustomPagination';
 import { PlusIcon } from 'utility/custom/production/icons/CustomIcons';
 import TableCustomerHeader from 'utility/custom/TableCustomerHeader';
 import { selectThemeColors } from 'utility/Utils';
-import LineAddForm from '../form/CriticalProcessAddForm';
-import LineEditForm from '../form/CriticalProcessEditForm';
+import CriticalProcessAddForm from '../form/CriticalProcessAddForm';
+import CriticalProcessEditForm from '../form/CriticalProcessEditForm';
 import {
   deleteCriticalProcessByRange,
   fetchCriticalProcessByQuery,
-  toggleCritcalProcessSidebar
+  toggleCritcalProcessSidebar,
+  toggleCritcalProcessStatus
 } from '../store/actions';
 import LineExpandRow from './CriticalProcessExpandRow';
 import { criticalProcessTableColumn } from './criticalProcessTableColumn';
@@ -196,14 +197,15 @@ const CriticalProcessList = () => {
       </Card>
 
       {selectedItem !== null && isOpenSidebar ? (
-        <LineEditForm
+        <CriticalProcessEditForm
           data={selectedItem}
           open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
+          toggleCritcalProcessStatus={toggleCritcalProcessStatus}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
-        <LineAddForm
+        <CriticalProcessAddForm
           open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}

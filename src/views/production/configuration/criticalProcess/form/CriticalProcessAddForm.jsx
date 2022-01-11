@@ -8,19 +8,29 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
-import { isObjEmpty } from 'utility/Utils';
+import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { addCriticalProcess } from '../store/actions';
+
+const CriticalProcessTypeDDL = [
+  { value: 'Partial', label: 'Partial' },
+  { value: 'Complete', label: 'Complete' }
+];
 
 const LineAddForm = props => {
   const { open, toggleSidebar, lastPageInfo } = props;
   const dispatch = useDispatch();
 
   const { register, errors, handleSubmit } = useForm();
+
+  //#region State
+  const [criticalProcess, setCriticalProcess] = useState(null);
+  //#endregion
 
   //Submit method for data save
   const onSubmit = values => {
@@ -30,9 +40,9 @@ const LineAddForm = props => {
         addCriticalProcess(
           {
             processName: values.processName,
-            processType: values.processType,
+            processType: criticalProcess.value,
             description: values.description,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -44,40 +54,54 @@ const LineAddForm = props => {
     <Sidebar
       size="lg"
       open={open}
-      title="New Line"
+      title="New Critical Process"
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
       toggleSidebar={toggleSidebar}
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <FormGroup>
-          <Label for="lineNumber">
-            Line Number <span></span>
-          </Label>
+          <Label for="lineNumber">Process Name</Label>
           <Input
-            name="lineNumber"
-            id="lineNumber"
-            placeholder="Line Name"
+            name="processName"
+            id="processName"
+            placeholder="Process Name"
             innerRef={register({ required: true })}
-            invalid={errors.lineNumber && true}
-            className={classnames({ 'is-invalid': errors['lineNumber'] })}
+            invalid={errors.processName && true}
+            className={classnames({ 'is-invalid': errors['processName'] })}
           />
-          {errors && errors.lineNumber && <FormFeedback>Line Number is Required!</FormFeedback>}
+          {errors && errors.processName && <FormFeedback>Process name is Required!</FormFeedback>}
         </FormGroup>
+
         <FormGroup>
-          <Label for="description">
-            Line Description <span></span>
-          </Label>
+          <Label for="processType">Process Type</Label>
+          <Select
+            name="processType"
+            id="role"
+            isSearchable
+            isClearable
+            theme={selectThemeColors}
+            options={CriticalProcessTypeDDL}
+            classNamePrefix="select"
+            innerRef={register({ required: true })}
+            value={criticalProcess}
+            onChange={item => setCriticalProcess(item)}
+          />
+          {errors && errors.description && <FormFeedback>Description is Required!</FormFeedback>}
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="description">Description</Label>
           <Input
             name="description"
             id="description"
             placeholder="Description"
-            innerRef={register({ required: true })}
+            innerRef={register({ required: false })}
             invalid={errors.description && true}
             className={classnames({ 'is-invalid': errors['description'] })}
           />
-          {errors && errors.description && <FormFeedback>Description is Required!</FormFeedback>}
+          {errors && errors.processName && <FormFeedback>Process name is Required!</FormFeedback>}
         </FormGroup>
         <FormGroup>
           <Label for="status">
@@ -85,7 +109,7 @@ const LineAddForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

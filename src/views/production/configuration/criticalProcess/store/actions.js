@@ -19,6 +19,7 @@ import {
   FETCH_CRITICAL_PROCESS_BY_ID,
   FETCH_CRITICAL_PROCESS_BY_QUERY,
   TOGGLE_CRITICAL_PROCESS_SIDEBAR,
+  TOGGLE_CRITICAL_PROCESS_STATUS,
   UPDATE_CRITICAL_PROCESS
 } from './actionType';
 
@@ -35,6 +36,12 @@ export const toggleCritcalProcessSidebar = condition => dispatch => {
   dispatch({
     type: TOGGLE_CRITICAL_PROCESS_SIDEBAR,
     payload: condition
+  });
+};
+export const toggleCritcalProcessStatus = status => dispatch => {
+  dispatch({
+    type: TOGGLE_CRITICAL_PROCESS_STATUS,
+    payload: status
   });
 };
 
@@ -64,7 +71,9 @@ export const fetchCriticalProcessById = id => {
       const res = await baseAxios.get(`${CRITICAL_PROCESS_API.fetch_by_id}`, { id });
       dispatch({
         type: FETCH_CRITICAL_PROCESS_BY_ID,
-        selectedItem: res.data ? res.data : null
+        payload: {
+          selectedItem: res.data.data
+        }
       });
     } catch (err) {
       notify('error', 'Something went wrong!!! Please try again');
@@ -91,6 +100,7 @@ export const addCriticalProcess = (data, params) => {
 
 //Update
 export const updateCriticalProcess = (data, params) => {
+  // console.log(data);
   return async dispatch => {
     try {
       const res = await baseAxios.post(`${CRITICAL_PROCESS_API.update}`, { data });

@@ -20,6 +20,7 @@
     "jest": true
   },
   "rules": {
+    "react-hooks/exhaustive-deps": "warn",
     "react/react-in-jsx-scope": 0,
     "react-hooks/rules-of-hooks": "error",
     "react/state-in-constructor": 0,

@@ -14,6 +14,7 @@ import {
   FETCH_CRITICAL_PROCESS_BY_ID,
   FETCH_CRITICAL_PROCESS_BY_QUERY,
   TOGGLE_CRITICAL_PROCESS_SIDEBAR,
+  TOGGLE_CRITICAL_PROCESS_STATUS,
   UPDATE_CRITICAL_PROCESS
 } from './actionType';
 
@@ -31,10 +32,17 @@ export const criticalProcessReducer = (state = initialState, action) => {
   switch (type) {
     case FETCH_CRITICAL_PROCESS:
       return { ...state, items: payload };
+
     case TOGGLE_CRITICAL_PROCESS_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
-    case FETCH_CRITICAL_PROCESS_BY_ID:
-      return { ...state, selectedItem: action.selectedItem };
+
+    case TOGGLE_CRITICAL_PROCESS_STATUS:
+      return { ...state, selectedItem: { ...state.selectedItem, state: payload } };
+
+    case FETCH_CRITICAL_PROCESS_BY_ID: {
+      return { ...state, selectedItem: payload.selectedItem };
+    }
+
     case FETCH_CRITICAL_PROCESS_BY_QUERY:
       return {
         ...state,
@@ -42,14 +50,19 @@ export const criticalProcessReducer = (state = initialState, action) => {
         total: payload.totalRecords,
         params: action.params
       };
+
     case ADD_CRITICAL_PROCESS:
       return { ...state, total: state.total + 1 };
+
     case UPDATE_CRITICAL_PROCESS:
       return { ...state, total: state.total + 1 };
+
     case DELETE_CRITICAL_PROCESS:
       return { ...state, items: payload };
+
     case DELETE_CRITICAL_PROCESS_BY_RANGE:
       return { ...state, items: payload };
+
     default:
       return state;
   }

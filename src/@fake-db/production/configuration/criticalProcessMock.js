@@ -31,7 +31,7 @@ const data = [
     processName: 'Process 03',
     processType: 'Partial',
     description: 'Process 03 Description',
-    status: 'active'
+    status: 'inactive'
   },
   {
     id: 4,
