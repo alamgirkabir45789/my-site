@@ -49,9 +49,9 @@ export const productionProcessReducer = (state = initialState, action) => {
     case UPDATE_PRODUCTION_PROCESS:
       return { ...state, total: state.total + 1 };
     case DELETE_PRODUCTION_PROCESS:
-      return { ...state };
+      return { ...state, productionProcesses: payload };
     case DELETE_PRODUCTION_PROCESS_BY_RANGE:
-      return { ...state };
+      return { ...state, productionProcesses: payload };
     case DROP_DOWN_PRODUCTION_PROCESS:
       return { ...state, dropDownItems: action.dropDownItems };
     default:

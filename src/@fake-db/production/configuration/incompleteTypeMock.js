@@ -1,58 +1,55 @@
 /*
-     Title: Production Process Mock
-     Description: Production Process Mock
-     Author: Iqbal Hossain
-     Date: 09-January-2022
-     Modified: 09-January-2022
+     Title: Incomplete Type API and fake Data
+     Description: Incomplete Type API and fake Data
+     Author: Iqbal Hossain 
+     Date: 11-January-2022
+     Modified: 11-January-2022
 */
 
 import { paginateArray } from '@fake-db/utils';
-import { PRODUCTION_PROCESS_API } from 'services/api-end-points/production/v1';
+import { INCOMPLETE_TYPE_API } from 'services/api-end-points/production/v1';
 import { randomIdGenerator } from 'utility/Utils';
 import mock from '../../mock';
 
 const data = [
   {
     id: 1,
-    productionProcessName: 'Cutting',
-    processType: 'Partial',
-    description: 'This is Cutting',
+    incompleteTypeName: 'Cutting defect',
+    productionProcess: 'Cutting',
     status: 'active'
   },
   {
     id: 2,
-    productionProcessName: 'Print',
-    processType: 'Complete',
-    description: 'This is Print',
+    incompleteTypeName: 'Sub-Store',
+    productionProcess: 'Print',
     status: 'active'
   },
   {
     id: 3,
-    productionProcessName: 'Wash',
-    processType: 'Partial',
-    description: 'This is Wash',
+    incompleteTypeName: 'Washing',
+    productionProcess: 'Wash',
     status: 'inactive'
   }
 ];
 
 //GET ALL DATA
-mock.onGet(`${PRODUCTION_PROCESS_API.fetch_all}`).reply(200, data);
+mock.onGet(`${INCOMPLETE_TYPE_API.fetch_all}`).reply(200, data);
 
 //GET: get single
-mock.onGet(`${PRODUCTION_PROCESS_API.fetch_by_id}`).reply(config => {
+mock.onGet(`${INCOMPLETE_TYPE_API.fetch_by_id}`).reply(config => {
   const { id } = config;
-  const productionProcess = data.find(e => e.id === id);
-  return [200, productionProcess, { succeeded: true }];
+  const res = data.find(e => e.id === id);
+  return [200, res, { succeeded: true }];
 });
 
 //GET: get by query
-mock.onGet(`${PRODUCTION_PROCESS_API.fetch_by_query}`).reply(config => {
+mock.onGet(`${INCOMPLETE_TYPE_API.fetch_by_query}`).reply(config => {
   const { q = '', rowsPerPage = 10, page = 1, status = null } = config;
   const queryLowered = q.toLowerCase();
   const filteredData = data.filter(
-    pp =>
-      pp.productionProcessName.toLowerCase().includes(queryLowered) ||
-      pp.status === (status === '' ? pp.status : status)
+    item =>
+      item.incompleteTypeName.toLowerCase().includes(queryLowered) ||
+      item.status === (status === '' ? item.status : status)
   );
   return [
     200,
@@ -65,7 +62,7 @@ mock.onGet(`${PRODUCTION_PROCESS_API.fetch_by_query}`).reply(config => {
 });
 
 //POST: Add new
-mock.onPost(`${PRODUCTION_PROCESS_API.add}`).reply(config => {
+mock.onPost(`${INCOMPLETE_TYPE_API.add}`).reply(config => {
   const res = JSON.parse(config.data);
   res.id = randomIdGenerator();
   data.unshift(res);
@@ -73,7 +70,7 @@ mock.onPost(`${PRODUCTION_PROCESS_API.add}`).reply(config => {
 });
 
 //POST: update
-mock.onPost(`${PRODUCTION_PROCESS_API.update}`).reply(config => {
+mock.onPost(`${INCOMPLETE_TYPE_API.update}`).reply(config => {
   const updateItem = JSON.parse(config.data).data;
   updateItem.id = Number(updateItem.id);
   const res = data.find(e => e.id === Number(updateItem.id));
@@ -82,7 +79,7 @@ mock.onPost(`${PRODUCTION_PROCESS_API.update}`).reply(config => {
 });
 
 //DELETE: delete
-mock.onDelete(`${PRODUCTION_PROCESS_API.delete}`).reply(config => {
+mock.onDelete(`${INCOMPLETE_TYPE_API.delete}`).reply(config => {
   let getId = Number(config.id);
   const itemIndex = data.findIndex(item => item.id === getId);
   data.splice(itemIndex, 1);
@@ -97,7 +94,7 @@ mock.onDelete(`${PRODUCTION_PROCESS_API.delete}`).reply(config => {
 });
 
 // DELETE: Deletes  Range
-mock.onDelete(`${PRODUCTION_PROCESS_API.delete_by_range}`).reply(config => {
+mock.onDelete(`${INCOMPLETE_TYPE_API.delete_by_range}`).reply(config => {
   // Get id from URL
   const modifieddata = [...data];
   const ids = config.ids;

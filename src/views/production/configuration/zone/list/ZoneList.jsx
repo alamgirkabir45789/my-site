@@ -33,7 +33,7 @@ const statusOptions = [
 const ZoneList = () => {
   const dispatch = useDispatch();
   const { zones, isOpenZoneSidebar, total, selectedZone } = useSelector(
-    ({ ZoneReducer }) => ZoneReducer
+    ({ zoneReducer }) => zoneReducer
   );
 
   //#region States

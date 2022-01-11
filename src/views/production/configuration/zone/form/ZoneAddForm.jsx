@@ -72,7 +72,7 @@ const ZoneAddForm = props => {
           <Input
             name="employeeCode"
             id="employeeCode"
-            placeholder="employeeCode"
+            placeholder="Employee Code"
             innerRef={register({ required: true })}
             invalid={errors.employeeCode && true}
             className={classnames({ 'is-invalid': errors['employeeCode'] })}

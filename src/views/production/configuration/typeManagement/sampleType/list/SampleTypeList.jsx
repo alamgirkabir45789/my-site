@@ -37,7 +37,7 @@ const statusOptions = [
 const SampleTypeList = () => {
   const dispatch = useDispatch();
   const { sampleTypes, isOpenSampleTypeSidebar, total, selectedSampleType } = useSelector(
-    ({ SampleTypeReducer }) => SampleTypeReducer
+    ({ sampleTypeReducer }) => sampleTypeReducer
   );
 
   //#region States

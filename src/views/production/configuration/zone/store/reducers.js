@@ -26,7 +26,7 @@ const initialState = {
   isOpenZoneSidebar: false
 };
 
-export const ZoneReducer = (state = initialState, action) => {
+export const zoneReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_ZONE:

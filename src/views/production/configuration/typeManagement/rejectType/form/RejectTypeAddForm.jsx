@@ -11,18 +11,12 @@ import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
 import { addRejectType } from '../store/actions';
-
-// const productionProcesses = [
-//   { id: 1, label: 'Cutting', value: 'Cutting' },
-//   { id: 2, label: 'Print', value: 'Print' },
-//   { id: 3, label: 'Wash', value: 'Wash' }
-// ];
 
 const RejectTypeAddForm = props => {
   const { open, toggleSidebar, lastPageInfo } = props;
@@ -83,7 +77,7 @@ const RejectTypeAddForm = props => {
         </FormGroup>
         <FormGroup>
           <Label for="productionProcess">Production Process</Label>
-          <CreatableSelect
+          <Select
             id="role"
             isSearchable
             isClearable

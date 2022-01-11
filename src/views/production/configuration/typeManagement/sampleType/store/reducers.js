@@ -26,7 +26,7 @@ const initialState = {
   isOpenSampleTypeSidebar: false
 };
 
-export const SampleTypeReducer = (state = initialState, action) => {
+export const sampleTypeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_SAMPLE_TYPE:
