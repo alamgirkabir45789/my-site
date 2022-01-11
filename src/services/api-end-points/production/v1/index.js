@@ -6,6 +6,7 @@
      Modified: 24-November-2021
 */
 
+import { INCOMPLETE_TYPE_API } from './incompleteType';
 import { LINE_API } from './line';
 import { PRODUCTION_PROCESS_API } from './productionProcess';
 import { PRODUCT_PARTS_API } from './productParts';
@@ -19,5 +20,6 @@ export {
   ZONE_API,
   PRODUCT_PARTS_API,
   PRODUCTION_PROCESS_API,
-  REJECT_TYPE_API
+  REJECT_TYPE_API,
+  INCOMPLETE_TYPE_API
 };
