@@ -8,33 +8,36 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
+import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
 import { addRejectType } from '../store/actions';
 
-const productionProcesses = [
-  { id: 1, label: 'Cutting', value: 'Cutting' },
-  { id: 2, label: 'Print', value: 'Print' },
-  { id: 3, label: 'Wash', value: 'Wash' }
-];
+// const productionProcesses = [
+//   { id: 1, label: 'Cutting', value: 'Cutting' },
+//   { id: 2, label: 'Print', value: 'Print' },
+//   { id: 3, label: 'Wash', value: 'Wash' }
+// ];
 
 const RejectTypeAddForm = props => {
   const { open, toggleSidebar, lastPageInfo } = props;
   const dispatch = useDispatch();
 
-  // const { productionProcesses } = useSelector(
-  //   ({ productionProcessReducer }) => productionProcessReducer
-  // );
+  const { dropDownItems } = useSelector(({ productionProcessReducer }) => productionProcessReducer);
   //#region State
   const [productionProcess, setProductionProcess] = useState(null);
   //#endregion
 
   const { register, errors, handleSubmit } = useForm();
+
+  useEffect(() => {
+    dispatch(getDropDownProductinProcess());
+  }, []);
 
   //Submit method for data save
   const onSubmit = values => {
@@ -44,7 +47,7 @@ const RejectTypeAddForm = props => {
         addRejectType(
           {
             rejectTypeName: values.rejectTypeName,
-            productionProcess: values.productionProcess,
+            productionProcess: productionProcess.label,
             status: 'active'
           },
           lastPageInfo
@@ -85,7 +88,7 @@ const RejectTypeAddForm = props => {
             isSearchable
             isClearable
             theme={selectThemeColors}
-            options={productionProcesses}
+            options={dropDownItems}
             classNamePrefix="select"
             innerRef={register({ required: true })}
             value={productionProcess}
@@ -97,22 +100,6 @@ const RejectTypeAddForm = props => {
             <FormFeedback>Production Process is Required!</FormFeedback>
           )}
         </FormGroup>
-        {/* <FormGroup>
-          <Label for="productionProcess">
-            <span>Production Process</span>
-          </Label>
-          <Input
-            name="productionProcess"
-            id="productionProcess"
-            placeholder="Production Process"
-            innerRef={register({ required: true })}
-            invalid={errors.productionProcess && true}
-            className={classnames({ 'is-invalid': errors['productionProcess'] })}
-          />
-          {errors && errors.productionProcess && (
-            <FormFeedback>Production Process is Required!</FormFeedback>
-          )}
-        </FormGroup> */}
         <FormGroup>
           <Label for="status">
             <Input

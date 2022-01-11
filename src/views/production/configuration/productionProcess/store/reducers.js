@@ -10,6 +10,7 @@ import {
   ADD_PRODUCTION_PROCESS,
   DELETE_PRODUCTION_PROCESS,
   DELETE_PRODUCTION_PROCESS_BY_RANGE,
+  DROP_DOWN_PRODUCTION_PROCESS,
   FETCH_PRODUCTION_PROCESS,
   FETCH_PRODUCTION_PROCESS_BY_ID,
   FETCH_PRODUCTION_PROCESS_BY_QUERY,
@@ -23,7 +24,8 @@ const initialState = {
   total: 1,
   params: {},
   selectedItem: null,
-  isOpenSidebar: false
+  isOpenSidebar: false,
+  dropDownItems: []
 };
 
 export const productionProcessReducer = (state = initialState, action) => {
@@ -50,6 +52,8 @@ export const productionProcessReducer = (state = initialState, action) => {
       return { ...state };
     case DELETE_PRODUCTION_PROCESS_BY_RANGE:
       return { ...state };
+    case DROP_DOWN_PRODUCTION_PROCESS:
+      return { ...state, dropDownItems: action.dropDownItems };
     default:
       return state;
   }
