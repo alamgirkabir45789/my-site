@@ -73,6 +73,7 @@ const TimeEditForm = props => {
           </Label>
           <Input
             name="fromTime"
+            type="time"
             id="fromTime"
             placeholder="From Time"
             defaultValue={data.fromTime}
@@ -88,6 +89,7 @@ const TimeEditForm = props => {
           </Label>
           <Input
             name="toTime"
+            type="time"
             id="toTime"
             placeholder="To Time"
             defaultValue={data.toTime}

@@ -72,6 +72,7 @@ const TimeAddForm = props => {
           </Label>
           <Input
             name="fromTime"
+            type="time"
             id="fromTime"
             placeholder="From Time"
             innerRef={register({ required: true })}
@@ -86,6 +87,7 @@ const TimeAddForm = props => {
           </Label>
           <Input
             name="toTime"
+            type="time"
             id="toTime"
             placeholder="To Time"
             innerRef={register({ required: true })}
