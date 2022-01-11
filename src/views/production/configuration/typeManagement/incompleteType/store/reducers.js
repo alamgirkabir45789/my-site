@@ -26,7 +26,7 @@ const initialState = {
   isOpenSidebar: false
 };
 
-export const rejectTypeReducer = (state = initialState, action) => {
+export const incompleteTypeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_INCOMPLETE_TYPE:
