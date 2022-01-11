@@ -1,6 +1,6 @@
 /**
- * Title: RejectType Edit Form
- * Description: RejectType Edit Form
+ * Title: RejectType List Page
+ * Description: RejectType List Page
  * Author: Iqbal Hossain
  * Date: 05-January-2022
  * Modified: 10-January-2022

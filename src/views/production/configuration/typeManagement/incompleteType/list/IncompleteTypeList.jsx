@@ -1,6 +1,6 @@
 /**
- * Title: RejectType Edit Form
- * Description: RejectType Edit Form
+ * Title: Incomplete Type List Page
+ * Description: Incomplete Type List Page
  * Author: Iqbal Hossain
  * Date: 05-January-2022
  * Modified: 10-January-2022
@@ -18,6 +18,7 @@ import CustomPagination from 'utility/custom/production/CustomPagination';
 import { PlusIcon } from 'utility/custom/production/icons/CustomIcons';
 import TableCustomerHeader from 'utility/custom/TableCustomerHeader';
 import { selectThemeColors } from 'utility/Utils';
+import IncompleteTypeAddForm from '../form/IncompleteTypeAddForm';
 import IncompleteTypeEditForm from '../form/IncompleteTypeEditForm';
 import {
   deleteIncompleteTypeByRange,
@@ -150,7 +151,7 @@ const IncompleteTypeList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag="h2">Reject Type</CardTitle>
+          <CardTitle tag="h2">Incomplete Type</CardTitle>
         </CardHeader>
         <TableCustomerHeader
           handlePerPage={handlePerPage}
@@ -200,7 +201,7 @@ const IncompleteTypeList = () => {
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
-        <IncompleteTypeEditForm
+        <IncompleteTypeAddForm
           open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
@@ -213,5 +214,5 @@ const IncompleteTypeList = () => {
 export default IncompleteTypeList;
 
 /** Change Log
- * 10-Jan-2022 (Iqbal): Create List Page With Mock
+ * 11-Jan-2022 (Iqbal): Create List Page With Mock
  */
