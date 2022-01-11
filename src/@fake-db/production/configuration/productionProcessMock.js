@@ -38,23 +38,6 @@ const data = [
 //GET ALL DATA
 mock.onGet(`${PRODUCTION_PROCESS_API.fetch_all}`).reply(200, data);
 
-//POST: Add new
-mock.onPost(`${PRODUCTION_PROCESS_API.add}`).reply(config => {
-  const productionProcess = JSON.parse(config.data);
-  productionProcess.id = randomIdGenerator();
-  data.unshift(productionProcess);
-  return [201, { productionProcess }];
-});
-
-//POST: update
-mock.onPost(`${PRODUCTION_PROCESS_API.update}`).reply(config => {
-  const updatePP = JSON.parse(config.data).pp;
-  updatePP.id = Number(updatePP.id);
-  const productionProcess = data.find(e => e.id === Number(updatePP.id));
-  Object.assign(productionProcess, updatePP);
-  return [200, { productionProcess }];
-});
-
 //GET: get single
 mock.onGet(`${PRODUCTION_PROCESS_API.fetch_by_id}`).reply(config => {
   const { id } = config;
@@ -81,24 +64,54 @@ mock.onGet(`${PRODUCTION_PROCESS_API.fetch_by_query}`).reply(config => {
   ];
 });
 
+//POST: Add new
+mock.onPost(`${PRODUCTION_PROCESS_API.add}`).reply(config => {
+  const res = JSON.parse(config.data);
+  res.id = randomIdGenerator();
+  data.unshift(res);
+  return [201, { message: 'Data Added Successfully!!', succeeded: true, data: res }];
+});
+
+//POST: update
+mock.onPost(`${PRODUCTION_PROCESS_API.update}`).reply(config => {
+  const updateItem = JSON.parse(config.data).data;
+  updateItem.id = Number(updateItem.id);
+  const res = data.find(e => e.id === Number(updateItem.id));
+  Object.assign(res, updateItem);
+  return [200, { message: 'Data Updated Successfully!!', succeeded: true, data: res }];
+});
+
 //DELETE: delete
 mock.onDelete(`${PRODUCTION_PROCESS_API.delete}`).reply(config => {
-  let productionProcessId = Number(config.id);
-  const productionProcessIndex = data.findIndex(
-    productionProcess => productionProcess.id === productionProcessId
-  );
-  data.splice(productionProcessIndex, 1);
-  return [200];
+  let getId = Number(config.id);
+  const itemIndex = data.findIndex(item => item.id === getId);
+  data.splice(itemIndex, 1);
+  return [
+    200,
+    {
+      message: 'Data Deleted Successfully!!!',
+      succeeded: true,
+      data: data
+    }
+  ];
 });
 
 // DELETE: Deletes  Range
 mock.onDelete(`${PRODUCTION_PROCESS_API.delete_by_range}`).reply(config => {
   // Get id from URL
-  const productionProcessIds = config.ids;
-  for (let index = 0; index < productionProcessIds.length; index++) {
-    const id = productionProcessIds[index];
-    const productionProcessIndex = data.findIndex(productionProcess => productionProcess.id === id);
-    data.splice(productionProcessIndex, 1);
+  const modifieddata = [...data];
+  const ids = config.ids;
+  for (let index = 0; index < ids.length; index++) {
+    const id = ids[index];
+    const itemIndex = modifieddata.findIndex(item => item.id === id);
+    modifieddata.splice(itemIndex, 1);
   }
-  return [200];
+  return [
+    200,
+    {
+      message: 'Data Deleted successfully!!!',
+      succeeded: true,
+      data: modifieddata
+    }
+  ];
 });

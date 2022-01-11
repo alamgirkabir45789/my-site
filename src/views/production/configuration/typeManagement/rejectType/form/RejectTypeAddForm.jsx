@@ -18,12 +18,6 @@ import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
 import { addRejectType } from '../store/actions';
 
-// const productionProcesses = [
-//   { id: 1, label: 'Cutting', value: 'Cutting' },
-//   { id: 2, label: 'Print', value: 'Print' },
-//   { id: 3, label: 'Wash', value: 'Wash' }
-// ];
-
 const RejectTypeAddForm = props => {
   const { open, toggleSidebar, lastPageInfo } = props;
   const dispatch = useDispatch();

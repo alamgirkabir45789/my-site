@@ -42,31 +42,34 @@ export const toggleProductionProcessSidebar = condition => dispatch => {
 //Get Data by Query
 export const fetchProductionProcessesByQuery = params => {
   return async dispatch => {
-    await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_by_query}`, params).then(response => {
+    try {
+      const res = await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_by_query}`, params);
       dispatch({
         type: FETCH_PRODUCTION_PROCESS_BY_QUERY,
         payload: {
-          productionProcesses: response.data.data,
-          totalRecords: response.data.totalRecords,
+          productionProcesses: res.data.data,
+          totalRecords: res.data.totalRecords,
           params
         }
       });
-    });
+    } catch (error) {
+      notify('error', 'Something went wrong!! Please try again');
+    }
   };
 };
 
 //Get by id
 export const fetchProductionProcessById = id => {
   return async dispatch => {
-    await baseAxios
-      .get(`${PRODUCTION_PROCESS_API.fetch_by_id}`, { id })
-      .then(response => {
-        dispatch({
-          type: FETCH_PRODUCTION_PROCESS_BY_ID,
-          selectedItem: response.data ? response.data : null
-        });
-      })
-      .catch(err => console.log(err));
+    try {
+      const res = await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_by_id}`, { id });
+      dispatch({
+        type: FETCH_PRODUCTION_PROCESS_BY_ID,
+        selectedItem: res.data ? res.data : null
+      });
+    } catch (error) {
+      notify('error', 'Something went wrong!! Please try again');
+    }
   };
 };
 
@@ -75,12 +78,13 @@ export const getDropDownProductinProcess = () => {
   return async dispatch => {
     try {
       const res = await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_all}`);
+      const productionProcessddl = res.data.map(item => ({
+        value: item.id,
+        label: item.productionProcessName
+      }));
       dispatch({
         type: DROP_DOWN_PRODUCTION_PROCESS,
-        dropDownItems: res.data.map(item => ({
-          value: item.id,
-          label: item.productionProcessName
-        }))
+        dropDownItems: productionProcessddl
       });
     } catch (err) {
       notify('error', 'Something went wrong!! Please try again');
@@ -89,75 +93,74 @@ export const getDropDownProductinProcess = () => {
 };
 
 //Add new
-export const addProductionProcess = (pp, params) => {
+export const addProductionProcess = (data, params) => {
   return async dispatch => {
-    await baseAxios
-      .post(`${PRODUCTION_PROCESS_API.add}`, pp)
-      .then(() => {
-        dispatch({
-          type: ADD_PRODUCTION_PROCESS,
-          payload: pp
-        });
-        notify('success', 'The Production Process added Successfully!');
-        dispatch(fetchProductionProcessesByQuery(params));
-      })
-      .catch(err => console.log(err));
+    try {
+      const res = await baseAxios.post(`${PRODUCTION_PROCESS_API.add}`, data);
+      dispatch({
+        type: ADD_PRODUCTION_PROCESS,
+        payload: data
+      });
+      notify('success', res.data.message);
+      dispatch(fetchProductionProcessesByQuery(params));
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Update
-export const updateProductionProcess = (pp, params) => {
-  return dispatch => {
-    baseAxios.post(`${PRODUCTION_PROCESS_API.update}`, { pp }).then(() => {
+export const updateProductionProcess = (data, params) => {
+  return async dispatch => {
+    try {
+      const res = await baseAxios.post(`${PRODUCTION_PROCESS_API.update}`, { data });
       dispatch({
         type: UPDATE_PRODUCTION_PROCESS,
-        payload: pp
+        payload: data
       });
-      notify('success', 'The Production Process Updated Successfully!');
+      notify('success', res.data.message);
       dispatch(fetchProductionProcessesByQuery(params));
-    });
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
 //Delete
 export const deleteProductionProcess = id => {
-  return dispatch => {
-    confirmDialog(confirmObj).then(async e => {
-      if (e.isConfirmed) {
-        await baseAxios
-          .delete(`${PRODUCTION_PROCESS_API.delete}`, { id })
-          .then(() => {
-            dispatch({
-              type: DELETE_PRODUCTION_PROCESS
-            });
-          })
-          .then(() => {
-            notify('success', 'Production Process Deleted Successfully!');
-            dispatch(fetchProductionProcess());
-          });
+  return async dispatch => {
+    const e = await confirmDialog(confirmObj);
+    if (e.isConfirmed) {
+      try {
+        const res = await baseAxios.delete(`${PRODUCTION_PROCESS_API.delete}`, { id });
+        dispatch({
+          type: DELETE_PRODUCTION_PROCESS,
+          payload: res.data.data
+        });
+        notify('success', res.data.message);
+      } catch (err) {
+        notify('error', 'Something went wrong!!! Please tyr again');
       }
-    });
+    }
   };
 };
 
 //Delete by Range
 export const deleteProductionProcessByRange = ids => {
-  return dispatch => {
-    confirmDialog(confirmObj).then(e => {
-      if (e.isConfirmed) {
-        baseAxios
-          .delete(`${PRODUCTION_PROCESS_API.delete_by_range}`, { ids })
-          .then(() => {
-            dispatch({
-              type: DELETE_PRODUCTION_PROCESS_BY_RANGE
-            });
-          })
-          .then(() => {
-            notify('success', 'Production Processes deleted Successfully!');
-            dispatch(fetchProductionProcess());
-          });
+  return async dispatch => {
+    const e = await confirmDialog(confirmObj);
+    if (e.isConfirmed) {
+      try {
+        const res = await baseAxios.delete(`${PRODUCTION_PROCESS_API.delete_by_range}`, { ids });
+        dispatch({
+          type: DELETE_PRODUCTION_PROCESS_BY_RANGE,
+          payload: res.data.data
+        });
+        notify('success', res.data.message);
+      } catch (err) {
+        notify('error', 'Something went wrong!!! Please tyr again');
       }
-    });
+    }
   };
 };
 
