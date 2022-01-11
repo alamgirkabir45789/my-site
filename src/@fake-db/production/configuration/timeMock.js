@@ -15,10 +15,42 @@ const data = [
   {
     id: 1,
     name: '1st',
-    fromTime: '8:00',
-    toTime: '8:50',
+    fromTime: '08:00',
+    toTime: '08:50',
     duration: '50 min',
     status: 'active'
+  },
+  {
+    id: 2,
+    name: '2nd',
+    fromTime: '08:51',
+    toTime: '09:40',
+    duration: '50 min',
+    status: 'active'
+  },
+  {
+    id: 3,
+    name: '3rd',
+    fromTime: '09:41',
+    toTime: '10:30',
+    duration: '50 min',
+    status: 'active'
+  },
+  {
+    id: 4,
+    name: '4th',
+    fromTime: '10:31',
+    toTime: '11:20',
+    duration: '50 min',
+    status: 'active'
+  },
+  {
+    id: 5,
+    name: '5th',
+    fromTime: '11:21',
+    toTime: '12:10',
+    duration: '50 min',
+    status: 'inactive'
   }
 ];
 
