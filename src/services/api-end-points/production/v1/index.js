@@ -12,6 +12,7 @@ import { PRODUCTION_PROCESS_API } from './productionProcess';
 import { PRODUCT_PARTS_API } from './productParts';
 import { REJECT_TYPE_API } from './rejectType';
 import { SAMPLE_TYPE_API } from './sampleType';
+import { TIME_API } from './time';
 import { ZONE_API } from './zone';
 
 export {
@@ -21,5 +22,6 @@ export {
   PRODUCT_PARTS_API,
   PRODUCTION_PROCESS_API,
   REJECT_TYPE_API,
-  INCOMPLETE_TYPE_API
+  INCOMPLETE_TYPE_API,
+  TIME_API
 };

@@ -10,6 +10,7 @@ import './production/configuration/productionProcessMock';
 import './production/configuration/productPartsMock';
 import './production/configuration/rejectTypeMock';
 import './production/configuration/sampleTypeMock';
+import './production/configuration/timeMock';
 import './production/configuration/zoneMock';
 
 mock.onAny().passThrough();
