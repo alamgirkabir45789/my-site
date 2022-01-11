@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
@@ -34,7 +34,7 @@ const RejectTypeEditForm = props => {
   useEffect(() => {
     dispatch(getDropDownProductinProcess());
     if (dropDownItems.length) {
-      const filterPP = dropDownItems?.find(i => i.label === data.productionProcess);
+      const filterPP = dropDownItems?.find(item => item.label === data.productionProcess);
       setProductionProcess(filterPP);
     }
   }, [dispatch, dropDownItems.length]);
@@ -87,7 +87,7 @@ const RejectTypeEditForm = props => {
           <Label for="productionProcess">
             <span>Production Process</span>
           </Label>
-          <CreatableSelect
+          <Select
             id="productionProcess"
             isSearchable
             isClearable
@@ -104,23 +104,6 @@ const RejectTypeEditForm = props => {
             <FormFeedback>Production Process is Required!</FormFeedback>
           )}
         </FormGroup>
-        {/* <FormGroup>
-          <Label for="productionProcess">
-            <span>Production Process</span>
-          </Label>
-          <Input
-            name="productionProcess"
-            id="productionProcess"
-            placeholder="Production Process"
-            defaultValue={data.productionProcess}
-            innerRef={register({ required: true })}
-            invalid={errors.productionProcess && true}
-            className={classnames({ 'is-invalid': errors['productionProcess'] })}
-          />
-          {errors && errors.productionProcess && (
-            <FormFeedback>Production Process is Required!</FormFeedback>
-          )}
-        </FormGroup> */}
         <FormGroup>
           <Label for="status">
             <Input

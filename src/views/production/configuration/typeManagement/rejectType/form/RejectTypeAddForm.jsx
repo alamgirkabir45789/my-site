@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
@@ -77,7 +77,7 @@ const RejectTypeAddForm = props => {
         </FormGroup>
         <FormGroup>
           <Label for="productionProcess">Production Process</Label>
-          <CreatableSelect
+          <Select
             id="role"
             isSearchable
             isClearable
