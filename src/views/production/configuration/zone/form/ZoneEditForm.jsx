@@ -58,7 +58,7 @@ const ZoneEditForm = props => {
           <Input
             name="zoneOwnerName"
             id="zoneOwnerName"
-            placeholder=" Line Name"
+            placeholder="Zone Owner Name"
             defaultValue={data.zoneOwnerName}
             innerRef={register({ required: true })}
             invalid={errors.zoneOwnerName && true}
@@ -73,7 +73,7 @@ const ZoneEditForm = props => {
           <Input
             name="employeeCode"
             id="employeeCode"
-            placeholder="employeeCode"
+            placeholder="Employee Code"
             defaultValue={data.employeeCode}
             innerRef={register({ required: true })}
             invalid={errors.employeeCode && true}
