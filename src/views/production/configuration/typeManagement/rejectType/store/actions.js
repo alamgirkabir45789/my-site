@@ -41,16 +41,19 @@ export const toggleRejectTypeSidebar = condition => dispatch => {
 //Get Data by Query
 export const fetchRejectTypesByQuery = params => {
   return async dispatch => {
-    await baseAxios.get(`${REJECT_TYPE_API.fetch_by_query}`, params).then(response => {
+    try {
+      const res = await baseAxios.get(`${REJECT_TYPE_API.fetch_by_query}`, params);
       dispatch({
         type: FETCH_REJECT_TYPE_BY_QUERY,
         payload: {
-          items: response.data.data,
-          totalRecords: response.data.totalRecords,
+          items: res.data.data,
+          totalRecords: res.data.totalRecords,
           params
         }
       });
-    });
+    } catch (err) {
+      notify('error', 'Something went wrong!!! Please try again');
+    }
   };
 };
 
@@ -129,6 +132,7 @@ export const deleteRejectTypeByRange = ids => {
     if (e.isConfirmed) {
       try {
         const res = await baseAxios.delete(`${REJECT_TYPE_API.delete_by_range}`, { ids });
+        console.log(res);
         dispatch({
           type: DELETE_REJECT_TYPE_BY_RANGE,
           payload: res.data.data

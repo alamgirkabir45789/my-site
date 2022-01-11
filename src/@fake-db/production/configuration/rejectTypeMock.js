@@ -1,6 +1,6 @@
 /*
-     Title: LINE API and fake Data
-     Description: LINE API and fake Data
+     Title: Reject Type API and fake Data
+     Description: Reject Type API and fake Data
      Author: Iqbal Hossain 
      Date: 10-January-2022
      Modified: 10-January-2022
@@ -101,7 +101,7 @@ mock.onDelete(`${REJECT_TYPE_API.delete_by_range}`).reply(config => {
   for (let index = 0; index < ids.length; index++) {
     const id = ids[index];
     const itemIndex = modifieddata.findIndex(item => item.id === id);
-    data.splice(itemIndex, 1);
+    modifieddata.splice(itemIndex, 1);
   }
   return [
     200,

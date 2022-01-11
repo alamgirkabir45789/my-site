@@ -15,6 +15,7 @@ import {
   ADD_PRODUCTION_PROCESS,
   DELETE_PRODUCTION_PROCESS,
   DELETE_PRODUCTION_PROCESS_BY_RANGE,
+  DROP_DOWN_PRODUCTION_PROCESS,
   FETCH_PRODUCTION_PROCESS,
   FETCH_PRODUCTION_PROCESS_BY_ID,
   FETCH_PRODUCTION_PROCESS_BY_QUERY,
@@ -66,6 +67,24 @@ export const fetchProductionProcessById = id => {
         });
       })
       .catch(err => console.log(err));
+  };
+};
+
+/// Get All Without Query
+export const getDropDownProductinProcess = () => {
+  return async dispatch => {
+    try {
+      const res = await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_all}`);
+      dispatch({
+        type: DROP_DOWN_PRODUCTION_PROCESS,
+        dropDownItems: res.data.map(item => ({
+          value: item.id,
+          label: item.productionProcessName
+        }))
+      });
+    } catch (err) {
+      notify('error', 'Something went wrong!! Please try again');
+    }
   };
 };
 
