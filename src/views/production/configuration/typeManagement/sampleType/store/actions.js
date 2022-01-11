@@ -62,7 +62,9 @@ export const fetchSampleTypeById = id => {
       .then(response => {
         dispatch({
           type: FETCH_SAMPLE_TYPE_BY_ID,
-          selectedSampleType: response.data ? response.data : null
+          payload: {
+            selectedSampleType: response.data ? response.data : null
+          }
         });
       })
       .catch(err => console.log(err));

@@ -36,13 +36,13 @@ export const productionProcessReducer = (state = initialState, action) => {
     case TOGGLE_PRODUCTION_PROCESS_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
     case FETCH_PRODUCTION_PROCESS_BY_ID:
-      return { ...state, selectedItem: action.selectedItem };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_PRODUCTION_PROCESS_BY_QUERY:
       return {
         ...state,
         productionProcesses: payload.productionProcesses,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_PRODUCTION_PROCESS:
       return { ...state, total: state.total + 1 };
@@ -53,7 +53,7 @@ export const productionProcessReducer = (state = initialState, action) => {
     case DELETE_PRODUCTION_PROCESS_BY_RANGE:
       return { ...state, productionProcesses: payload };
     case DROP_DOWN_PRODUCTION_PROCESS:
-      return { ...state, dropDownItems: action.dropDownItems };
+      return { ...state, dropDownItems: payload.dropDownItems };
     default:
       return state;
   }

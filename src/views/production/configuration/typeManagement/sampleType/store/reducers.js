@@ -34,13 +34,13 @@ export const sampleTypeReducer = (state = initialState, action) => {
     case TOGGLE_SAMPLE_TYPE_SIDEBAR:
       return { ...state, isOpenSampleTypeSidebar: payload };
     case FETCH_SAMPLE_TYPE_BY_ID:
-      return { ...state, selectedSampleType: action.selectedSampleType };
+      return { ...state, selectedSampleType: payload.selectedSampleType };
     case FETCH_SAMPLE_TYPE_BY_QUERY:
       return {
         ...state,
         sampleTypes: payload.sampleTypes,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_SAMPLE_TYPE:
       return { ...state, total: state.total + 1 };

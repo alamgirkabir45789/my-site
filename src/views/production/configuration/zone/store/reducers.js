@@ -34,13 +34,13 @@ export const zoneReducer = (state = initialState, action) => {
     case TOGGLE_ZONE_SIDEBAR:
       return { ...state, isOpenZoneSidebar: payload };
     case FETCH_ZONE_BY_ID:
-      return { ...state, selectedZone: action.selectedZone };
+      return { ...state, selectedZone: payload.selectedZone };
     case FETCH_ZONE_BY_QUERY:
       return {
         ...state,
         zones: payload.zones,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_ZONE:
       return { ...state, total: state.total + 1 };

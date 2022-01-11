@@ -34,13 +34,13 @@ export const lineReducer = (state = initialState, action) => {
     case TOGGLE_LINE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
     case FETCH_LINE_BY_ID:
-      return { ...state, selectedItem: action.selectedItem };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_LINE_BY_QUERY:
       return {
         ...state,
         items: payload.items,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_LINE:
       return { ...state, total: state.total + 1 };

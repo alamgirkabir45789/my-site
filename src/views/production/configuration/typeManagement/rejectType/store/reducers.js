@@ -34,13 +34,13 @@ export const rejectTypeReducer = (state = initialState, action) => {
     case TOGGLE_REJECT_TYPE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
     case FETCH_REJECT_TYPE_BY_ID:
-      return { ...state, selectedItem: action.selectedItem };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_REJECT_TYPE_BY_QUERY:
       return {
         ...state,
         items: payload.items,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_REJECT_TYPE:
       return { ...state, total: state.total + 1 };

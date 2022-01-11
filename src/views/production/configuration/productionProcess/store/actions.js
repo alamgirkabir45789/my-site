@@ -65,7 +65,9 @@ export const fetchProductionProcessById = id => {
       const res = await baseAxios.get(`${PRODUCTION_PROCESS_API.fetch_by_id}`, { id });
       dispatch({
         type: FETCH_PRODUCTION_PROCESS_BY_ID,
-        selectedItem: res.data ? res.data : null
+        payload: {
+          selectedItem: res.data ? res.data : null
+        }
       });
     } catch (error) {
       notify('error', 'Something went wrong!! Please try again');
@@ -84,7 +86,9 @@ export const getDropDownProductinProcess = () => {
       }));
       dispatch({
         type: DROP_DOWN_PRODUCTION_PROCESS,
-        dropDownItems: productionProcessddl
+        payload: {
+          dropDownItems: productionProcessddl
+        }
       });
     } catch (err) {
       notify('error', 'Something went wrong!! Please try again');

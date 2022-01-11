@@ -64,7 +64,9 @@ export const fetchIncompleteTypeById = id => {
       const res = await baseAxios.get(`${INCOMPLETE_TYPE_API.fetch_by_id}`, { id });
       dispatch({
         type: FETCH_INCOMPLETE_TYPE_BY_ID,
-        selectedItem: res.data ? res.data : null
+        payload: {
+          selectedItem: res.data ? res.data : null
+        }
       });
     } catch (err) {
       notify('error', 'Something went wrong!!! Please try again');

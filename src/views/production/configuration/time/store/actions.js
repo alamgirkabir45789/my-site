@@ -61,7 +61,9 @@ export const fetchTimeById = id => {
       const res = await baseAxios.get(`${TIME_API.fetch_by_id}`, { id });
       dispatch({
         type: FETCH_TIME_BY_ID,
-        selectedItem: res.data.data ? res.data.data : null
+        payload: {
+          selectedItem: res.data.data ? res.data.data : null
+        }
       });
     } catch (err) {
       notify('error', 'Something went wrong!!! Please try again');

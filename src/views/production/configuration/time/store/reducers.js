@@ -34,13 +34,13 @@ export const timeReducer = (state = initialState, action) => {
     case TOGGLE_TIME_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
     case FETCH_TIME_BY_ID:
-      return { ...state, selectedItem: action.selectedItem };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_TIME_BY_QUERY:
       return {
         ...state,
         items: payload.items,
         total: payload.totalRecords,
-        params: action.params
+        params: payload.params
       };
     case ADD_TIME:
       return { ...state, total: state.total + 1 };

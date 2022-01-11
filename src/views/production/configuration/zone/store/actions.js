@@ -62,7 +62,9 @@ export const fetchZoneById = id => {
       .then(response => {
         dispatch({
           type: FETCH_ZONE_BY_ID,
-          selectedZone: response.data ? response.data : null
+          payload: {
+            selectedZone: response.data ? response.data : null
+          }
         });
       })
       .catch(err => console.log(err));
