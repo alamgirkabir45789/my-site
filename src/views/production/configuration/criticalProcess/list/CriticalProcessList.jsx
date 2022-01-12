@@ -23,8 +23,7 @@ import CriticalProcessEditForm from '../form/CriticalProcessEditForm';
 import {
   deleteCriticalProcessByRange,
   fetchCriticalProcessByQuery,
-  toggleCritcalProcessSidebar,
-  toggleCritcalProcessStatus
+  toggleCritcalProcessSidebar
 } from '../store/actions';
 import LineExpandRow from './CriticalProcessExpandRow';
 import { criticalProcessTableColumn } from './criticalProcessTableColumn';
@@ -201,7 +200,6 @@ const CriticalProcessList = () => {
           data={selectedItem}
           open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
-          toggleCritcalProcessStatus={toggleCritcalProcessStatus}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (

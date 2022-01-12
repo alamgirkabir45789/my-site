@@ -36,8 +36,9 @@ export const criticalProcessReducer = (state = initialState, action) => {
     case TOGGLE_CRITICAL_PROCESS_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
 
-    case TOGGLE_CRITICAL_PROCESS_STATUS:
-      return { ...state, selectedItem: { ...state.selectedItem, state: payload } };
+    case TOGGLE_CRITICAL_PROCESS_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
 
     case FETCH_CRITICAL_PROCESS_BY_ID: {
       return { ...state, selectedItem: payload.selectedItem };

@@ -15,7 +15,7 @@ import Select from 'react-select';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
-import { TOGGLE_INCOMPLETE_TYPE_SIDEBAR } from '../../typeManagement/incompleteType/store/actionType';
+import { toggleCritcalProcessStatus, updateCriticalProcess } from '../store/actions';
 
 const CriticalProcessTypeDDL = [
   { value: 'Partial', label: 'Partial' },
@@ -24,7 +24,7 @@ const CriticalProcessTypeDDL = [
 
 const CriticalProcessEditForm = props => {
   // eslint-disable-next-line no-unused-vars
-  const { open, toggleSidebar, toggleCritcalProcessStatus, data, lastPageInfo } = props;
+  const { open, toggleSidebar, data, lastPageInfo } = props;
   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
@@ -46,21 +46,19 @@ const CriticalProcessEditForm = props => {
   //#endregion
 
   const onSubmit = values => {
-    // eslint-disable-next-line no-console
-    console.log(values);
     if (isObjEmpty(errors)) {
       toggleSidebar();
-      // dispatch(
-      //   updateCriticalProcess(
-      //     {
-      //       id: data.id,
-      //       lineNumber: values.lineNumber,
-      //       description: values.description,
-      //       status: 'active'
-      //     },
-      //     lastPageInfo
-      //   )
-      // );
+      dispatch(
+        updateCriticalProcess(
+          {
+            id: data.id,
+            lineNumber: values.lineNumber,
+            description: values.description,
+            status: values.status ? 'active' : 'inactive'
+          },
+          lastPageInfo
+        )
+      );
     }
   };
 
@@ -129,7 +127,7 @@ const CriticalProcessEditForm = props => {
               innerRef={register({ required: false })}
               checked={data.status === 'active' ? true : false}
               onChange={e =>
-                dispatch({ type: TOGGLE_INCOMPLETE_TYPE_SIDEBAR, payload: e.target.checked })
+                dispatch(toggleCritcalProcessStatus(e.target.checked ? 'active' : 'inactive'))
               }
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>

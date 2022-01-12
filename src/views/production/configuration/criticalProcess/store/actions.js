@@ -31,20 +31,6 @@ export const fetchCriticalProcess = () => async dispatch => {
   });
 };
 
-//Open Sidebar
-export const toggleCritcalProcessSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_CRITICAL_PROCESS_SIDEBAR,
-    payload: condition
-  });
-};
-export const toggleCritcalProcessStatus = status => dispatch => {
-  dispatch({
-    type: TOGGLE_CRITICAL_PROCESS_STATUS,
-    payload: status
-  });
-};
-
 //Get Data by Query
 export const fetchCriticalProcessByQuery = params => {
   return async dispatch => {
@@ -154,6 +140,22 @@ export const deleteCriticalProcessByRange = ids => {
   };
 };
 
+//Toggle Sidebar
+export const toggleCritcalProcessSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_CRITICAL_PROCESS_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleCritcalProcessStatus = status => dispatch => {
+  dispatch({
+    type: TOGGLE_CRITICAL_PROCESS_STATUS,
+    payload: status
+  });
+};
+
 /** Change Log
- * 08-Jan-2022(Iqbal): Create Function/Method deleteLineByRange, deleteLine, updateLine, addLine, fetchLinesByQuery, fetchLineById
+ * 12-Jan-2022: add toggleCritcalProcessStatus for status change
  */
