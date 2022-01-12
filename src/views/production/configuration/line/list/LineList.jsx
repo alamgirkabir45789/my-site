@@ -195,13 +195,11 @@ const LineList = () => {
         <LineEditForm
           data={selectedItem}
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
         <LineAddForm
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : null}

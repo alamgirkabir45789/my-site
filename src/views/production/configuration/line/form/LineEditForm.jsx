@@ -8,30 +8,42 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { updateLine } from '../store/actions';
+import { toggleLineSidebar, updateLine } from '../store/actions';
 
 const LineEditForm = props => {
-  const { open, toggleSidebar, data, lastPageInfo } = props;
+  const { open, data, lastPageInfo } = props;
   const dispatch = useDispatch();
+
+  const { isOpenSidebar } = useSelector(({ lineReducer }) => lineReducer);
 
   const { register, errors, handleSubmit } = useForm();
 
+  const [check, setCheck] = useState('');
+
+  // const onChangeStatus = e => {
+  //   const { type, name, value, checked } = e.target;
+  //   setCheck({
+  //     ...check,
+  //     [name]: type === 'checkbox' ? checked : value === 'active' ? true : false
+  //   });
+  // };
+
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
-      toggleSidebar();
+      dispatch(toggleLineSidebar(!isOpenSidebar));
       dispatch(
         updateLine(
           {
             id: data.id,
             lineNumber: values.lineNumber,
             description: values.description,
-            status: 'active'
+            status: check ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -47,7 +59,7 @@ const LineEditForm = props => {
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
-      toggleSidebar={toggleSidebar}
+      toggleSidebar={() => dispatch(toggleLineSidebar(!isOpenSidebar))}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
@@ -85,8 +97,10 @@ const LineEditForm = props => {
             <Input
               style={{ marginLeft: '5px' }}
               name="status"
+              // value={check}
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              checked={data.status === 'active' ? { checked: true } : false}
+              onChange={e => setCheck({ checked: e.target.checked })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>
@@ -98,7 +112,12 @@ const LineEditForm = props => {
         <Button.Ripple type="reset" className="mr-1" outline color="secondary">
           Reset
         </Button.Ripple>
-        <Button.Ripple type="cancel" color="danger" outline onClick={toggleSidebar}>
+        <Button.Ripple
+          type="cancel"
+          color="danger"
+          outline
+          onClick={() => dispatch(toggleLineSidebar(!isOpenSidebar))}
+        >
           Cancel
         </Button.Ripple>
       </Form>
