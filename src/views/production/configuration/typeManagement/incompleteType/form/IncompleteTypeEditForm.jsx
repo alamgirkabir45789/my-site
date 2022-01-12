@@ -16,11 +16,14 @@ import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
-import { updateIncompleteType } from '../store/actions';
+import { toggleIncompleteTypeSidebar, updateIncompleteType } from '../store/actions';
 
 const IncompleteTypeEditForm = props => {
-  const { open, toggleSidebar, data, lastPageInfo } = props;
+  const { open, data, lastPageInfo } = props;
   const dispatch = useDispatch();
+
+  //Reducer for Sidebar
+  const { isOpenSidebar } = useSelector(({ incompleteTypeReducer }) => incompleteTypeReducer);
 
   const { dropDownItems } = useSelector(({ productionProcessReducer }) => productionProcessReducer);
 
@@ -42,7 +45,7 @@ const IncompleteTypeEditForm = props => {
 
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
-      toggleSidebar();
+      dispatch(toggleIncompleteTypeSidebar(!isOpenSidebar));
       dispatch(
         updateIncompleteType(
           {
@@ -65,7 +68,7 @@ const IncompleteTypeEditForm = props => {
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
-      toggleSidebar={toggleSidebar}
+      toggleSidebar={() => dispatch(toggleIncompleteTypeSidebar(!isOpenSidebar))}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
@@ -124,7 +127,12 @@ const IncompleteTypeEditForm = props => {
         <Button.Ripple type="reset" className="mr-1" outline color="secondary">
           Reset
         </Button.Ripple>
-        <Button.Ripple type="cancel" color="danger" outline onClick={toggleSidebar}>
+        <Button.Ripple
+          type="cancel"
+          color="danger"
+          outline
+          onClick={() => dispatch(toggleIncompleteTypeSidebar(!isOpenSidebar))}
+        >
           Cancel
         </Button.Ripple>
       </Form>

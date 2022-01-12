@@ -197,13 +197,11 @@ const ProductPartsList = () => {
         <ProductPartsEditForm
           data={selectedItem}
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
         <ProductPartsAddForm
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : null}

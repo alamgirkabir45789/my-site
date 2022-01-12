@@ -201,13 +201,11 @@ const SampleTypeList = () => {
         <SampleTypeEditForm
           data={selectedItem}
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
         <SampleTypeAddForm
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : null}

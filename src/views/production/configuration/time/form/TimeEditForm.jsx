@@ -10,21 +10,24 @@ import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { updateTime } from '../store/actions';
+import { toggleTimeSidebar, updateTime } from '../store/actions';
 
 const TimeEditForm = props => {
-  const { open, toggleSidebar, data, lastPageInfo } = props;
+  const { open, data, lastPageInfo } = props;
   const dispatch = useDispatch();
+
+  // Reducer for Sidebar
+  const { isOpenSidebar } = useSelector(({ timeReducer }) => timeReducer);
 
   const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
-      toggleSidebar();
+      dispatch(toggleTimeSidebar(!isOpenSidebar));
       dispatch(
         updateTime(
           {
@@ -49,7 +52,7 @@ const TimeEditForm = props => {
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
-      toggleSidebar={toggleSidebar}
+      toggleSidebar={() => dispatch(toggleTimeSidebar(!isOpenSidebar))}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
@@ -132,7 +135,12 @@ const TimeEditForm = props => {
         <Button.Ripple type="reset" className="mr-1" outline color="secondary">
           Reset
         </Button.Ripple>
-        <Button.Ripple type="cancel" color="danger" outline onClick={toggleSidebar}>
+        <Button.Ripple
+          type="cancel"
+          color="danger"
+          outline
+          onClick={() => dispatch(toggleTimeSidebar(!isOpenSidebar))}
+        >
           Cancel
         </Button.Ripple>
       </Form>

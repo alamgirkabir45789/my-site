@@ -32,6 +32,7 @@ const statusOptions = [
 
 const TimeList = () => {
   const dispatch = useDispatch();
+
   const { items, isOpenSidebar, total, selectedItem } = useSelector(
     ({ timeReducer }) => timeReducer
   );
@@ -193,13 +194,11 @@ const TimeList = () => {
         <TimeEditForm
           data={selectedItem}
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
         <TimeAddForm
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : null}

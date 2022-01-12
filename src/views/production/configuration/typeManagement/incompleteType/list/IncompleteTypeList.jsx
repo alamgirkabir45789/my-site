@@ -197,13 +197,11 @@ const IncompleteTypeList = () => {
         <IncompleteTypeEditForm
           data={selectedItem}
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : isOpenSidebar ? (
         <IncompleteTypeAddForm
           open={isOpenSidebar}
-          toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
       ) : null}

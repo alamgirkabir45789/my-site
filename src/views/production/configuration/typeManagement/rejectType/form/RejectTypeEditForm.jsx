@@ -16,11 +16,14 @@ import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
-import { updateRejectType } from '../store/actions';
+import { toggleRejectTypeSidebar, updateRejectType } from '../store/actions';
 
 const RejectTypeEditForm = props => {
-  const { open, toggleSidebar, data, lastPageInfo } = props;
+  const { open, data, lastPageInfo } = props;
   const dispatch = useDispatch();
+
+  //Reducer for Sidebar
+  const { isOpenSidebar } = useSelector(({ rejectTypeReducer }) => rejectTypeReducer);
 
   const { dropDownItems } = useSelector(({ productionProcessReducer }) => productionProcessReducer);
 
@@ -42,7 +45,7 @@ const RejectTypeEditForm = props => {
 
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
-      toggleSidebar();
+      dispatch(toggleRejectTypeSidebar(!isOpenSidebar));
       dispatch(
         updateRejectType(
           {
@@ -65,7 +68,7 @@ const RejectTypeEditForm = props => {
       style={{ transition: '0.5s all ease' }}
       headerClassName="mb-1"
       contentClassName="pt-0"
-      toggleSidebar={toggleSidebar}
+      toggleSidebar={() => dispatch(toggleRejectTypeSidebar(!isOpenSidebar))}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
@@ -122,7 +125,12 @@ const RejectTypeEditForm = props => {
         <Button.Ripple type="reset" className="mr-1" outline color="secondary">
           Reset
         </Button.Ripple>
-        <Button.Ripple type="cancel" color="danger" outline onClick={toggleSidebar}>
+        <Button.Ripple
+          type="cancel"
+          color="danger"
+          outline
+          onClick={() => dispatch(toggleRejectTypeSidebar(!isOpenSidebar))}
+        >
           Cancel
         </Button.Ripple>
       </Form>
