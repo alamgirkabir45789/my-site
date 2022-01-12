@@ -35,28 +35,12 @@ const data = [
 //GET ALL DATA
 mock.onGet(`${SAMPLE_TYPE_API.fetch_all}`).reply(200, data);
 
-//POST: Add new
-mock.onPost(`${SAMPLE_TYPE_API.add}`).reply(config => {
-  const sampleType = JSON.parse(config.data);
-  sampleType.id = randomIdGenerator();
-  data.unshift(sampleType);
-  return [201, { sampleType }];
-});
-
-//POST: update
-mock.onPost(`${SAMPLE_TYPE_API.update}`).reply(config => {
-  const updateSampleType = JSON.parse(config.data).sampleType;
-  updateSampleType.id = Number(updateSampleType.id);
-  const sampleType = data.find(e => e.id === Number(updateSampleType.id));
-  Object.assign(sampleType, updateSampleType);
-  return [200, { sampleType }];
-});
-
 //GET: get single
+
 mock.onGet(`${SAMPLE_TYPE_API.fetch_by_id}`).reply(config => {
   const { id } = config;
-  const sampleType = data.find(e => e.id === id);
-  return [200, sampleType, { succeeded: true }];
+  const res = data.find(e => e.id === id);
+  return [200, { succeeded: true, data: res }];
 });
 
 //GET: get by query
@@ -64,9 +48,9 @@ mock.onGet(`${SAMPLE_TYPE_API.fetch_by_query}`).reply(config => {
   const { q = '', rowsPerPage = 10, page = 1, status = null } = config;
   const queryLowered = q.toLowerCase();
   const filteredData = data.filter(
-    sampleType =>
-      sampleType.sampleTypeName.toLowerCase().includes(queryLowered) ||
-      sampleType.status === (status === '' ? sampleType.status : status)
+    item =>
+      item.sampleTypeName.toLowerCase().includes(queryLowered) ||
+      item.status === (status === '' ? item.status : status)
   );
   return [
     200,
@@ -78,23 +62,54 @@ mock.onGet(`${SAMPLE_TYPE_API.fetch_by_query}`).reply(config => {
   ];
 });
 
+//POST: Add new
+mock.onPost(`${SAMPLE_TYPE_API.add}`).reply(config => {
+  const res = JSON.parse(config.data);
+  res.id = randomIdGenerator();
+  data.unshift(res);
+  return [201, { message: 'Data Added Successfully!!', succeeded: true, data: res }];
+});
+
+//POST: update
+mock.onPost(`${SAMPLE_TYPE_API.update}`).reply(config => {
+  const updateItem = JSON.parse(config.data).data;
+  updateItem.id = Number(updateItem.id);
+  const res = data.find(e => e.id === Number(updateItem.id));
+  Object.assign(res, updateItem);
+  return [200, { message: 'Data Updated Successfully!!', succeeded: true, data: res }];
+});
+
 //DELETE: delete
 mock.onDelete(`${SAMPLE_TYPE_API.delete}`).reply(config => {
-  let sampleTypeId = config.id;
-  sampleTypeId = Number(sampleTypeId);
-  const sampleTypeIndex = data.findIndex(sampleType => sampleType.id === sampleTypeId);
-  data.splice(sampleTypeIndex, 1);
-  return [200];
+  let getId = Number(config.id);
+  const itemIndex = data.findIndex(item => item.id === getId);
+  data.splice(itemIndex, 1);
+  return [
+    200,
+    {
+      message: 'Data Deleted Successfully!!!',
+      succeeded: true,
+      data: data
+    }
+  ];
 });
 
 // DELETE: Deletes  Range
 mock.onDelete(`${SAMPLE_TYPE_API.delete_by_range}`).reply(config => {
   // Get id from URL
-  const sampleTypeIds = config.ids;
-  for (let index = 0; index < sampleTypeIds.length; index++) {
-    const id = sampleTypeIds[index];
-    const sampleTypeIndex = data.findIndex(sampleType => sampleType.id === id);
-    data.splice(sampleTypeIndex, 1);
+  const modifieddata = [...data];
+  const ids = config.ids;
+  for (let index = 0; index < ids.length; index++) {
+    const id = ids[index];
+    const itemIndex = modifieddata.findIndex(item => item.id === id);
+    modifieddata.splice(itemIndex, 1);
   }
-  return [200];
+  return [
+    200,
+    {
+      message: 'Data Deleted successfully!!!',
+      succeeded: true,
+      data: modifieddata
+    }
+  ];
 });

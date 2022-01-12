@@ -30,14 +30,6 @@ export const fetchLine = () => async dispatch => {
   });
 };
 
-//Open Sidebar
-export const toggleLineSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_LINE_SIDEBAR,
-    payload: condition
-  });
-};
-
 //Get Data by Query
 export const fetchLinesByQuery = params => {
   return async dispatch => {
@@ -144,6 +136,14 @@ export const deleteLineByRange = ids => {
       }
     }
   };
+};
+
+//Open Sidebar
+export const toggleLineSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_LINE_SIDEBAR,
+    payload: condition
+  });
 };
 
 /** Change Log

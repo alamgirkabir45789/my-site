@@ -18,27 +18,27 @@ import {
 } from './actionType';
 
 const initialState = {
-  sampleTypes: [],
+  items: [],
   queryData: [],
   total: 1,
   params: {},
-  selectedSampleType: null,
-  isOpenSampleTypeSidebar: false
+  selectedItem: null,
+  isOpenSidebar: false
 };
 
 export const sampleTypeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case FETCH_SAMPLE_TYPE:
-      return { ...state, sampleTypes: payload };
+      return { ...state, items: payload };
     case TOGGLE_SAMPLE_TYPE_SIDEBAR:
-      return { ...state, isOpenSampleTypeSidebar: payload };
+      return { ...state, isOpenSidebar: payload };
     case FETCH_SAMPLE_TYPE_BY_ID:
-      return { ...state, selectedSampleType: payload.selectedSampleType };
+      return { ...state, selectedItem: payload.selectedItem };
     case FETCH_SAMPLE_TYPE_BY_QUERY:
       return {
         ...state,
-        sampleTypes: payload.sampleTypes,
+        items: payload.items,
         total: payload.totalRecords,
         params: payload.params
       };
@@ -47,9 +47,9 @@ export const sampleTypeReducer = (state = initialState, action) => {
     case UPDATE_SAMPLE_TYPE:
       return { ...state, total: state.total + 1 };
     case DELETE_SAMPLE_TYPE:
-      return { ...state };
+      return { ...state, items: payload };
     case DELETE_SAMPLE_TYPE_BY_RANGE:
-      return { ...state };
+      return { ...state, items: payload };
     default:
       return state;
   }

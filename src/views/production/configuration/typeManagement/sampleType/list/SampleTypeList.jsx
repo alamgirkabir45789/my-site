@@ -36,7 +36,7 @@ const statusOptions = [
 
 const SampleTypeList = () => {
   const dispatch = useDispatch();
-  const { sampleTypes, isOpenSampleTypeSidebar, total, selectedSampleType } = useSelector(
+  const { items, isOpenSidebar, total, selectedItem } = useSelector(
     ({ sampleTypeReducer }) => sampleTypeReducer
   );
 
@@ -55,7 +55,7 @@ const SampleTypeList = () => {
   //#endregion
 
   //Global Function to toggle Sidebar
-  const toggleSidebar = () => store.dispatch(toggleSampleTypeSidebar(!isOpenSampleTypeSidebar));
+  const toggleSidebar = () => store.dispatch(toggleSampleTypeSidebar(!isOpenSidebar));
 
   //#region Effects
   useEffect(() => {
@@ -164,7 +164,7 @@ const SampleTypeList = () => {
         <DataTable
           onSelectedRowsChange={handleRowSelected}
           onSort={handleSort}
-          progressPending={!sampleTypes.length}
+          progressPending={!items.length}
           progressComponent={<CustomPreLoader />}
           contextActions={
             <Button.Ripple
@@ -188,7 +188,7 @@ const SampleTypeList = () => {
           columns={SampleTypeTableColumn}
           sortIcon={<ChevronDown />}
           className="react-dataTable"
-          data={sampleTypes}
+          data={items}
         />
         <CustomPagination
           count={Number(Math.ceil(total / rowsPerPage))}
@@ -197,16 +197,16 @@ const SampleTypeList = () => {
         />
       </Card>
 
-      {selectedSampleType !== null && isOpenSampleTypeSidebar ? (
+      {selectedItem !== null && isOpenSidebar ? (
         <SampleTypeEditForm
-          data={selectedSampleType}
-          open={isOpenSampleTypeSidebar}
+          data={selectedItem}
+          open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
-      ) : isOpenSampleTypeSidebar ? (
+      ) : isOpenSidebar ? (
         <SampleTypeAddForm
-          open={isOpenSampleTypeSidebar}
+          open={isOpenSidebar}
           toggleSidebar={toggleSidebar}
           lastPageInfo={{ page: currentPage, rowsPerPage, total }}
         />
