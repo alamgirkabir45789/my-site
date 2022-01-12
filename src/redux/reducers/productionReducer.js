@@ -1,3 +1,4 @@
+import { criticalProcessReducer } from 'views/production/configuration/criticalProcess/store/reducers';
 import { lineReducer } from 'views/production/configuration/line/store/reducers';
 import { productionProcessReducer } from 'views/production/configuration/productionProcess/store/reducers';
 import { productPartReducer } from 'views/production/configuration/productParts/store/reducers';
@@ -13,6 +14,7 @@ export const productionReducers = {
   zoneReducer,
   productPartReducer,
   productionProcessReducer,
+  criticalProcessReducer,
   rejectTypeReducer,
   incompleteTypeReducer,
   timeReducer

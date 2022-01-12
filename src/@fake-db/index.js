@@ -4,6 +4,7 @@ import './account/todo';
 import './account/userApi';
 import './jwt';
 import mock from './mock';
+import './production/configuration/criticalProcessMock';
 import './production/configuration/incompleteTypeMock';
 import './production/configuration/lineMock';
 import './production/configuration/productionProcessMock';

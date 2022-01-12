@@ -6,6 +6,7 @@
      Modified: 24-November-2021
 */
 
+import { CRITICAL_PROCESS_API } from './criticalProcess';
 import { INCOMPLETE_TYPE_API } from './incompleteType';
 import { LINE_API } from './line';
 import { PRODUCTION_PROCESS_API } from './productionProcess';
@@ -22,6 +23,7 @@ export {
   PRODUCT_PARTS_API,
   PRODUCTION_PROCESS_API,
   REJECT_TYPE_API,
+  CRITICAL_PROCESS_API,
   INCOMPLETE_TYPE_API,
   TIME_API
 };
