@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ChevronDown, XSquare } from 'react-feather';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import { Button, Card, CardBody, CardHeader, CardTitle, Col, Input, Row } from 'reactstrap';
 import CustomPreLoader from 'utility/custom/CustomPreLoader';
@@ -18,6 +19,7 @@ import { PlusIcon } from 'utility/custom/production/icons/CustomIcons';
 import TableCustomerHeader from 'utility/custom/TableCustomerHeader';
 import { selectThemeColors } from 'utility/Utils';
 import { deleteCutPlanByRange, fetchCutPlansByQuery } from '../store/actions';
+import CutPlanExpandTable from './CutPlanExpandTable';
 import { cutPlanTableColumn } from './cutPlanTableColumn';
 
 // Status filter options
@@ -28,6 +30,7 @@ const statusOptions = [
 ];
 
 const CutPlanList = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { items, total } = useSelector(({ cutPlanReducer }) => cutPlanReducer);
 
@@ -146,7 +149,13 @@ const CutPlanList = () => {
           rowsPerPage={rowsPerPage}
           searchTerm={searchTerm}
         >
-          <PlusIcon />
+          <PlusIcon
+            onClick={() =>
+              history.push({
+                pathname: `cut-plan-new`
+              })
+            }
+          />
         </TableCustomerHeader>
 
         <DataTable
@@ -167,7 +176,7 @@ const CutPlanList = () => {
           responsive={true}
           paginationServer
           expandableRows
-          // expandableRowsComponent={<LineExpandRow data={data => data} />}
+          expandableRowsComponent={<CutPlanExpandTable />}
           expandOnRowClicked
           persistTableHead
           columns={cutPlanTableColumn}

@@ -118,3 +118,87 @@ export const cutPlanTableColumn = [
     )
   }
 ];
+
+export const cutPlanDetailsTablecolumn = [
+  {
+    name: 'Cut Number',
+    minWidth: '170px',
+    selector: 'cutNumber',
+    sortable: true,
+    cell: row => row.cutNumber
+  },
+  {
+    name: 'P.O.',
+    minWidth: '150px',
+    selector: 'po',
+    sortable: true,
+    cell: row => row.po
+  },
+  {
+    name: 'Color',
+    minWidth: '150px',
+    selector: 'color',
+    sortable: true,
+    cell: row => row.color
+  },
+  {
+    name: 'Width',
+    minWidth: '150px',
+    selector: 'width',
+    sortable: true,
+    cell: row => row.width
+  },
+  {
+    name: 'Length',
+    minWidth: '150px',
+    selector: 'length',
+    sortable: true,
+    cell: row => row.length
+  },
+  {
+    name: 'Lay',
+    minWidth: '150px',
+    selector: 'lay',
+    sortable: true,
+    cell: row => row.lay
+  },
+  {
+    name: 'Quantity',
+    minWidth: '150px',
+    selector: 'quantity',
+    sortable: true,
+    cell: row => row.quantity
+  },
+  {
+    name: 'Actions',
+    maxWidth: '100px',
+    cell: row => (
+      <UncontrolledDropdown>
+        <DropdownToggle tag="div" className="btn btn-sm">
+          <MoreVertical size={14} className="cursor-pointer" />
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem tag={Link} to={`item-details/${row.name}`} className="w-100">
+            <FileText color="skyBlue" size={14} className="mr-50" />
+            <span color="primary" className="align-middle">
+              Details
+            </span>
+          </DropdownItem>
+          <DropdownItem className="w-100" onClick={() => {}}>
+            <Edit color="green" size={14} className="mr-50" />
+            <span className="align-middle">Edit</span>
+          </DropdownItem>
+          <DropdownItem
+            className="w-100"
+            onClick={() => {
+              store.dispatch(deleteCutPlan(row.id));
+            }}
+          >
+            <Trash2 color="red" size={14} className="mr-50" />
+            <span className="align-middle">Delete</span>
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    )
+  }
+];

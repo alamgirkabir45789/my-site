@@ -11,6 +11,29 @@ import { CUT_PLAN_API } from 'services/api-end-points/production/v1';
 import { randomIdGenerator } from 'utility/Utils';
 import mock from '../../mock';
 
+export const cutPlanDetails = [
+  {
+    id: 1,
+    cutNumber: '45',
+    po: 'PO 101',
+    color: 'Red',
+    width: '3',
+    length: '12',
+    lay: '200',
+    quantity: '1200'
+  },
+  {
+    id: 2,
+    cutNumber: '46',
+    po: 'PO 102',
+    color: 'Red',
+    width: '3',
+    length: '12',
+    lay: '200',
+    quantity: '1200'
+  }
+];
+
 const data = [
   {
     id: 1,
@@ -21,7 +44,29 @@ const data = [
     styleCategory: 'T-Shirt',
     totalLay: '400',
     totalQuantity: '2400',
-    status: 'active'
+    status: 'active',
+    details: [
+      {
+        id: 1,
+        cutNumber: '45',
+        po: 'PO 101',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      },
+      {
+        id: 2,
+        cutNumber: '46',
+        po: 'PO 102',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      }
+    ]
   },
   {
     id: 2,
@@ -32,7 +77,19 @@ const data = [
     styleCategory: 'Shorts',
     totalLay: '600',
     totalQuantity: '6000',
-    status: 'active'
+    status: 'active',
+    details: [
+      {
+        id: 1,
+        cutNumber: '47',
+        po: 'PO 101',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      }
+    ]
   },
   {
     id: 3,
@@ -43,7 +100,39 @@ const data = [
     styleCategory: 'Jeans',
     totalLay: '500',
     totalQuantity: '5000',
-    status: 'inactive'
+    status: 'inactive',
+    details: [
+      {
+        id: 1,
+        cutNumber: '48',
+        po: 'PO 101',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      },
+      {
+        id: 2,
+        cutNumber: '49',
+        po: 'PO 102',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      },
+      {
+        id: 3,
+        cutNumber: '50',
+        po: 'PO 103',
+        color: 'Red',
+        width: '3',
+        length: '12',
+        lay: '200',
+        quantity: '1200'
+      }
+    ]
   }
 ];
 
