@@ -14,6 +14,7 @@ import {
   FETCH_LINE_BY_ID,
   FETCH_LINE_BY_QUERY,
   TOGGLE_LINE_SIDEBAR,
+  TOGGLE_LINE_STATUS,
   UPDATE_LINE
 } from './actionType';
 
@@ -33,6 +34,9 @@ export const lineReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_LINE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_LINE_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_LINE_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_LINE_BY_QUERY:

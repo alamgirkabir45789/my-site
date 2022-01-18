@@ -32,7 +32,7 @@ const ProductPartAddForm = props => {
           {
             name: values.name,
             shortName: values.shortName,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -81,7 +81,7 @@ const ProductPartAddForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

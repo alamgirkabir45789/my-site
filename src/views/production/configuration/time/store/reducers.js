@@ -14,6 +14,7 @@ import {
   FETCH_TIME_BY_ID,
   FETCH_TIME_BY_QUERY,
   TOGGLE_TIME_SIDEBAR,
+  TOGGLE_TIME_STATUS,
   UPDATE_TIME
 } from './actionType';
 
@@ -33,6 +34,8 @@ export const timeReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_TIME_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_TIME_STATUS:
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
     case FETCH_TIME_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_TIME_BY_QUERY:

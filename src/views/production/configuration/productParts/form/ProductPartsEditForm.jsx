@@ -14,7 +14,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { toggleProductPartSidebar, updateProductPart } from '../store/actions';
+import {
+  toggleProductPartSidebar,
+  toggleProductPartStutas,
+  updateProductPart
+} from '../store/actions';
 
 const ProductPartsEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -32,7 +36,7 @@ const ProductPartsEditForm = props => {
             id: data.id,
             name: values.name,
             shortName: values.shortName,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -87,7 +91,11 @@ const ProductPartsEditForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e =>
+                dispatch(toggleProductPartStutas(e.target.checked ? 'active' : 'inactive'))
+              }
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

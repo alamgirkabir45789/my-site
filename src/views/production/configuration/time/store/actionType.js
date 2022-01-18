@@ -8,6 +8,7 @@
 
 export const FETCH_TIME = 'FETCH_TIME';
 export const TOGGLE_TIME_SIDEBAR = 'TOGGLE_TIME_SIDEBAR';
+export const TOGGLE_TIME_STATUS = 'TOGGLE_TIME_STATUS';
 export const FETCH_TIME_BY_QUERY = 'FETCH_TIME_BY_QUERY';
 export const ADD_TIME = 'ADD_TIME';
 export const DELETE_TIME = 'DELETE_TIME';

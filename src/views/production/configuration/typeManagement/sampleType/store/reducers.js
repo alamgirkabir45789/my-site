@@ -14,6 +14,7 @@ import {
   FETCH_SAMPLE_TYPE_BY_ID,
   FETCH_SAMPLE_TYPE_BY_QUERY,
   TOGGLE_SAMPLE_TYPE_SIDEBAR,
+  TOGGLE_SAMPLE_TYPE_STATUS,
   UPDATE_SAMPLE_TYPE
 } from './actionType';
 
@@ -33,6 +34,9 @@ export const sampleTypeReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_SAMPLE_TYPE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_SAMPLE_TYPE_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_SAMPLE_TYPE_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_SAMPLE_TYPE_BY_QUERY:

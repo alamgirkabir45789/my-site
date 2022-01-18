@@ -14,6 +14,7 @@ import {
   FETCH_PRODUCT_PARTS_BY_QUERY,
   FETCH_PRODUCT_PART_BY_ID,
   TOGGLE_PRODUCT_PART_SIDEBAR,
+  TOGGLE_PRODUCT_PART_STATUS,
   UPDATE_PRODUCT_PART
 } from './actionType';
 
@@ -33,6 +34,8 @@ export const productPartReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_PRODUCT_PART_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_PRODUCT_PART_STATUS:
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
     case FETCH_PRODUCT_PART_BY_ID:
       return { ...state, selectedItem: action.selectedItem };
     case FETCH_PRODUCT_PARTS_BY_QUERY:

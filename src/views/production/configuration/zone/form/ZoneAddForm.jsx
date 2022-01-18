@@ -35,7 +35,7 @@ const ZoneAddForm = props => {
             zoneOwnerName: values.zoneOwnerName,
             employeeCode: values.employeeCode,
             phoneNumber: values.phoneNumber,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -104,7 +104,7 @@ const ZoneAddForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

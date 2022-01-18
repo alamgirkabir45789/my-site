@@ -19,6 +19,7 @@ import {
   FETCH_PRODUCT_PARTS_BY_QUERY,
   FETCH_PRODUCT_PART_BY_ID,
   TOGGLE_PRODUCT_PART_SIDEBAR,
+  TOGGLE_PRODUCT_PART_STATUS,
   UPDATE_PRODUCT_PART
 } from './actionType';
 
@@ -32,14 +33,6 @@ export const fetchProductParts = () => async dispatch => {
   } catch (err) {
     notify('error', 'Something went wrong!!! Please try again');
   }
-};
-
-//Toggle Sidebar
-export const toggleProductPartSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_PRODUCT_PART_SIDEBAR,
-    payload: condition
-  });
 };
 
 //Get Data by Query
@@ -144,4 +137,20 @@ export const deleteProductPartByRange = ids => {
       }
     }
   };
+};
+
+//Toggle Sidebar
+export const toggleProductPartSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_PRODUCT_PART_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Sidebar
+export const toggleProductPartStutas = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_PRODUCT_PART_STATUS,
+    payload: condition
+  });
 };

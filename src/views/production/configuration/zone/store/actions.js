@@ -19,6 +19,7 @@ import {
   FETCH_ZONE_BY_ID,
   FETCH_ZONE_BY_QUERY,
   TOGGLE_ZONE_SIDEBAR,
+  TOGGLE_ZONE_STATUS,
   UPDATE_ZONE
 } from './actionType';
 
@@ -27,14 +28,6 @@ export const fetchZone = () => async dispatch => {
   dispatch({
     type: FETCH_ZONE,
     payload: response.data
-  });
-};
-
-//Open Sidebar
-export const toggleZoneSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_ZONE_SIDEBAR,
-    payload: condition
   });
 };
 
@@ -144,6 +137,22 @@ export const deleteZoneByRange = ids => {
       }
     }
   };
+};
+
+//Open Sidebar
+export const toggleZoneSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_ZONE_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Stutes
+export const toggleZoneStatus = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_ZONE_STATUS,
+    payload: condition
+  });
 };
 
 /** Change Log

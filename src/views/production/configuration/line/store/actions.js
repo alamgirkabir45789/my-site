@@ -19,6 +19,7 @@ import {
   FETCH_LINE_BY_ID,
   FETCH_LINE_BY_QUERY,
   TOGGLE_LINE_SIDEBAR,
+  TOGGLE_LINE_STATUS,
   UPDATE_LINE
 } from './actionType';
 
@@ -143,6 +144,14 @@ export const toggleLineSidebar = condition => dispatch => {
   dispatch({
     type: TOGGLE_LINE_SIDEBAR,
     payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleLineStatus = status => dispatch => {
+  dispatch({
+    type: TOGGLE_LINE_STATUS,
+    payload: status
   });
 };
 

@@ -19,6 +19,7 @@ import {
   FETCH_REJECT_TYPE_BY_ID,
   FETCH_REJECT_TYPE_BY_QUERY,
   TOGGLE_REJECT_TYPE_SIDEBAR,
+  TOGGLE_REJECT_TYPE_STATUS,
   UPDATE_REJECT_TYPE
 } from './actionType';
 
@@ -27,14 +28,6 @@ export const fetchRejectType = () => async dispatch => {
   dispatch({
     type: FETCH_REJECT_TYPE,
     payload: response.data
-  });
-};
-
-//Open Sidebar
-export const toggleRejectTypeSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_REJECT_TYPE_SIDEBAR,
-    payload: condition
   });
 };
 
@@ -134,7 +127,6 @@ export const deleteRejectTypeByRange = ids => {
     if (e.isConfirmed) {
       try {
         const res = await baseAxios.delete(`${REJECT_TYPE_API.delete_by_range}`, { ids });
-        console.log(res);
         dispatch({
           type: DELETE_REJECT_TYPE_BY_RANGE,
           payload: res.data.data
@@ -145,6 +137,22 @@ export const deleteRejectTypeByRange = ids => {
       }
     }
   };
+};
+
+//Open Sidebar
+export const toggleRejectTypeSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_REJECT_TYPE_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleRejectTypeStatus = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_REJECT_TYPE_STATUS,
+    payload: condition
+  });
 };
 
 /** Change Log

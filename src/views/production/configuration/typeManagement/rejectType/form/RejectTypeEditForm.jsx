@@ -16,7 +16,11 @@ import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty, selectThemeColors } from 'utility/Utils';
 import { getDropDownProductinProcess } from 'views/production/configuration/productionProcess/store/actions';
-import { toggleRejectTypeSidebar, updateRejectType } from '../store/actions';
+import {
+  toggleRejectTypeSidebar,
+  toggleRejectTypeStatus,
+  updateRejectType
+} from '../store/actions';
 
 const RejectTypeEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -52,7 +56,7 @@ const RejectTypeEditForm = props => {
             id: data.id,
             rejectTypeName: values.rejectTypeName,
             productionProcess: productionProcess.label,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -113,7 +117,11 @@ const RejectTypeEditForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e =>
+                dispatch(toggleRejectTypeStatus(e.target.checked ? 'active' : 'inactive'))
+              }
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

@@ -15,6 +15,7 @@ import {
   FETCH_PRODUCTION_PROCESS_BY_ID,
   FETCH_PRODUCTION_PROCESS_BY_QUERY,
   TOGGLE_PRODUCTION_PROCESS_SIDEBAR,
+  TOGGLE_PRODUCTION_PROCESS_STATUS,
   UPDATE_PRODUCTION_PROCESS
 } from './actionType';
 
@@ -35,6 +36,9 @@ export const productionProcessReducer = (state = initialState, action) => {
       return { ...state, productionProcesses: payload };
     case TOGGLE_PRODUCTION_PROCESS_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_PRODUCTION_PROCESS_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_PRODUCTION_PROCESS_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_PRODUCTION_PROCESS_BY_QUERY:

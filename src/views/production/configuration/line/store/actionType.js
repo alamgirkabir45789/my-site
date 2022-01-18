@@ -8,6 +8,7 @@
 
 export const FETCH_LINE = 'FETCH_LINE';
 export const TOGGLE_LINE_SIDEBAR = 'TOGGLE_LINE_SIDEBAR';
+export const TOGGLE_LINE_STATUS = 'TOGGLE_LINE_STATUS';
 export const FETCH_LINE_BY_QUERY = 'FETCH_LINE_BY_QUERY';
 export const ADD_LINE = 'ADD_LINE';
 export const DELETE_LINE = 'DELETE_LINE';

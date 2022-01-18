@@ -14,7 +14,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { toggleSampleTypeSidebar, updateSampleType } from '../store/actions';
+import {
+  toggleSampleTypeSidebar,
+  toggleSampleTypeStatus,
+  updateSampleType
+} from '../store/actions';
 
 const SampleTypeEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -34,7 +38,7 @@ const SampleTypeEditForm = props => {
             id: data.id,
             sampleTypeName: values.sampleTypeName,
             description: values.description,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -89,7 +93,11 @@ const SampleTypeEditForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e =>
+                dispatch(toggleSampleTypeStatus(e.target.checked ? 'active' : 'inactive'))
+              }
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

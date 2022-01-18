@@ -8,13 +8,13 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { toggleLineSidebar, updateLine } from '../store/actions';
+import { toggleLineSidebar, toggleLineStatus, updateLine } from '../store/actions';
 
 const LineEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -23,16 +23,6 @@ const LineEditForm = props => {
   const { isOpenSidebar } = useSelector(({ lineReducer }) => lineReducer);
 
   const { register, errors, handleSubmit } = useForm();
-
-  const [check, setCheck] = useState('');
-
-  // const onChangeStatus = e => {
-  //   const { type, name, value, checked } = e.target;
-  //   setCheck({
-  //     ...check,
-  //     [name]: type === 'checkbox' ? checked : value === 'active' ? true : false
-  //   });
-  // };
 
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
@@ -43,7 +33,7 @@ const LineEditForm = props => {
             id: data.id,
             lineNumber: values.lineNumber,
             description: values.description,
-            status: check ? 'active' : 'inactive'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -97,10 +87,10 @@ const LineEditForm = props => {
             <Input
               style={{ marginLeft: '5px' }}
               name="status"
-              // value={check}
               type="checkbox"
-              checked={data.status === 'active' ? { checked: true } : false}
-              onChange={e => setCheck({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e => dispatch(toggleLineStatus(e.target.checked ? 'active' : 'inactive'))}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

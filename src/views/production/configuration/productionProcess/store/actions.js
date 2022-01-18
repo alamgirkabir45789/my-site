@@ -20,6 +20,7 @@ import {
   FETCH_PRODUCTION_PROCESS_BY_ID,
   FETCH_PRODUCTION_PROCESS_BY_QUERY,
   TOGGLE_PRODUCTION_PROCESS_SIDEBAR,
+  TOGGLE_PRODUCTION_PROCESS_STATUS,
   UPDATE_PRODUCTION_PROCESS
 } from './actionType';
 
@@ -28,14 +29,6 @@ export const fetchProductionProcess = () => async dispatch => {
   dispatch({
     type: FETCH_PRODUCTION_PROCESS,
     payload: response.data
-  });
-};
-
-//Open Sidebar
-export const toggleProductionProcessSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_PRODUCTION_PROCESS_SIDEBAR,
-    payload: condition
   });
 };
 
@@ -166,6 +159,21 @@ export const deleteProductionProcessByRange = ids => {
       }
     }
   };
+};
+//Open Sidebar
+export const toggleProductionProcessSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_PRODUCTION_PROCESS_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleProductionProcessStatus = status => dispatch => {
+  dispatch({
+    type: TOGGLE_PRODUCTION_PROCESS_STATUS,
+    payload: status
+  });
 };
 
 /** Change Log

@@ -34,7 +34,7 @@ const SampleTypeAddForm = props => {
           {
             sampleTypeName: values.sampleTypeName,
             description: values.description,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -87,7 +87,7 @@ const SampleTypeAddForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

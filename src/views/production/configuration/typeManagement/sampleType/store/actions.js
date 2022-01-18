@@ -19,6 +19,7 @@ import {
   FETCH_SAMPLE_TYPE_BY_ID,
   FETCH_SAMPLE_TYPE_BY_QUERY,
   TOGGLE_SAMPLE_TYPE_SIDEBAR,
+  TOGGLE_SAMPLE_TYPE_STATUS,
   UPDATE_SAMPLE_TYPE
 } from './actionType';
 
@@ -142,6 +143,14 @@ export const deleteSampleTypeByRange = ids => {
 export const toggleSampleTypeSidebar = condition => dispatch => {
   dispatch({
     type: TOGGLE_SAMPLE_TYPE_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleSampleTypeStatus = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_SAMPLE_TYPE_STATUS,
     payload: condition
   });
 };

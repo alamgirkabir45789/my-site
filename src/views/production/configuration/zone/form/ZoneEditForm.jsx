@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { toggleZoneSidebar, updateZone } from '../store/actions';
+import { toggleZoneSidebar, toggleZoneStatus, updateZone } from '../store/actions';
 
 const ZoneEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -34,7 +34,7 @@ const ZoneEditForm = props => {
             zoneOwnerName: values.zoneOwnerName,
             employeeCode: values.employeeCode,
             phoneNumber: values.phoneNumber,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -104,7 +104,9 @@ const ZoneEditForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e => dispatch(toggleZoneStatus(e.target.checked ? 'active' : 'inactive'))}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

@@ -14,6 +14,7 @@ import {
   FETCH_INCOMPLETE_TYPE_BY_ID,
   FETCH_INCOMPLETE_TYPE_BY_QUERY,
   TOGGLE_INCOMPLETE_TYPE_SIDEBAR,
+  TOGGLE_INCOMPLETE_TYPE_STATUS,
   UPDATE_INCOMPLETE_TYPE
 } from './actionType';
 
@@ -33,6 +34,9 @@ export const incompleteTypeReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_INCOMPLETE_TYPE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_INCOMPLETE_TYPE_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_INCOMPLETE_TYPE_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_INCOMPLETE_TYPE_BY_QUERY:

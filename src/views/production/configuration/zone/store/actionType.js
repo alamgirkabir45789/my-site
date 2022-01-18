@@ -8,6 +8,7 @@
 
 export const FETCH_ZONE = 'FETCH_ZONE';
 export const TOGGLE_ZONE_SIDEBAR = 'TOGGLE_ZONE_SIDEBAR';
+export const TOGGLE_ZONE_STATUS = 'TOGGLE_ZONE_STATUS';
 export const FETCH_ZONE_BY_QUERY = 'FETCH_ZONE_BY_QUERY';
 export const ADD_ZONE = 'ADD_ZONE';
 export const DELETE_ZONE = 'DELETE_ZONE';

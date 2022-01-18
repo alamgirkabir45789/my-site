@@ -19,6 +19,7 @@ import {
   FETCH_INCOMPLETE_TYPE_BY_ID,
   FETCH_INCOMPLETE_TYPE_BY_QUERY,
   TOGGLE_INCOMPLETE_TYPE_SIDEBAR,
+  TOGGLE_INCOMPLETE_TYPE_STATUS,
   UPDATE_INCOMPLETE_TYPE
 } from './actionType';
 
@@ -27,14 +28,6 @@ export const fetchIncompleteType = () => async dispatch => {
   dispatch({
     type: FETCH_INCOMPLETE_TYPE,
     payload: response.data
-  });
-};
-
-//Open Sidebar
-export const toggleIncompleteTypeSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_INCOMPLETE_TYPE_SIDEBAR,
-    payload: condition
   });
 };
 
@@ -144,6 +137,22 @@ export const deleteIncompleteTypeByRange = ids => {
       }
     }
   };
+};
+
+//Open Sidebar
+export const toggleIncompleteTypeSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_INCOMPLETE_TYPE_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleIncompleteTypeStatus = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_INCOMPLETE_TYPE_STATUS,
+    payload: condition
+  });
 };
 
 /** Change Log

@@ -8,7 +8,7 @@
 
 import Sidebar from '@core/components/sidebar';
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
@@ -23,8 +23,6 @@ const LineAddForm = props => {
 
   const { register, errors, handleSubmit } = useForm();
 
-  const [check, setCheck] = useState('');
-
   //Submit method for data save
   const onSubmit = values => {
     if (isObjEmpty(errors)) {
@@ -34,7 +32,7 @@ const LineAddForm = props => {
           {
             lineNumber: values.lineNumber,
             description: values.description,
-            status: check ? 'active' : 'inactive'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -86,9 +84,8 @@ const LineAddForm = props => {
             <Input
               style={{ marginLeft: '5px' }}
               name="status"
-              value={check}
               type="checkbox"
-              onChange={e => setCheck(e.target.checked)}
+              innerRef={register({ required: false })}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>

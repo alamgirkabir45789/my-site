@@ -14,6 +14,7 @@ import {
   FETCH_ZONE_BY_ID,
   FETCH_ZONE_BY_QUERY,
   TOGGLE_ZONE_SIDEBAR,
+  TOGGLE_ZONE_STATUS,
   UPDATE_ZONE
 } from './actionType';
 
@@ -33,6 +34,9 @@ export const zoneReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_ZONE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_ZONE_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_ZONE_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_ZONE_BY_QUERY:

@@ -14,6 +14,7 @@ import {
   FETCH_REJECT_TYPE_BY_ID,
   FETCH_REJECT_TYPE_BY_QUERY,
   TOGGLE_REJECT_TYPE_SIDEBAR,
+  TOGGLE_REJECT_TYPE_STATUS,
   UPDATE_REJECT_TYPE
 } from './actionType';
 
@@ -33,6 +34,9 @@ export const rejectTypeReducer = (state = initialState, action) => {
       return { ...state, items: payload };
     case TOGGLE_REJECT_TYPE_SIDEBAR:
       return { ...state, isOpenSidebar: payload };
+    case TOGGLE_REJECT_TYPE_STATUS: {
+      return { ...state, selectedItem: { ...state.selectedItem, status: payload } };
+    }
     case FETCH_REJECT_TYPE_BY_ID:
       return { ...state, selectedItem: payload.selectedItem };
     case FETCH_REJECT_TYPE_BY_QUERY:

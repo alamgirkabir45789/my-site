@@ -19,6 +19,7 @@ import {
   FETCH_TIME_BY_ID,
   FETCH_TIME_BY_QUERY,
   TOGGLE_TIME_SIDEBAR,
+  TOGGLE_TIME_STATUS,
   UPDATE_TIME
 } from './actionType';
 
@@ -27,14 +28,6 @@ export const fetchTime = () => async dispatch => {
   dispatch({
     type: FETCH_TIME,
     payload: response.data
-  });
-};
-
-//Open Sidebar
-export const toggleTimeSidebar = condition => dispatch => {
-  dispatch({
-    type: TOGGLE_TIME_SIDEBAR,
-    payload: condition
   });
 };
 
@@ -143,6 +136,21 @@ export const deleteTimeByRange = ids => {
   };
 };
 
+//Open Sidebar
+export const toggleTimeSidebar = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_TIME_SIDEBAR,
+    payload: condition
+  });
+};
+
+//Toggle Status
+export const toggleTimeStatus = condition => dispatch => {
+  dispatch({
+    type: TOGGLE_TIME_STATUS,
+    payload: condition
+  });
+};
 /** Change Log
  * 11-Jan-2022(Iqbal): Create Function/Method deleteTIMEByRange, deleteTIME, updateTIME, addTIME, fetchTIMEsByQuery, fetchTIMEById
  */

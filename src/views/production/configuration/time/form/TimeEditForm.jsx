@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { isObjEmpty } from 'utility/Utils';
-import { toggleTimeSidebar, updateTime } from '../store/actions';
+import { toggleTimeSidebar, toggleTimeStatus, updateTime } from '../store/actions';
 
 const TimeEditForm = props => {
   const { open, data, lastPageInfo } = props;
@@ -36,7 +36,7 @@ const TimeEditForm = props => {
             fromTime: values.fromTime,
             toTime: values.toTime,
             duration: values.duration,
-            status: 'active'
+            status: values.status ? 'active' : 'inactive'
           },
           lastPageInfo
         )
@@ -123,7 +123,9 @@ const TimeEditForm = props => {
               style={{ marginLeft: '5px' }}
               name="status"
               type="checkbox"
-              onChange={e => dispatch({ checked: e.target.checked })}
+              innerRef={register({ required: false })}
+              checked={data.status === 'active' ? true : false}
+              onChange={e => dispatch(toggleTimeStatus(e.target.checked ? 'active' : 'inactive'))}
             />
             <span style={{ marginLeft: '25px' }}> Is Active </span>
           </Label>
