@@ -213,7 +213,7 @@ const CutPlanAddForm = () => {
                     </FormGroup>
 
                     <FormGroup tag={Col} xs="6">
-                      <Input type="button" value="S" disabled />
+                      <Input type="text" value="S" className="text-center" disabled />
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
                       <Input
@@ -227,7 +227,7 @@ const CutPlanAddForm = () => {
                       {errors && errors.size && <FormFeedback>Size is required!</FormFeedback>}
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
-                      <Input type="button" value="M" disabled />
+                      <Input type="text" value="M" className="text-center" disabled />
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
                       <Input
@@ -241,7 +241,7 @@ const CutPlanAddForm = () => {
                       {errors && errors.size && <FormFeedback>Size is required!</FormFeedback>}
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
-                      <Input type="button" value="L" disabled />
+                      <Input type="text" value="L" className="text-center" disabled />
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
                       <Input
@@ -256,10 +256,10 @@ const CutPlanAddForm = () => {
                     </FormGroup>
 
                     <FormGroup tag={Col} xs="6">
-                      <Input type="button" value="Total" disabled />
+                      <Input type="text" value="Total" className="text-center" disabled />
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
-                      <Input type="button" value="6" disabled />
+                      <Input type="text" value="6" className="text-center" disabled />
                     </FormGroup>
                     <FormGroup tag={Col} xs="6">
                       <Label className="text-dark font-weight-bold" for="width">
