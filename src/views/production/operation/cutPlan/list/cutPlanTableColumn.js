@@ -202,3 +202,135 @@ export const cutPlanDetailsTablecolumn = [
     )
   }
 ];
+
+export const cutPlanPoDetailsTablecolumn = [
+  {
+    name: 'PO No',
+    minWidth: '170px',
+    selector: 'poNo',
+    sortable: true,
+    cell: row => row.poNo
+  },
+  {
+    name: 'Destination',
+    minWidth: '150px',
+    selector: 'destination',
+    sortable: true,
+    cell: row => row.destination
+  },
+  {
+    name: 'Shipment Date',
+    minWidth: '150px',
+    selector: 'shipmentDate',
+    sortable: true,
+    cell: row => row.shipmentDate
+  },
+  {
+    name: 'Shipment Mode',
+    minWidth: '150px',
+    selector: 'shipmentMode',
+    sortable: true,
+    cell: row => row.shipmentMode
+  },
+  {
+    name: 'Inspection Date',
+    minWidth: '150px',
+    selector: 'inspectionDate',
+    sortable: true,
+    cell: row => row.inspectionDate
+  },
+  {
+    name: 'Order Qty',
+    minWidth: '150px',
+    selector: 'orderQty',
+    sortable: true,
+    cell: row => row.orderQty
+  },
+  {
+    name: 'Order UOM',
+    minWidth: '150px',
+    selector: 'orderUOM',
+    sortable: true,
+    cell: row => row.orderUOM
+  },
+  {
+    name: 'Excess',
+    minWidth: '150px',
+    selector: 'excess',
+    sortable: true,
+    cell: row => row.excess
+  },
+  {
+    name: 'Wastage',
+    minWidth: '150px',
+    selector: 'wastage',
+    sortable: true,
+    cell: row => row.wastage
+  }
+];
+
+export const cutPlanPoDetailsClupsTablecolumn = [
+  {
+    name: 'Colors',
+    minWidth: '170px',
+    selector: 'colors',
+    sortable: true,
+    cell: row => row.colors
+  },
+  {
+    name: 'Order Quantity',
+    minWidth: '150px',
+    selector: 'orderQuantity',
+    sortable: true,
+    cell: row => row.orderQuantity
+  },
+  {
+    name: 'Extra %',
+    minWidth: '150px',
+    selector: 'extra',
+    sortable: true,
+    cell: row => row.extra
+  },
+  {
+    name: 'With Extra',
+    minWidth: '150px',
+    selector: 'withExtra',
+    sortable: true,
+    cell: row => row.withExtra
+  },
+  {
+    name: 'Previous Qty',
+    minWidth: '150px',
+    selector: 'previousQty',
+    sortable: true,
+    cell: row => row.previousQty
+  },
+  {
+    name: 'Lay Count',
+    minWidth: '150px',
+    selector: 'layCount',
+    sortable: true,
+    cell: row => row.layCount
+  },
+  {
+    name: 'Total Qty',
+    minWidth: '150px',
+    selector: 'totalQty',
+    sortable: true,
+    cell: row => row.totalQty
+  },
+  {
+    name: 'RC',
+    minWidth: '150px',
+    selector: 'rc',
+    sortable: true,
+    cell: row => row.rc
+  },
+  {
+    name: 'Blance',
+    minWidth: '150px',
+    selector: 'blance',
+    sortable: true,
+    cell: row => row.blance
+  }
+];

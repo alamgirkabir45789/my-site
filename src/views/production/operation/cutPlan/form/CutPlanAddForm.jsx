@@ -6,7 +6,10 @@
  * Modified: 18-January-2022
  */
 
+import { cutPlanPoDetails } from '@fake-db/production/operation/cutPlanMock';
 import React, { useState } from 'react';
+import DataTable from 'react-data-table-component';
+import { ChevronDown } from 'react-feather';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import {
@@ -22,7 +25,10 @@ import {
   Label,
   Row
 } from 'reactstrap';
+import CustomPreLoader from 'utility/custom/CustomPreLoader';
 import { selectThemeColors } from 'utility/Utils';
+import { cutPlanPoDetailsTablecolumn } from '../list/cutPlanTableColumn';
+import CutPlanPoDetailsExpandTable from './CutPlanPoDetailsExpandTable';
 
 const dropDownStyle = [
   { value: 'AV56567', label: 'AV56567' },
@@ -197,7 +203,7 @@ const CutPlanAddForm = () => {
                 </div>
               </Col>
 
-              <Col xs="12" sm="12" md="6" lg="6" xl="6" style={{ size: 'small' }}>
+              <Col xs="12" sm="12" md="6" lg="6" xl="6">
                 <div className="divider divider-left divider-primary">
                   <div className="divider-text text-secondary font-weight-bolder">
                     Size Wise Ratio
@@ -292,6 +298,33 @@ const CutPlanAddForm = () => {
                       )}
                     </FormGroup>
                   </Row>
+                </div>
+              </Col>
+              <hr />
+            </Row>
+
+            <Row>
+              <Col xs="12" sm="12" md="12" lg="12" xl="12">
+                <div className="divider divider-left divider-primary">
+                  <div className="divider-text text-secondary font-weight-bolder">PO Details</div>
+                </div>
+                <div className="border rounded rounded-5 p-1">
+                  <DataTable
+                    progressPending={!cutPlanPoDetails.length}
+                    progressComponent={<CustomPreLoader />}
+                    dense
+                    subHeader={false}
+                    highlightOnHover
+                    responsive={true}
+                    paginationServer
+                    expandableRows
+                    expandableRowsComponent={<CutPlanPoDetailsExpandTable />}
+                    persistTableHead
+                    columns={cutPlanPoDetailsTablecolumn}
+                    sortIcon={<ChevronDown />}
+                    className="react-dataTable"
+                    data={cutPlanPoDetails}
+                  />
                 </div>
               </Col>
               <hr />

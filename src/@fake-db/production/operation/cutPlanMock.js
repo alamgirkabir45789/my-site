@@ -11,26 +11,120 @@ import { CUT_PLAN_API } from 'services/api-end-points/production/v1';
 import { randomIdGenerator } from 'utility/Utils';
 import mock from '../../mock';
 
-export const cutPlanDetails = [
+export const cutPlanPoDetails = [
   {
     id: 1,
-    cutNumber: '45',
-    po: 'PO 101',
-    color: 'Red',
-    width: '3',
-    length: '12',
-    lay: '200',
-    quantity: '1200'
+    poNo: 'PO 01',
+    destination: 'Africa',
+    shipmentDate: '10-11-2021',
+    shipmentMode: 'Air',
+    inspectionDate: '10-11-2021',
+    orderQty: 5000,
+    orderUOM: 'PC',
+    excess: 2,
+    wastage: 2,
+    details: [
+      {
+        id: 1,
+        colors: 'Red',
+        orderQuantity: 2000,
+        extra: 2,
+        withExtra: 2040,
+        previousQty: 0,
+        layCount: 200,
+        totalQty: 1200,
+        rc: '',
+        blance: 840
+      },
+      {
+        id: 1,
+        colors: 'Green',
+        orderQuantity: 3000,
+        extra: 2,
+        withExtra: 3060,
+        previousQty: 0,
+        layCount: 0,
+        totalQty: 0,
+        rc: '',
+        blance: 3000
+      }
+    ]
   },
   {
     id: 2,
-    cutNumber: '46',
-    po: 'PO 102',
-    color: 'Red',
-    width: '3',
-    length: '12',
-    lay: '200',
-    quantity: '1200'
+    poNo: 'PO 02',
+    destination: 'India',
+    shipmentDate: '11-11-2021',
+    shipmentMode: 'Sea',
+    inspectionDate: '11-11-2021',
+    orderQty: 7000,
+    orderUOM: 'PC',
+    excess: 2,
+    wastage: 2,
+    details: [
+      {
+        id: 1,
+        colors: 'Red',
+        orderQuantity: 2000,
+        extra: 2,
+        withExtra: 2040,
+        previousQty: 0,
+        layCount: 200,
+        totalQty: 1200,
+        rc: '',
+        blance: 840
+      },
+      {
+        id: 1,
+        colors: 'Green',
+        orderQuantity: 3000,
+        extra: 2,
+        withExtra: 3060,
+        previousQty: 0,
+        layCount: 0,
+        totalQty: 0,
+        rc: '',
+        blance: 3000
+      }
+    ]
+  },
+  {
+    id: 3,
+    poNo: 'PO 03',
+    destination: 'Canada',
+    shipmentDate: '12-11-2021',
+    shipmentMode: 'Bus',
+    inspectionDate: '12-11-2021',
+    orderQty: 5241,
+    orderUOM: 'PC',
+    excess: 2,
+    wastage: 2,
+    details: [
+      {
+        id: 1,
+        colors: 'Red',
+        orderQuantity: 2000,
+        extra: 2,
+        withExtra: 2040,
+        previousQty: 0,
+        layCount: 200,
+        totalQty: 1200,
+        rc: '',
+        blance: 840
+      },
+      {
+        id: 1,
+        colors: 'Green',
+        orderQuantity: 3000,
+        extra: 2,
+        withExtra: 3060,
+        previousQty: 0,
+        layCount: 0,
+        totalQty: 0,
+        rc: '',
+        blance: 3000
+      }
+    ]
   }
 ];
 
