@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
-import DataTable from 'react-data-table-component';
-import { ChevronDown } from 'react-feather';
 import { useDispatch } from 'react-redux';
-import { Card } from 'reactstrap';
-import CustomPreLoader from 'utility/custom/CustomPreLoader';
-import { cutPlanPoDetailsClupsTablecolumn } from '../list/cutPlanTableColumn';
+import { Input, Table, TabPane } from 'reactstrap';
 import { fetchCutPlansByQuery } from '../store/actions';
 
 const CutPlanPoDetailsExpandTable = props => {
@@ -25,22 +21,142 @@ const CutPlanPoDetailsExpandTable = props => {
 
   return (
     <div>
-      <Card>
-        <DataTable
-          style={{ padding: '0px 60px' }}
-          //   progressPending={!details.length}
-          progressComponent={<CustomPreLoader />}
-          dense
-          subHeader={false}
-          highlightOnHover
-          responsive={true}
-          paginationServer
-          persistTableHead
-          columns={cutPlanPoDetailsClupsTablecolumn}
-          sortIcon={<ChevronDown />}
-          data={details}
-        />
-      </Card>
+      <TabPane tabId="1">
+        <div>
+          <Table className="pre-costing-details-table table-bordered" size="sm" responsive={true}>
+            <thead className="">
+              <tr>
+                <th className=" text-center">
+                  <strong>Colors</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Order Quantity</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Extra %</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>With Extra%</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Previous Qty</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Lay Count</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Total Qty</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>RC</strong>
+                </th>
+                <th className=" text-center">
+                  <strong>Blance</strong>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {details.map(item => (
+                <tr key={item.id}>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id="colors"
+                      className="text-left"
+                      disabled
+                      bsSize="sm"
+                      type="text"
+                      value={item.colors}
+                      name="colors"
+                      placeholder="Color"
+                      onChange={() => {}}
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="orderQuantity"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="extra"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="withExtra"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="previousQty"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="layCount"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="totalQty"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="rc"
+                      placeholder="0"
+                    />
+                  </td>
+                  <td style={{ width: '105px' }}>
+                    <Input
+                      id=""
+                      className="text-right"
+                      bsSize="sm"
+                      type="number"
+                      name="blance"
+                      placeholder="0"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </TabPane>
     </div>
   );
 };

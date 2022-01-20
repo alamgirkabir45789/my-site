@@ -37,7 +37,7 @@ export const cutPlanPoDetails = [
         blance: 840
       },
       {
-        id: 1,
+        id: 2,
         colors: 'Green',
         orderQuantity: 3000,
         extra: 2,
@@ -75,7 +75,7 @@ export const cutPlanPoDetails = [
         blance: 840
       },
       {
-        id: 1,
+        id: 2,
         colors: 'Green',
         orderQuantity: 3000,
         extra: 2,
@@ -113,7 +113,7 @@ export const cutPlanPoDetails = [
         blance: 840
       },
       {
-        id: 1,
+        id: 2,
         colors: 'Green',
         orderQuantity: 3000,
         extra: 2,
