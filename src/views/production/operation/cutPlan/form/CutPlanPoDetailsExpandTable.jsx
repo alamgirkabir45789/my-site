@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { MoreVertical } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { Input, Table, TabPane } from 'reactstrap';
 import { fetchCutPlansByQuery } from '../store/actions';
@@ -58,29 +59,8 @@ const CutPlanPoDetailsExpandTable = props => {
             <tbody className="text-center">
               {details.map(item => (
                 <tr key={item.id}>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id="colors"
-                      className="text-left"
-                      disabled
-                      bsSize="sm"
-                      type="text"
-                      value={item.colors}
-                      name="colors"
-                      placeholder="Color"
-                      onChange={() => {}}
-                    />
-                  </td>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="orderQuantity"
-                      placeholder="0"
-                    />
-                  </td>
+                  <td style={{ width: '105px' }}>{item.colors}</td>
+                  <td style={{ width: '105px' }}>{item.orderQuantity}</td>
                   <td style={{ width: '105px' }}>
                     <Input
                       id=""
@@ -91,36 +71,9 @@ const CutPlanPoDetailsExpandTable = props => {
                       placeholder="0"
                     />
                   </td>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="withExtra"
-                      placeholder="0"
-                    />
-                  </td>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="previousQty"
-                      placeholder="0"
-                    />
-                  </td>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="layCount"
-                      placeholder="0"
-                    />
-                  </td>
+                  <td style={{ width: '105px' }}>{item.withExtra}</td>
+                  <td style={{ width: '105px' }}>{item.previousQty}</td>
+                  <td style={{ width: '105px' }}>{item.layCount}</td>
                   <td style={{ width: '105px' }}>
                     <Input
                       id=""
@@ -128,29 +81,13 @@ const CutPlanPoDetailsExpandTable = props => {
                       bsSize="sm"
                       type="number"
                       name="totalQty"
-                      placeholder="0"
+                      placeholder={item.totalQty}
                     />
                   </td>
                   <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="rc"
-                      placeholder="0"
-                    />
+                    <MoreVertical />
                   </td>
-                  <td style={{ width: '105px' }}>
-                    <Input
-                      id=""
-                      className="text-right"
-                      bsSize="sm"
-                      type="number"
-                      name="blance"
-                      placeholder="0"
-                    />
-                  </td>
+                  <td style={{ width: '105px' }}>{item.blance}</td>
                 </tr>
               ))}
             </tbody>
