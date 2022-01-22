@@ -17,69 +17,7 @@ const data = [
     cutNo: '45',
     comboNo: '1',
     size: 'M',
-    color: 'Red',
-    details: [
-      {
-        id: 1,
-        bundleNumber: '45-M-01-F',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 2,
-        bundleNumber: '45-M-01-B',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 3,
-        bundleNumber: '45-M-01-PO',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 4,
-        bundleNumber: '45-M-01-Cuff',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 5,
-        bundleNumber: '45-M-01-Coller',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      }
-    ]
+    color: 'Red'
   },
   {
     id: 2,
@@ -87,69 +25,7 @@ const data = [
     cutNo: '45',
     comboNo: '2',
     size: 'M',
-    color: 'Red',
-    details: [
-      {
-        id: 1,
-        bundleNumber: '45-M-01-F',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 2,
-        bundleNumber: '45-M-01-B',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 3,
-        bundleNumber: '45-M-01-PO',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 4,
-        bundleNumber: '45-M-01-Cuff',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 5,
-        bundleNumber: '45-M-01-Coller',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      }
-    ]
+    color: 'Red'
   },
   {
     id: 3,
@@ -157,93 +33,70 @@ const data = [
     cutNo: '45',
     comboNo: 3,
     size: 'M',
-    color: 'Red',
-    details: [
-      {
-        id: 1,
-        bundleNumber: '45-M-01-F',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 2,
-        bundleNumber: '45-M-01-B',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 3,
-        bundleNumber: '45-M-01-PO',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 4,
-        bundleNumber: '45-M-01-Cuff',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      },
-      {
-        id: 5,
-        bundleNumber: '45-M-01-Coller',
-        date: '23/11/2021',
-        serialStart: 1,
-        serialEnd: 25,
-        quantity: 25,
-        status: 'pending',
-        hasReject: false,
-        rejectInfo: '',
-        checked: ''
-      }
-    ]
+    color: 'Red'
+  }
+];
+
+export const details = [
+  {
+    id: 11,
+    bundleNumber: '45-M-01-F',
+    date: '23/11/2021',
+    serialStart: 1,
+    serialEnd: 25,
+    quantity: 25,
+    status: 'pending',
+    hasReject: false,
+    rejectInfo: '',
+    checked: ''
   },
   {
-    id: 4,
-    cutPlanNo: 'CP004',
-    cutNo: '45',
-    comboNo: 4,
-    size: 'M',
-    color: 'Red'
+    id: 12,
+    bundleNumber: '45-M-01-B',
+    date: '23/11/2021',
+    serialStart: 1,
+    serialEnd: 25,
+    quantity: 25,
+    status: 'pending',
+    hasReject: false,
+    rejectInfo: '',
+    checked: ''
   },
   {
-    id: 5,
-    cutPlanNo: 'CP005',
-    cutNo: '45',
-    comboNo: 5,
-    size: 'M',
-    color: 'Red'
+    id: 13,
+    bundleNumber: '45-M-01-PO',
+    date: '23/11/2021',
+    serialStart: 1,
+    serialEnd: 25,
+    quantity: 25,
+    status: 'pending',
+    hasReject: false,
+    rejectInfo: '',
+    checked: ''
   },
   {
-    id: 6,
-    cutPlanNo: 'CP006',
-    cutNo: '45',
-    comboNo: 6,
-    size: 'M',
-    color: 'Red'
+    id: 14,
+    bundleNumber: '45-M-01-Cuff',
+    date: '23/11/2021',
+    serialStart: 1,
+    serialEnd: 25,
+    quantity: 25,
+    status: 'pending',
+    hasReject: false,
+    rejectInfo: '',
+    checked: ''
+  },
+  {
+    id: 15,
+    bundleNumber: '45-M-01-Coller',
+    date: '23/11/2021',
+    serialStart: 1,
+    serialEnd: 25,
+    quantity: 25,
+    status: 'pending',
+    hasReject: false,
+    rejectInfo: '',
+    checked: ''
   }
 ];
 

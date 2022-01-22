@@ -7,23 +7,36 @@
  */
 
 import React, { Fragment, useEffect, useState } from 'react';
+import { Maximize2 } from 'react-feather';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader, CardTitle, Col, Input, Label, Row } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Col,
+  Collapse,
+  Input,
+  Label,
+  Row
+} from 'reactstrap';
 import CustomPagination from 'utility/custom/production/CustomPagination';
 import ResizableTable from 'utility/custom/ResizableTable';
 import TableCustomerHeader from 'utility/custom/TableCustomerHeader';
 import { fetchPanelChecksByQuery } from '../store/actions';
+import PanelCheckBundleDetails from './PanelCheckBundleDetails';
 
 const PanelCheckListPage = () => {
   const dispatch = useDispatch();
   const { items, total } = useSelector(({ panelCheckReducer }) => panelCheckReducer);
-
   //#region States
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [isOpen, setIsOpen] = React.useState(false);
   //#endregion
+
   //#region Effects
   useEffect(() => {
     dispatch(fetchPanelChecksByQuery({ page: currentPage, rowsPerPage }));
@@ -123,10 +136,22 @@ const PanelCheckListPage = () => {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {items?.map((panelCheck, index) => (
+                    {items?.map(panelCheck => (
                       <Fragment key={panelCheck.id + panelCheck.id}>
                         <tr key={panelCheck.id}>
-                          <td style={{ minWidth: '4px' }}>{index + 1}</td>
+                          <td style={{ minWidth: '4px' }}>
+                            <Button.Ripple
+                              for="collapseId"
+                              tag={Label}
+                              onClick={() => {
+                                setIsOpen(!isOpen);
+                              }}
+                              className="btn-icon"
+                              color="flat-primary"
+                            >
+                              <Maximize2 id="collapseId" size={15} color="#7367f0" />
+                            </Button.Ripple>
+                          </td>
                           <td>
                             <Label className="text-dark font-weight-bold" for="styleNo">
                               {panelCheck.cutPlanNo}
@@ -170,6 +195,18 @@ const PanelCheckListPage = () => {
           onPageChange={handlePageChange}
         />
       </Card>
+
+      <Collapse isOpen={isOpen}>
+        <PanelCheckBundleDetails />
+      </Collapse>
+
+      {/* {selectedItem !== null ? (
+        <PanelCheckBundleDetails isOpen={isOpen} />
+      ) : selectedItem == null ? (
+        <div>
+          <Label className="text-dark font-weight-bold">There have no record</Label>
+        </div>
+      ) : null} */}
     </div>
   );
 };
