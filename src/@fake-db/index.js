@@ -14,5 +14,6 @@ import './production/configuration/sampleTypeMock';
 import './production/configuration/timeMock';
 import './production/configuration/zoneMock';
 import './production/operation/cutPlanMock';
+import './production/operation/panelCheckMock';
 
 mock.onAny().passThrough();

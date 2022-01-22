@@ -8,6 +8,7 @@ import { rejectTypeReducer } from 'views/production/configuration/typeManagement
 import { sampleTypeReducer } from 'views/production/configuration/typeManagement/sampleType/store/reducers';
 import { zoneReducer } from 'views/production/configuration/zone/store/reducers';
 import { cutPlanReducer } from 'views/production/operation/cutPlan/store/reducers';
+import { panelCheckReducer } from 'views/production/operation/panelCheck/store/reducers';
 
 export const productionReducers = {
   lineReducer,
@@ -19,5 +20,6 @@ export const productionReducers = {
   rejectTypeReducer,
   incompleteTypeReducer,
   timeReducer,
-  cutPlanReducer
+  cutPlanReducer,
+  panelCheckReducer
 };

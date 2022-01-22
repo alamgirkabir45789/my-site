@@ -10,6 +10,7 @@ import { CRITICAL_PROCESS_API } from './criticalProcess';
 import { CUT_PLAN_API } from './cutPlan';
 import { INCOMPLETE_TYPE_API } from './incompleteType';
 import { LINE_API } from './line';
+import { PANEL_CHECK_API } from './panelCheck';
 import { PRODUCTION_PROCESS_API } from './productionProcess';
 import { PRODUCT_PARTS_API } from './productParts';
 import { REJECT_TYPE_API } from './rejectType';
@@ -27,5 +28,6 @@ export {
   CRITICAL_PROCESS_API,
   INCOMPLETE_TYPE_API,
   TIME_API,
-  CUT_PLAN_API
+  CUT_PLAN_API,
+  PANEL_CHECK_API
 };
