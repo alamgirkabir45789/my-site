@@ -11,7 +11,7 @@ import { PANEL_CHECK_API } from 'services/api-end-points/production/v1';
 import { notify } from 'utility/custom/notifications';
 import { FETCH_PANEL_CHECK, FETCH_PANEL_CHECK_BY_QUERY } from './actionType';
 
-export const fetchCutPlan = () => async dispatch => {
+export const fetchPanelCheck = () => async dispatch => {
   const response = await baseAxios.get(`${PANEL_CHECK_API.fetch_all}`);
   dispatch({
     type: FETCH_PANEL_CHECK,
@@ -20,7 +20,7 @@ export const fetchCutPlan = () => async dispatch => {
 };
 
 //Get Data by Query
-export const fetchCutPlansByQuery = params => {
+export const fetchPanelChecksByQuery = params => {
   return async dispatch => {
     try {
       const res = await baseAxios.get(`${PANEL_CHECK_API.fetch_by_query}`, params);

@@ -2,8 +2,8 @@
      Title: Panel Check Mockup
      Description: Panel Check Mockup
      Author: Iqbal Hossain
-     Date: 18-January-2022
-     Modified: 18-January-2022
+     Date: 22-January-2022
+     Modified: 22-January-2022
 */
 
 import { paginateArray } from '@fake-db/utils';
@@ -155,7 +155,7 @@ const data = [
     id: 3,
     cutPlanNo: 'CP003',
     cutNo: '45',
-    comboNo: '1',
+    comboNo: 3,
     size: 'M',
     color: 'Red',
     details: [
@@ -220,6 +220,30 @@ const data = [
         checked: ''
       }
     ]
+  },
+  {
+    id: 4,
+    cutPlanNo: 'CP004',
+    cutNo: '45',
+    comboNo: 4,
+    size: 'M',
+    color: 'Red'
+  },
+  {
+    id: 5,
+    cutPlanNo: 'CP005',
+    cutNo: '45',
+    comboNo: 5,
+    size: 'M',
+    color: 'Red'
+  },
+  {
+    id: 6,
+    cutPlanNo: 'CP006',
+    cutNo: '45',
+    comboNo: 6,
+    size: 'M',
+    color: 'Red'
   }
 ];
 

@@ -11,8 +11,10 @@ import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ChevronDown } from 'react-feather';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -37,10 +39,14 @@ const dropDownStyle = [
 ];
 
 const CutPlanAddForm = () => {
+  const { replace } = useHistory();
   const { register, errors, handleSubmit } = useForm();
 
   //#region State
   const [style, setStyle] = useState(null);
+  //#endregion
+
+  //#region Events
 
   //#endregion
 
@@ -332,6 +338,24 @@ const CutPlanAddForm = () => {
           </Form>
         </CardBody>
       </Card>
+
+      <Row>
+        <Col className="d-flex flex-row-reverse">
+          <div className="d-inline-block mb-1 mt-1">
+            <Button.Ripple
+              onClick={() => {
+                replace('/cut-plan');
+              }}
+              className="ml-1 "
+              outline
+              color="secondary"
+              size="sm"
+            >
+              Back to List
+            </Button.Ripple>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };
