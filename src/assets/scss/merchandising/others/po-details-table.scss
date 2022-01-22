@@ -7,7 +7,9 @@
     width: 100%;
     // overflow-y: initial;
   }
-
+  tr {
+    height: 5px;
+  }
   th,
   td {
     // text-align: center;
@@ -25,24 +27,3 @@
     padding-inline-start: 0;
   }
 }
-
-// .pre-costing-summary-table {
-//   .table {
-//     width: 100%;
-//     // background-color: rgb(107, 10, 10);
-//     th,
-//     td {
-//       max-width: 15px;
-//       padding: 0;
-//       margin-left: 0em;
-//       margin-right: 0em;
-//       input {
-//         // width: 70%;
-//         align-content: flex-end;
-//         float: right;
-//         clear: both;
-//         text-align: right;
-//       }
-//     }
-//   }
-// }
