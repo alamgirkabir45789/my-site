@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /**
  * Title: Cut Plan Add Form
  * Description: Cut Plan Add Form
@@ -6,11 +7,10 @@
  * Modified: 18-January-2022
  */
 
-import { cutPlanPoDetails } from '@fake-db/production/operation/cutPlanMock';
 import ActionMenu from 'layouts/components/menu/action-menu';
-import React, { useState } from 'react';
-import DataTable from 'react-data-table-component';
-import { ChevronDown } from 'react-feather';
+import moment from 'moment';
+import React, { Fragment, useState } from 'react';
+import { Maximize2, Minimize2 } from 'react-feather';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import {
@@ -28,10 +28,9 @@ import {
   NavLink,
   Row
 } from 'reactstrap';
-import CustomPreLoader from 'utility/custom/CustomPreLoader';
-import { selectThemeColors } from 'utility/Utils';
-import { cutPlanPoDetailsTablecolumn } from '../list/cutPlanTableColumn';
-import CutPlanPoDetailsExpandTable from './CutPlanPoDetailsExpandTable';
+import ResizableTable from 'utility/custom/ResizableTable';
+import { randomIdGenerator, selectThemeColors } from 'utility/Utils';
+import classes from '../styles/CutPlanAddForm.module.scss';
 
 const dropDownStyle = [
   { value: 'AV56567', label: 'AV56567' },
@@ -44,6 +43,39 @@ const CutPlanAddForm = () => {
 
   //#region State
   const [style, setStyle] = useState(null);
+  const [orderDetails] = useState([
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO101',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 5000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO102',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    }
+  ]);
+
+  const [isOpen] = useState([
+    {
+      rowId: orderDetails[0].fieldId,
+      yes: false
+    }
+  ]);
 
   //#endregion
 
@@ -310,26 +342,145 @@ const CutPlanAddForm = () => {
               <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12} className="mt-n1">
                 <Badge color="primary">{`PO Details`}</Badge>
               </FormGroup>
-              <Col xs="12" sm="12" md="12" lg="12" xl="12">
-                <div className="border rounded rounded-5 p-1">
-                  <DataTable
-                    progressPending={!cutPlanPoDetails.length}
-                    progressComponent={<CustomPreLoader />}
-                    dense
-                    subHeader={false}
-                    highlightOnHover
-                    responsive={true}
-                    paginationServer
-                    expandableRows
-                    expandableRowsComponent={<CutPlanPoDetailsExpandTable />}
-                    persistTableHead
-                    columns={cutPlanPoDetailsTablecolumn}
-                    sortIcon={<ChevronDown />}
-                    className="react-dataTable"
-                    data={cutPlanPoDetails}
-                  />
-                </div>
-              </Col>
+              <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12}>
+                {/* <div className="po-details-table"> */}
+                <ResizableTable
+                  mainClass="purchaseTable"
+                  tableId="purchaseTableId"
+                  className={classes.poDetailsTable}
+                  size="sm"
+                  responsive
+                >
+                  <thead className="thead-light table-bordered">
+                    <tr className="text-center">
+                      <th style={{ minWidth: '4px' }}>
+                        <strong>#</strong>
+                      </th>
+                      <th>
+                        <strong>PO No.</strong>
+                      </th>
+                      <th>
+                        <strong>Destination</strong>
+                      </th>
+                      <th>
+                        <strong>Inspection Date</strong>
+                      </th>
+                      <th>
+                        <strong>Shipment Mode</strong>
+                      </th>
+                      <th>
+                        <strong>Shipment Date</strong>
+                      </th>
+
+                      <th>
+                        <strong>Order Qty</strong>
+                      </th>
+                      <th>
+                        <strong>Order UOM</strong>
+                      </th>
+
+                      <th>
+                        <strong>Excess Qty</strong>
+                      </th>
+                      <th>
+                        <strong>Wastage Qty</strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-center">
+                    {orderDetails.map(i => (
+                      <Fragment key={i.fieldId + i.fieldId}>
+                        <tr key={i.fieldId}>
+                          <td style={{ minWidth: '4px' }}>
+                            <Button.Ripple
+                              for="collapseId"
+                              tag={Label}
+                              onClick={() => {}}
+                              className="btn-sm"
+                              color="flat-primary"
+                            >
+                              <Maximize2
+                                className={
+                                  isOpen.find(item => item.rowId === i.fieldId)?.yes
+                                    ? 'd-none'
+                                    : 'd'
+                                }
+                                id="collapseId"
+                                size={15}
+                                color="#7367f0"
+                              />
+                              <Minimize2
+                                className={
+                                  isOpen.find(item => item.rowId === i.fieldId)?.yes
+                                    ? 'd'
+                                    : 'd-none'
+                                }
+                                id="collapseId"
+                                size={15}
+                                color="#28c76f"
+                              />
+                            </Button.Ripple>
+                          </td>
+                          <td>{i.poNo}</td>
+                          <td>{i.destination}</td>
+                          <td>{i.inspectionDate}</td>
+                          <td>{i.shipmentMode}</td>
+                          <td>{i.shipmentDate}</td>
+                          <td>{i.orderQuantity}</td>
+                          <td>{i.orderUOM}</td>
+                          <td>{i.excessQuantity}</td>
+                          <td>{i.wastageQuantity}</td>
+                        </tr>
+                        {/* <tr>
+                            <td colSpan={7}>
+                              {orderDetails.some(i => i.fieldId === i.fieldId) && (
+                                <Collapse
+                                  isOpen={isOpen.find(item => item.rowId === i.fieldId)?.yes}
+                                >
+                                  <Table>
+                                    <thead className="thead-dark table-bordered">
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Style No</th>
+                                        <th>Product Category</th>
+                                        <th>Style Category</th>
+                                        <th>Size Range</th>
+                                        <th>Colors</th>
+                                        <th>Total Quantity</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">
+                                          <span>
+                                            <Button.Ripple
+                                              onClick={() => {}}
+                                              className="btn-icon"
+                                              color="flat-primary"
+                                            >
+                                              <Settings size={16} />
+                                            </Button.Ripple>
+                                          </span>
+                                        </th>
+                                        <td>{i.style?.label}</td>
+                                        <td>Top</td>
+                                        <td>DRESS</td>
+                                        <td>2T-3T-4T-5-6-7</td>
+                                        <td>PINK</td>
+                                        <td>120725</td>
+                                      </tr>
+                                    </tbody>
+                                  </Table>
+                                </Collapse>
+                              )}
+                            </td>
+                          </tr> */}
+                      </Fragment>
+                    ))}
+                  </tbody>
+                </ResizableTable>
+                {/* </div> */}
+              </FormGroup>
               <hr />
             </Row>
           </Form>
