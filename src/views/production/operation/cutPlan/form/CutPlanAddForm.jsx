@@ -10,7 +10,7 @@
 import ActionMenu from 'layouts/components/menu/action-menu';
 import moment from 'moment';
 import React, { Fragment, useState } from 'react';
-import { Maximize2, Minimize2 } from 'react-feather';
+import { Maximize2 } from 'react-feather';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 import {
@@ -67,13 +67,150 @@ const CutPlanAddForm = () => {
       orderUOM: 'pc',
       excessQuantity: 0,
       wastageQuantity: 0
-    }
-  ]);
-
-  const [isOpen] = useState([
+    },
     {
-      rowId: orderDetails[0].fieldId,
-      yes: false
+      fieldId: randomIdGenerator(),
+      poNo: 'PO103',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO104',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO105',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO106',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO107',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO108',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 5000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO109',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO110',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO111',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO012',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO113',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
+    },
+    {
+      fieldId: randomIdGenerator(),
+      poNo: 'PO114',
+      destination: 'China',
+      inspectionDate: moment(new Date()).format('yy-MM-DD'),
+      shipmentMode: 'Air',
+      shipmentDate: moment(new Date()).format('yy-MM-DD'),
+      orderQuantity: 7000,
+      orderUOM: 'pc',
+      excessQuantity: 0,
+      wastageQuantity: 0
     }
   ]);
 
@@ -351,7 +488,7 @@ const CutPlanAddForm = () => {
                   size="sm"
                   responsive
                 >
-                  <thead className="thead-light table-bordered">
+                  <thead className={`thead-light table-bordered ${classes.stickyTableHead}`}>
                     <tr className="text-center">
                       <th style={{ minWidth: '4px' }}>
                         <strong>#</strong>
@@ -399,26 +536,7 @@ const CutPlanAddForm = () => {
                               className="btn-sm"
                               color="flat-primary"
                             >
-                              <Maximize2
-                                className={
-                                  isOpen.find(item => item.rowId === i.fieldId)?.yes
-                                    ? 'd-none'
-                                    : 'd'
-                                }
-                                id="collapseId"
-                                size={15}
-                                color="#7367f0"
-                              />
-                              <Minimize2
-                                className={
-                                  isOpen.find(item => item.rowId === i.fieldId)?.yes
-                                    ? 'd'
-                                    : 'd-none'
-                                }
-                                id="collapseId"
-                                size={15}
-                                color="#28c76f"
-                              />
+                              <Maximize2 id="collapseId" size={15} color="#7367f0" />
                             </Button.Ripple>
                           </td>
                           <td>{i.poNo}</td>
