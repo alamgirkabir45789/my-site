@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Col, Input, Label, Row } from 'reactstrap';
 import ResizableTable from 'utility/custom/ResizableTable';
 import { fetchPanelChecksByQuery } from '../store/actions';
-
+import classes from '../styles/PanelCheckBundleDetails.module.scss';
 const PanelCheckBundleDetails = () => {
   const dispatch = useDispatch();
   //   const { items } = useSelector(({ panelCheckReducer }) => panelCheckReducer);
@@ -33,7 +33,7 @@ const PanelCheckBundleDetails = () => {
     <div>
       <Row>
         <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-          <div className="panel-Check-details-table">
+          <div className={classes.panelCheckDetailsTable}>
             <ResizableTable
               mainClass="panelCheckTable"
               tableId="panelCheckTableId"
