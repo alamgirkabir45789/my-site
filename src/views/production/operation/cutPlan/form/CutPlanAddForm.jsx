@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Title: Cut Plan Add Form
  * Description: Cut Plan Add Form
@@ -19,6 +20,7 @@ import {
   CardBody,
   Col,
   Collapse,
+  CustomInput,
   Form,
   FormFeedback,
   FormGroup,
@@ -42,12 +44,21 @@ const CutPlanAddForm = () => {
   const { register, errors, handleSubmit } = useForm();
 
   //#region State
-  const [style, setStyle] = useState(null);
+  const [masterInfo, setMasterInfo] = useState({
+    cutPlanNo: '',
+    startDate: '',
+    style: '',
+    styleCategory: '',
+    BuyerName: '',
+    totalQty: '',
+    totalLayCount: '',
+    layPerCut: ''
+  });
   const [orderDetails, setOrderDetails] = useState([
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO101',
-      destination: 'China',
+      destination: 'Finland',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -56,6 +67,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -66,7 +78,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -77,14 +90,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3000
+          balance: 3000,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO102',
-      destination: 'China',
+      destination: 'Denmark',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -93,6 +107,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -103,7 +118,8 @@ const CutPlanAddForm = () => {
           previousQty: 1200,
           LayCount: 200,
           totalQty: 1200,
-          balance: 1170
+          balance: 1170,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -114,14 +130,15 @@ const CutPlanAddForm = () => {
           previousQty: 1200,
           LayCount: 0,
           totalQty: 0,
-          balance: 2300
+          balance: 2300,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO103',
-      destination: 'China',
+      destination: 'Norway',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -130,6 +147,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -140,7 +158,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -151,14 +170,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3001
+          balance: 3001,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO104',
-      destination: 'China',
+      destination: 'Belgium',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -167,6 +187,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -177,7 +198,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -188,14 +210,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3002
+          balance: 3002,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO105',
-      destination: 'China',
+      destination: 'Sweden',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -204,6 +227,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -214,7 +238,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -225,14 +250,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3003
+          balance: 3003,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO106',
-      destination: 'China',
+      destination: 'Switzerland',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -241,6 +267,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -251,7 +278,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -262,14 +290,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3003
+          balance: 3003,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO107',
-      destination: 'China',
+      destination: 'Netherlands',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -278,6 +307,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -288,7 +318,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -299,14 +330,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3004
+          balance: 3004,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO108',
-      destination: 'China',
+      destination: 'France',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -315,6 +347,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -325,7 +358,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -336,14 +370,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3005
+          balance: 3005,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO109',
-      destination: 'China',
+      destination: 'Germany',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -352,6 +387,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -362,7 +398,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -373,14 +410,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3006
+          balance: 3006,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO110',
-      destination: 'China',
+      destination: 'Japan',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -389,6 +427,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -399,7 +438,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -410,14 +450,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3007
+          balance: 3007,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO111',
-      destination: 'China',
+      destination: 'Canada',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -426,6 +467,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -436,7 +478,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -447,14 +490,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3008
+          balance: 3008,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO012',
-      destination: 'China',
+      destination: 'Taiwan',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -463,6 +507,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -473,7 +518,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -484,14 +530,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3009
+          balance: 3009,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO113',
-      destination: 'China',
+      destination: 'Australia',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -500,6 +547,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -510,7 +558,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -521,14 +570,15 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3010
+          balance: 3010,
+          isChecked: false
         }
       ]
     },
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO114',
-      destination: 'China',
+      destination: 'Singapore',
       inspectionDate: moment(new Date()).format('yy-MM-DD'),
       shipmentMode: 'Air',
       shipmentDate: moment(new Date()).format('yy-MM-DD'),
@@ -537,6 +587,7 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
+      isChecked: false,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -547,7 +598,8 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 200,
           totalQty: 1200,
-          balance: 840
+          balance: 840,
+          isChecked: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -558,17 +610,68 @@ const CutPlanAddForm = () => {
           previousQty: 0,
           LayCount: 0,
           totalQty: 0,
-          balance: 3011
+          balance: 3011,
+          isChecked: false
         }
       ]
     }
   ]);
+  //#endregion
+
+  //#region UDF's
   const togglePoDetails = idx => {
     const _orderDetails = [...orderDetails];
     const clickedItem = _orderDetails[idx];
     clickedItem.isOpen = !clickedItem.isOpen;
     _orderDetails[idx] = clickedItem;
     setOrderDetails(_orderDetails);
+  };
+
+  const toggleCheck = (odIdx, podIdx) => {
+    const _orderDetails = [...orderDetails];
+    const clickedItem = _orderDetails[odIdx];
+    const _podetails = [...clickedItem.poDetails];
+    const checkedItem = _podetails[podIdx];
+    checkedItem.isChecked = !checkedItem.isChecked;
+    _podetails[podIdx] = checkedItem;
+    _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
+    setOrderDetails(_orderDetails);
+  };
+  //#endregion
+
+  //#region Events
+  const onExtraPercentageChange = (e, odIdx, podIdx) => {
+    const _orderDetails = [...orderDetails];
+    const clickedItem = _orderDetails[odIdx];
+    const _podetails = [...clickedItem.poDetails];
+    const checkedItem = _podetails[podIdx];
+    checkedItem.extra = e.target.value;
+    checkedItem.withExtra =
+      checkedItem.orderQuantity + (checkedItem.orderQuantity * checkedItem.extra) / 100;
+    _podetails[podIdx] = checkedItem;
+    _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
+    setOrderDetails(_orderDetails);
+  };
+
+  const onOutQuantityChange = (e, odIdx, podIdx) => {
+    const _orderDetails = [...orderDetails];
+    const clickedItem = _orderDetails[odIdx];
+    const _podetails = [...clickedItem.poDetails];
+    const checkedItem = _podetails[podIdx];
+    checkedItem.totalQty = e.target.value;
+    const _laycout = Number.isInteger(checkedItem.totalQty / 6) ? checkedItem.totalQty / 6 : 0;
+    checkedItem.LayCount = _laycout;
+    _podetails[podIdx] = checkedItem;
+    _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
+    let _abc;
+    for (let i = 0; i < _podetails.length; i++) {
+      const element = _podetails[i].LayCount;
+      console.log(element);
+    }
+
+    setOrderDetails(_orderDetails);
+
+    //setMasterInfo({ ...masterInfo, totalLayCount: +masterInfo.totalLayCount + _laycout });
   };
   //#endregion
 
@@ -643,8 +746,7 @@ const CutPlanAddForm = () => {
                       theme={selectThemeColors}
                       options={dropDownStyle}
                       classNamePrefix="select"
-                      value={style}
-                      onChange={data => setStyle(data)}
+                      onChange={() => {}}
                       innerRef={register({ required: true })}
                     />
 
@@ -709,6 +811,8 @@ const CutPlanAddForm = () => {
                       type="text"
                       name="totalLayCount"
                       placeholder="Total Lay Count"
+                      value={masterInfo.totalLayCount}
+                      readOnly
                       innerRef={register({ required: true })}
                       invalid={errors.totalLayCount && true}
                     />
@@ -874,14 +978,14 @@ const CutPlanAddForm = () => {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {orderDetails.map((i, idx) => (
+                    {orderDetails.map((i, odidx) => (
                       <Fragment key={i.fieldId + i.fieldId}>
                         <tr key={i.fieldId}>
                           <td style={{ minWidth: '4px' }}>
                             <Button
                               for="collapseId"
                               tag={Label}
-                              onClick={() => togglePoDetails(idx)}
+                              onClick={() => togglePoDetails(odidx)}
                               className="btn-sm"
                               color="flat-primary"
                             >
@@ -911,7 +1015,7 @@ const CutPlanAddForm = () => {
                               <Table className={classes.childTable}>
                                 <thead className="thead-light table-bordered">
                                   <tr>
-                                    <th></th>
+                                    <th>#</th>
                                     <th>Color</th>
                                     <th>Order Qty</th>
                                     <th>Extra</th>
@@ -924,16 +1028,53 @@ const CutPlanAddForm = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {i.poDetails.map(pod => (
+                                  {i.poDetails.map((pod, podIdx) => (
                                     <tr key={pod.fieldId}>
-                                      <td></td>
-                                      <td>{pod.color}</td>
+                                      <td className="text-center">
+                                        <CustomInput
+                                          type="checkbox"
+                                          className="custom-control-primary"
+                                          id={`pod-${pod.fieldId}`}
+                                          checked={pod.isChecked}
+                                          inline
+                                          onChange={() => toggleCheck(odidx, podIdx)}
+                                        />
+                                      </td>
+                                      <td className="text-left">{pod.color}</td>
                                       <td>{pod.orderQuantity}</td>
-                                      <td>{pod.extra}</td>
+                                      <td style={{ maxWidth: '20px' }}>
+                                        {pod.isChecked ? (
+                                          <Input
+                                            id="extra"
+                                            type="number"
+                                            name="extra"
+                                            bsSize="sm"
+                                            value={pod.extra}
+                                            onChange={e =>
+                                              onExtraPercentageChange(e, odidx, podIdx)
+                                            }
+                                          />
+                                        ) : (
+                                          pod.extra
+                                        )}
+                                      </td>
                                       <td>{pod.withExtra}</td>
                                       <td>{pod.previousQty}</td>
                                       <td>{pod.LayCount}</td>
-                                      <td>{pod.totalQty}</td>
+                                      <td style={{ maxWidth: '20px' }}>
+                                        {pod.isChecked ? (
+                                          <Input
+                                            id="totalQty"
+                                            type="number"
+                                            name="totalQty"
+                                            value={pod.totalQty}
+                                            bsSize="sm"
+                                            onChange={e => onOutQuantityChange(e, odidx, podIdx)}
+                                          />
+                                        ) : (
+                                          pod.totalQty
+                                        )}
+                                      </td>
                                       <td>
                                         <MoreVertical color="#7367F0" />
                                       </td>
