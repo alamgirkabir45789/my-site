@@ -1,7 +1,6 @@
 .poDetailsTable {
-  position: relative;
   width: 100%;
-  box-sizing: border-box;
+
   thead {
     tr {
       th {
@@ -23,4 +22,16 @@
   position: sticky;
   top: 0;
   z-index: 2;
+}
+
+.childTable {
+  width: 95%;
+  margin: 0.5rem auto;
+  thead {
+    tr {
+      th {
+        background-color: rgba(115, 103, 240, 0.15) !important;
+      }
+    }
+  }
 }

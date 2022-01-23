@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-condition */
 /**
  * Title: Cut Plan Add Form
  * Description: Cut Plan Add Form
@@ -10,9 +9,8 @@
 import ActionMenu from 'layouts/components/menu/action-menu';
 import moment from 'moment';
 import React, { Fragment, useState } from 'react';
-import { Maximize2 } from 'react-feather';
+import { Maximize2, Minimize2, MoreVertical } from 'react-feather';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import {
   Badge,
@@ -20,6 +18,7 @@ import {
   Card,
   CardBody,
   Col,
+  Collapse,
   Form,
   FormFeedback,
   FormGroup,
@@ -27,9 +26,9 @@ import {
   Label,
   NavItem,
   NavLink,
-  Row
+  Row,
+  Table
 } from 'reactstrap';
-import ResizableTable from 'utility/custom/ResizableTable';
 import { randomIdGenerator, selectThemeColors } from 'utility/Utils';
 import classes from '../styles/CutPlanAddForm.module.scss';
 
@@ -40,12 +39,11 @@ const dropDownStyle = [
 ];
 
 const CutPlanAddForm = () => {
-  const { replace } = useHistory();
   const { register, errors, handleSubmit } = useForm();
 
   //#region State
   const [style, setStyle] = useState(null);
-  const [orderDetails] = useState([
+  const [orderDetails, setOrderDetails] = useState([
     {
       fieldId: randomIdGenerator(),
       poNo: 'PO101',
@@ -56,7 +54,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 5000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3000
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -68,7 +91,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 3500,
+          extra: 2,
+          withExtra: 3570,
+          previousQty: 1200,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 1170
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3500,
+          extra: 0,
+          withExtra: 3500,
+          previousQty: 1200,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 2300
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -80,7 +128,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3001
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -92,7 +165,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3002
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -104,7 +202,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3003
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -116,7 +239,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3003
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -128,7 +276,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3004
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -140,7 +313,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 5000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3005
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -152,7 +350,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3006
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -164,7 +387,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3007
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -176,7 +424,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3008
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -188,7 +461,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3009
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -200,7 +498,32 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3010
+        }
+      ]
     },
     {
       fieldId: randomIdGenerator(),
@@ -212,10 +535,41 @@ const CutPlanAddForm = () => {
       orderQuantity: 7000,
       orderUOM: 'pc',
       excessQuantity: 0,
-      wastageQuantity: 0
+      wastageQuantity: 0,
+      isOpen: false,
+      poDetails: [
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Red',
+          orderQuantity: 2000,
+          extra: 2,
+          withExtra: 2040,
+          previousQty: 0,
+          LayCount: 200,
+          totalQty: 1200,
+          balance: 840
+        },
+        {
+          fieldId: randomIdGenerator(),
+          color: 'Green',
+          orderQuantity: 3000,
+          extra: 0,
+          withExtra: 3000,
+          previousQty: 0,
+          LayCount: 0,
+          totalQty: 0,
+          balance: 3011
+        }
+      ]
     }
   ]);
-
+  const togglePoDetails = idx => {
+    const _orderDetails = [...orderDetails];
+    const clickedItem = _orderDetails[idx];
+    clickedItem.isOpen = !clickedItem.isOpen;
+    _orderDetails[idx] = clickedItem;
+    setOrderDetails(_orderDetails);
+  };
   //#endregion
 
   return (
@@ -240,7 +594,7 @@ const CutPlanAddForm = () => {
               </NavItem>
             </ActionMenu>
             <Row>
-              <Col xs="12" sm="12" md="6" lg="6" xl="6">
+              <Col xs="12" sm="12" md="12" lg="6" xl="6">
                 <Row className="border rounded rounded-3 mr-1">
                   <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12} className="mt-n1">
                     <Badge color="primary">{`Master Info`}</Badge>
@@ -381,7 +735,7 @@ const CutPlanAddForm = () => {
                 </Row>
               </Col>
 
-              <Col xs="12" sm="12" md="6" lg="6" xl="6">
+              <Col xs="12" sm="12" md="12" lg="6" xl="6">
                 <Row className="border rounded rounded-3">
                   <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12} className="mt-n1">
                     <Badge color="primary">{`Size Wise Ratio`}</Badge>
@@ -483,14 +837,8 @@ const CutPlanAddForm = () => {
               </FormGroup>
               <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12}>
                 {/* <div className="po-details-table"> */}
-                <ResizableTable
-                  mainClass="purchaseTable"
-                  tableId="purchaseTableId"
-                  className={classes.poDetailsTable}
-                  size="sm"
-                  responsive
-                >
-                  <thead className={`thead-light table-bordered ${classes.stickyTableHead}`}>
+                <Table className={classes.poDetailsTable} size="sm" responsive>
+                  <thead className={`thead-dark table-bordered ${classes.stickyTableHead}`}>
                     <tr className="text-center">
                       <th style={{ minWidth: '4px' }}>
                         <strong>#</strong>
@@ -527,19 +875,23 @@ const CutPlanAddForm = () => {
                     </tr>
                   </thead>
                   <tbody className="text-center">
-                    {orderDetails.map(i => (
+                    {orderDetails.map((i, idx) => (
                       <Fragment key={i.fieldId + i.fieldId}>
                         <tr key={i.fieldId}>
                           <td style={{ minWidth: '4px' }}>
-                            <Button.Ripple
+                            <Button
                               for="collapseId"
                               tag={Label}
-                              onClick={() => {}}
+                              onClick={() => togglePoDetails(idx)}
                               className="btn-sm"
                               color="flat-primary"
                             >
-                              <Maximize2 id="collapseId" size={15} color="#7367f0" />
-                            </Button.Ripple>
+                              {i.isOpen ? (
+                                <Minimize2 size={15} color="#57C69D" />
+                              ) : (
+                                <Maximize2 id="collapseId" size={15} color="#7367f0" />
+                              )}
+                            </Button>
                           </td>
                           <td>{i.poNo}</td>
                           <td>{i.destination}</td>
@@ -550,6 +902,49 @@ const CutPlanAddForm = () => {
                           <td>{i.orderUOM}</td>
                           <td>{i.excessQuantity}</td>
                           <td>{i.wastageQuantity}</td>
+                        </tr>
+                        <tr>
+                          <td
+                            colSpan={10}
+                            style={{ padding: '2px 10px !important', backgroundColor: '#fff' }}
+                          >
+                            <Collapse isOpen={i.isOpen}>
+                              <Table className={classes.childTable}>
+                                <thead className="thead-light table-bordered">
+                                  <tr>
+                                    <th></th>
+                                    <th>Color</th>
+                                    <th>Order Qty</th>
+                                    <th>Extra</th>
+                                    <th>With Extra</th>
+                                    <th>Previous</th>
+                                    <th>Lay Count</th>
+                                    <th>Total Qty</th>
+                                    <th>RC</th>
+                                    <th>Balance</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {i.poDetails.map(pod => (
+                                    <tr key={pod.fieldId}>
+                                      <td></td>
+                                      <td>{pod.color}</td>
+                                      <td>{pod.orderQuantity}</td>
+                                      <td>{pod.extra}</td>
+                                      <td>{pod.withExtra}</td>
+                                      <td>{pod.previousQty}</td>
+                                      <td>{pod.LayCount}</td>
+                                      <td>{pod.totalQty}</td>
+                                      <td>
+                                        <MoreVertical color="#7367F0" />
+                                      </td>
+                                      <td>{pod.balance}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </Table>
+                            </Collapse>
+                          </td>
                         </tr>
                         {/* <tr>
                             <td colSpan={7}>
@@ -598,7 +993,7 @@ const CutPlanAddForm = () => {
                       </Fragment>
                     ))}
                   </tbody>
-                </ResizableTable>
+                </Table>
                 {/* </div> */}
               </FormGroup>
               <hr />
@@ -606,24 +1001,6 @@ const CutPlanAddForm = () => {
           </Form>
         </CardBody>
       </Card>
-
-      <Row>
-        <Col className="d-flex flex-row-reverse">
-          <div className="d-inline-block mb-1 mt-1">
-            <Button.Ripple
-              onClick={() => {
-                replace('/cut-plan');
-              }}
-              className="ml-1 "
-              outline
-              color="secondary"
-              size="sm"
-            >
-              Back to List
-            </Button.Ripple>
-          </div>
-        </Col>
-      </Row>
     </div>
   );
 };
