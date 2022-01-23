@@ -3,7 +3,7 @@
  * Description: Cut Plan Add Form
  * Author: Iqbal Hossain
  * Date: 05-January-2022
- * Modified: 18-January-2022
+ * Modified: 23-January-2022
  */
 
 import ActionMenu from 'layouts/components/menu/action-menu';
@@ -836,7 +836,6 @@ const CutPlanAddForm = () => {
                 <Badge color="primary">{`PO Details`}</Badge>
               </FormGroup>
               <FormGroup tag={Col} xs={12} sm={12} md={12} lg={12} xl={12}>
-                {/* <div className="po-details-table"> */}
                 <Table className={classes.poDetailsTable} size="sm" responsive>
                   <thead className={`thead-dark table-bordered ${classes.stickyTableHead}`}>
                     <tr className="text-center">
@@ -946,55 +945,10 @@ const CutPlanAddForm = () => {
                             </Collapse>
                           </td>
                         </tr>
-                        {/* <tr>
-                            <td colSpan={7}>
-                              {orderDetails.some(i => i.fieldId === i.fieldId) && (
-                                <Collapse
-                                  isOpen={isOpen.find(item => item.rowId === i.fieldId)?.yes}
-                                >
-                                  <Table>
-                                    <thead className="thead-dark table-bordered">
-                                      <tr>
-                                        <th>#</th>
-                                        <th>Style No</th>
-                                        <th>Product Category</th>
-                                        <th>Style Category</th>
-                                        <th>Size Range</th>
-                                        <th>Colors</th>
-                                        <th>Total Quantity</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <th scope="row">
-                                          <span>
-                                            <Button.Ripple
-                                              onClick={() => {}}
-                                              className="btn-icon"
-                                              color="flat-primary"
-                                            >
-                                              <Settings size={16} />
-                                            </Button.Ripple>
-                                          </span>
-                                        </th>
-                                        <td>{i.style?.label}</td>
-                                        <td>Top</td>
-                                        <td>DRESS</td>
-                                        <td>2T-3T-4T-5-6-7</td>
-                                        <td>PINK</td>
-                                        <td>120725</td>
-                                      </tr>
-                                    </tbody>
-                                  </Table>
-                                </Collapse>
-                              )}
-                            </td>
-                          </tr> */}
                       </Fragment>
                     ))}
                   </tbody>
                 </Table>
-                {/* </div> */}
               </FormGroup>
               <hr />
             </Row>
@@ -1006,3 +960,7 @@ const CutPlanAddForm = () => {
 };
 
 export default CutPlanAddForm;
+
+/**
+ * 23-Jan-2022 : add collapsible table in Cut plan create form
+ **/
