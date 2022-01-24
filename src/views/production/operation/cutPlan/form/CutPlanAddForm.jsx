@@ -67,19 +67,19 @@ const CutPlanAddForm = () => {
       excessQuantity: 0,
       wastageQuantity: 0,
       isOpen: false,
-
       poDetails: [
         {
           fieldId: randomIdGenerator(),
           color: 'Red',
           orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
+          extra: 0,
+          withExtra: 2000,
           previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000,
+          isChecked: false,
+          hasError: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -88,10 +88,11 @@ const CutPlanAddForm = () => {
           extra: 0,
           withExtra: 3000,
           previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
+          layCount: 0,
+          cutQuantity: 0,
           balance: 3000,
-          isChecked: false
+          isChecked: false,
+          hasError: false
         }
       ]
     },
@@ -113,13 +114,14 @@ const CutPlanAddForm = () => {
           fieldId: randomIdGenerator(),
           color: 'Red',
           orderQuantity: 3500,
-          extra: 2,
-          withExtra: 3570,
+          extra: 0,
+          withExtra: 3500,
           previousQty: 1200,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 1170,
-          isChecked: false
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2300,
+          isChecked: false,
+          hasError: false
         },
         {
           fieldId: randomIdGenerator(),
@@ -127,491 +129,12 @@ const CutPlanAddForm = () => {
           orderQuantity: 3500,
           extra: 0,
           withExtra: 3500,
-          previousQty: 1200,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 2300,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO103',
-      destination: 'Norway',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3001,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO104',
-      destination: 'Belgium',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3002,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO105',
-      destination: 'Sweden',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3003,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO106',
-      destination: 'Switzerland',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3003,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO107',
-      destination: 'Netherlands',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3004,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO108',
-      destination: 'France',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 5000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3005,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO109',
-      destination: 'Germany',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3006,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO110',
-      destination: 'Japan',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3007,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO111',
-      destination: 'Canada',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3008,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO012',
-      destination: 'Taiwan',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3009,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO113',
-      destination: 'Australia',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3010,
-          isChecked: false
-        }
-      ]
-    },
-    {
-      fieldId: randomIdGenerator(),
-      poNo: 'PO114',
-      destination: 'Singapore',
-      inspectionDate: moment(new Date()).format('yy-MM-DD'),
-      shipmentMode: 'Air',
-      shipmentDate: moment(new Date()).format('yy-MM-DD'),
-      orderQuantity: 7000,
-      orderUOM: 'pc',
-      excessQuantity: 0,
-      wastageQuantity: 0,
-      isOpen: false,
-      isChecked: false,
-      poDetails: [
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Red',
-          orderQuantity: 2000,
-          extra: 2,
-          withExtra: 2040,
-          previousQty: 0,
-          LayCount: 200,
-          totalQty: 1200,
-          balance: 840,
-          isChecked: false
-        },
-        {
-          fieldId: randomIdGenerator(),
-          color: 'Green',
-          orderQuantity: 3000,
-          extra: 0,
-          withExtra: 3000,
-          previousQty: 0,
-          LayCount: 0,
-          totalQty: 0,
-          balance: 3011,
-          isChecked: false
+          previousQty: 2400,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 1100,
+          isChecked: false,
+          hasError: false
         }
       ]
     }
@@ -648,6 +171,8 @@ const CutPlanAddForm = () => {
     checkedItem.extra = e.target.value;
     checkedItem.withExtra =
       checkedItem.orderQuantity + (checkedItem.orderQuantity * checkedItem.extra) / 100;
+    const _balanceQty = checkedItem.withExtra - (checkedItem.previousQty + checkedItem.cutQuantity);
+    checkedItem.balance = _balanceQty;
     _podetails[podIdx] = checkedItem;
     _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
     setOrderDetails(_orderDetails);
@@ -664,9 +189,20 @@ const CutPlanAddForm = () => {
     // find child row of parent row
     const checkedItem = _podetails[podIdx];
     // mutate data of child row
-    checkedItem.totalQty = value ? +value : 0;
-    const _laycout = Number.isInteger(checkedItem.totalQty / 6) ? checkedItem.totalQty / 6 : 0;
-    checkedItem.LayCount = _laycout;
+    let _cutQty = value ? +value : 0;
+    checkedItem.hasError = false;
+    if (_cutQty > checkedItem.withExtra - checkedItem.previousQty) {
+      //notify('warning', 'Quantity exceeded!!!');
+      checkedItem.hasError = !checkedItem.hasError;
+      _cutQty = 0;
+    }
+    const _laycout = Number.isInteger(_cutQty / 6) ? _cutQty / 6 : 0;
+    checkedItem.cutQuantity = _cutQty;
+    checkedItem.layCount = _laycout;
+
+    const _balanceQty = checkedItem.withExtra - (checkedItem.previousQty + checkedItem.cutQuantity);
+    checkedItem.balance = _balanceQty;
+
     // replace chlid row with new one
     _podetails[podIdx] = checkedItem;
     // replace po details obj with new one
@@ -684,8 +220,8 @@ const CutPlanAddForm = () => {
     let totalQuantity = 0;
     for (let i = 0; i < checkedItems.length; i++) {
       const item = checkedItems[i];
-      totalLayCount += item.LayCount;
-      totalQuantity += item.totalQty;
+      totalLayCount += item.layCount;
+      totalQuantity += item.cutQuantity;
     }
 
     setOrderDetails(_orderDetails);
@@ -1042,7 +578,7 @@ const CutPlanAddForm = () => {
                                     <th>With Extra</th>
                                     <th>Previous</th>
                                     <th>Lay Count</th>
-                                    <th>Total Qty</th>
+                                    <th>Cut Qty</th>
                                     <th>RC</th>
                                     <th>Balance</th>
                                   </tr>
@@ -1070,6 +606,7 @@ const CutPlanAddForm = () => {
                                             name="extra"
                                             bsSize="sm"
                                             value={pod.extra}
+                                            onSelect={e => e.target.select()}
                                             onChange={e =>
                                               onExtraPercentageChange(e, odidx, podIdx)
                                             }
@@ -1080,19 +617,23 @@ const CutPlanAddForm = () => {
                                       </td>
                                       <td>{pod.withExtra}</td>
                                       <td>{pod.previousQty}</td>
-                                      <td>{pod.LayCount}</td>
+                                      <td>{pod.layCount}</td>
                                       <td style={{ maxWidth: '20px' }}>
                                         {pod.isChecked ? (
                                           <Input
                                             id="totalQty"
                                             type="number"
                                             name="totalQty"
-                                            value={pod.totalQty}
+                                            value={pod.cutQuantity}
+                                            onSelect={e => e.target.select()}
                                             bsSize="sm"
                                             onChange={e => onOutQuantityChange(e, odidx, podIdx)}
                                           />
                                         ) : (
-                                          pod.totalQty
+                                          pod.cutQuantity
+                                        )}
+                                        {pod.hasError && (
+                                          <span className="text-danger">limit exceeded</span>
                                         )}
                                       </td>
                                       <td>
