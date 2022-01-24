@@ -654,24 +654,42 @@ const CutPlanAddForm = () => {
   };
 
   const onOutQuantityChange = (e, odIdx, podIdx) => {
+    const { value } = e.target;
+    // introduce a copy of original order details
     const _orderDetails = [...orderDetails];
+    // find parent row
     const clickedItem = _orderDetails[odIdx];
+    // introduce a copy of original po details
     const _podetails = [...clickedItem.poDetails];
+    // find child row of parent row
     const checkedItem = _podetails[podIdx];
-    checkedItem.totalQty = e.target.value;
+    // mutate data of child row
+    checkedItem.totalQty = value ? +value : 0;
     const _laycout = Number.isInteger(checkedItem.totalQty / 6) ? checkedItem.totalQty / 6 : 0;
     checkedItem.LayCount = _laycout;
+    // replace chlid row with new one
     _podetails[podIdx] = checkedItem;
+    // replace po details obj with new one
     _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
-    let _abc;
-    for (let i = 0; i < _podetails.length; i++) {
-      const element = _podetails[i].LayCount;
-      console.log(element);
+
+    // get an arry with all selected child elements
+    const checkedItems = _orderDetails
+      .reduce((acc, curr) => {
+        curr.poDetails.map(po => acc.push(po));
+        return acc;
+      }, [])
+      .filter(item => item.isChecked);
+
+    let totalLayCount = 0;
+    let totalQuantity = 0;
+    for (let i = 0; i < checkedItems.length; i++) {
+      const item = checkedItems[i];
+      totalLayCount += item.LayCount;
+      totalQuantity += item.totalQty;
     }
 
     setOrderDetails(_orderDetails);
-
-    //setMasterInfo({ ...masterInfo, totalLayCount: +masterInfo.totalLayCount + _laycout });
+    setMasterInfo({ ...masterInfo, totalLayCount: totalLayCount, totalQty: totalQuantity });
   };
   //#endregion
 
@@ -795,6 +813,8 @@ const CutPlanAddForm = () => {
                       type="text"
                       name="totalQty"
                       placeholder="Total Quanity"
+                      value={masterInfo.totalQty}
+                      readOnly
                       innerRef={register({ required: true })}
                       invalid={errors.totalQty && true}
                     />
