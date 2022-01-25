@@ -66,7 +66,7 @@ const CutPlanAddForm = () => {
       orderUOM: 'pc',
       excessQuantity: 0,
       wastageQuantity: 0,
-      isOpen: false,
+      isOpen: true,
       poDetails: [
         {
           fieldId: randomIdGenerator(),
@@ -107,7 +107,7 @@ const CutPlanAddForm = () => {
       orderUOM: 'pc',
       excessQuantity: 0,
       wastageQuantity: 0,
-      isOpen: false,
+      isOpen: true,
       isChecked: false,
       poDetails: [
         {
@@ -150,14 +150,30 @@ const CutPlanAddForm = () => {
     setOrderDetails(_orderDetails);
   };
 
-  const toggleCheck = (odIdx, podIdx) => {
+  const toggleCheck = (e, odIdx, podIdx) => {
+    const { checked } = e.target;
     const _orderDetails = [...orderDetails];
     const clickedItem = _orderDetails[odIdx];
     const _podetails = [...clickedItem.poDetails];
-    const checkedItem = _podetails[podIdx];
-    checkedItem.isChecked = !checkedItem.isChecked;
+    const checkedItem = { ..._podetails[podIdx] };
+    const cloneCheckedItem = { ..._podetails[podIdx] };
+    checkedItem.isChecked = checked;
+
+    if (!checked) {
+      setMasterInfo({
+        ...masterInfo,
+        totalQty: masterInfo.totalQty - checkedItem.cutQuantity,
+        totalLayCount: masterInfo.totalLayCount - checkedItem.layCount
+      });
+      checkedItem.extra = 0;
+      checkedItem.withExtra = cloneCheckedItem.orderQuantity;
+      checkedItem.cutQuantity = 0;
+      checkedItem.layCount = 0;
+      checkedItem.balance = cloneCheckedItem.orderQuantity - cloneCheckedItem.previousQty;
+    }
     _podetails[podIdx] = checkedItem;
     _orderDetails[odIdx] = { ...clickedItem, poDetails: _podetails };
+
     setOrderDetails(_orderDetails);
   };
   //#endregion
@@ -233,11 +249,7 @@ const CutPlanAddForm = () => {
     <div>
       <Card className="p-1 mt-3">
         <CardBody>
-          <Form
-            onSubmit={() => {
-              handleSubmit;
-            }}
-          >
+          <Form onSubmit={e => e.preventDefault()}>
             <ActionMenu title="New Cut Plan">
               <NavItem className="mr-1">
                 <NavLink tag={Button} size="sm" color="primary" type="submit">
@@ -593,7 +605,7 @@ const CutPlanAddForm = () => {
                                           id={`pod-${pod.fieldId}`}
                                           checked={pod.isChecked}
                                           inline
-                                          onChange={() => toggleCheck(odidx, podIdx)}
+                                          onChange={e => toggleCheck(e, odidx, podIdx)}
                                         />
                                       </td>
                                       <td className="text-left">{pod.color}</td>
