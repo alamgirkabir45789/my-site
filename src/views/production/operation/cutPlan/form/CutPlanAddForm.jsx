@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /**
  * Title: Cut Plan Add Form
  * Description: Cut Plan Add Form
@@ -41,7 +40,7 @@ const dropDownStyle = [
 ];
 
 const CutPlanAddForm = () => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors } = useForm();
 
   //#region State
   const [masterInfo, setMasterInfo] = useState({
