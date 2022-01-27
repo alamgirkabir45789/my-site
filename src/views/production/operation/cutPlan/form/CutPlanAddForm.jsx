@@ -116,7 +116,27 @@ const CutPlanAddForm = () => {
   ];
 
   // eslint-disable-next-line no-unused-vars
-  const [orderDetails, setOrderDetails] = useState(data.map(item => ({ ...item, isOpen: false })));
+  const [orderDetails, setOrderDetails] = useState(
+    // data.map(item => ({
+    //   ...item,
+    //   isOpen: false,
+    //   details: item.details.map(m => ({ ...m, isChecked: false }))
+    // }))
+    data.map(item => {
+      const _item = { ...item };
+      _item.isOpen = false;
+      _item.details = _item.details.map(m => ({ ...m, isChecked: false }));
+      return _item;
+    })
+  );
+
+  console.log(orderDetails);
+
+  // const copyData = [...orderDetails];
+  // console.log(copyData.map(c => c.details.map(p => ({ ...p, check: false }))));
+
+  // const [check] = useState(orderDetails.map(i => i.details.map(c => ({ ...c, isChecked: false }))));
+  // console.log(check);
 
   const handleClick = index => {
     const _orderDetails = [...orderDetails];
@@ -124,6 +144,10 @@ const CutPlanAddForm = () => {
     clickedItem.isOpen = !clickedItem.isOpen;
     _orderDetails[index] = clickedItem;
     setOrderDetails(_orderDetails);
+  };
+
+  const handleCheck = oddId => {
+    console.log(oddId);
   };
 
   const handleCancel = () => {
@@ -428,10 +452,11 @@ const CutPlanAddForm = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {od.details.map(odd => (
+                            {od.details.map((odd, oddId) => (
                               <tr key={odd.id}>
                                 <td>
                                   <input
+                                    onClick={() => handleCheck(oddId)}
                                     type="checkbox"
                                     id="checkbox"
                                     name="checkbox"
