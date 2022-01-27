@@ -8,7 +8,7 @@
 
 import '@custom-styles/merchandising/others/custom-table.scss';
 import ActionMenu from 'layouts/components/menu/action-menu';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Maximize2, Minimize2, MoreVertical } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import CreatableSelect from 'react-select/creatable';
@@ -39,10 +39,91 @@ const dropDownStyle = [
 const CutPlanAddForm = () => {
   const { replace } = useHistory();
 
-  const [nestedTableOpen, setNestedTableOpen] = useState(false);
+  const data = [
+    {
+      id: 1,
+      poNo: 'PO101',
+      destination: 'Chaina',
+      inspectionDate: new Date().toLocaleDateString(),
+      shipmentMode: 'Air',
+      shipmentDate: new Date().toLocaleDateString(),
+      orderQty: 5000,
+      orderUOM: 'pc',
+      excess: 2,
+      wastage: 2,
 
-  const handleClick = () => {
-    setNestedTableOpen(!nestedTableOpen);
+      details: [
+        {
+          id: 101,
+          color: 'Red',
+          orderQty: 2000,
+          extra: 0,
+          withExtra: 2000,
+          previous: 0,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000
+        },
+        {
+          id: 102,
+          color: 'Red',
+          orderQty: 2000,
+          extra: 0,
+          withExtra: 2000,
+          previous: 0,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000
+        }
+      ]
+    },
+    {
+      id: 2,
+      poNo: 'PO102',
+      destination: 'Chaina',
+      inspectionDate: new Date().toLocaleDateString(),
+      shipmentMode: 'Air',
+      shipmentDate: new Date().toLocaleDateString(),
+      orderQty: 7000,
+      orderUOM: 'pc',
+      excess: 2,
+      wastage: 2,
+      details: [
+        {
+          id: 103,
+          color: 'Green',
+          orderQty: 2000,
+          extra: 0,
+          withExtra: 2000,
+          previous: 0,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000
+        },
+        {
+          id: 104,
+          color: 'Yellow',
+          orderQty: 2000,
+          extra: 0,
+          withExtra: 2000,
+          previous: 0,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000
+        }
+      ]
+    }
+  ];
+
+  // eslint-disable-next-line no-unused-vars
+  const [orderDetails, setOrderDetails] = useState(data.map(item => ({ ...item, isOpen: false })));
+
+  const handleClick = index => {
+    const _orderDetails = [...orderDetails];
+    const clickedItem = _orderDetails[index];
+    clickedItem.isOpen = !clickedItem.isOpen;
+    _orderDetails[index] = clickedItem;
+    setOrderDetails(_orderDetails);
   };
 
   const handleCancel = () => {
@@ -292,140 +373,113 @@ const CutPlanAddForm = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <Button.Ripple
-                  for="collapseId"
-                  tag={Label}
-                  onClick={handleClick}
-                  className="btn-icon"
-                  color="flat-primary"
-                >
-                  <Maximize2
-                    id="collapseId"
-                    className={!nestedTableOpen ? 'd-none' : 'd'}
-                    size={15}
-                    color="#7367f0"
-                  />
-                  <Minimize2
-                    id="collapseId"
-                    size={15}
-                    className={nestedTableOpen ? 'd-none' : 'd'}
-                    color="#28c76f"
-                  />
-                </Button.Ripple>
-              </td>
-              <td>PO-01</td>
-              <td>France</td>
-              <td>2022-01-25</td>
-              <td>Air</td>
-              <td>2022-01-25</td>
-              <td>5000</td>
-              <td>PC</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
+            {orderDetails.map((od, index) => {
+              return (
+                <Fragment key={od.id}>
+                  <tr>
+                    <td>
+                      <Button.Ripple
+                        for="collapseId"
+                        tag={Label}
+                        onClick={() => handleClick(index)}
+                        className="btn-icon"
+                        color="flat-primary"
+                      >
+                        <Maximize2
+                          id="collapseId"
+                          className={!od.isOpen ? 'd-none' : 'd'}
+                          size={15}
+                          color="#7367f0"
+                        />
+                        <Minimize2
+                          id="collapseId"
+                          size={15}
+                          className={od.isOpen ? 'd-none' : 'd'}
+                          color="#28c76f"
+                        />
+                      </Button.Ripple>
+                    </td>
+                    <td>{od.poNo}</td>
+                    <td>{od.destination}</td>
+                    <td>{od.inspectionDate}</td>
+                    <td>{od.shipmentMode}</td>
+                    <td>{od.shipmentDate}</td>
+                    <td>{od.orderQty}</td>
+                    <td>{od.orderUOM}</td>
+                    <td>{od.excess}</td>
+                    <td>{od.wastage}</td>
+                  </tr>
+                  <tr>
+                    <td colSpan={10}>
+                      <Collapse isOpen={od.isOpen}>
+                        <Table className="text-center">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Color</th>
+                              <th>Order Qty</th>
+                              <th>Extra</th>
+                              <th>With Extra</th>
+                              <th>Previous</th>
+                              <th>Lay Count</th>
+                              <th>Cut Qty</th>
+                              <th>RC</th>
+                              <th>Balance</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {od.details.map(odd => (
+                              <tr key={odd.id}>
+                                <td>
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox"
+                                    name="checkbox"
+                                    value="checkbox"
+                                  />
+                                </td>
+                                <td>{odd.color}</td>
+                                <td>{odd.orderQty}</td>
+                                <td>
+                                  <Input
+                                    className="text-center"
+                                    type="text"
+                                    id="extra"
+                                    name="extra"
+                                    placeholder="0"
+                                    bsSize="sm"
+                                  />
+                                </td>
+                                <td>{odd.withExtra}</td>
+                                <td>{odd.previous}</td>
+                                <td>{odd.layCount}</td>
+                                <td>
+                                  <Input
+                                    className="text-center"
+                                    type="text"
+                                    id="cutQuantity"
+                                    name="cutQuantity"
+                                    placeholder="0"
+                                    bsSize="sm"
+                                  />
+                                </td>
+                                <td>
+                                  <span>
+                                    <MoreVertical size={18} id="rcIds" color="purple" />
+                                  </span>
+                                </td>
+                                <td>{odd.balance}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </Collapse>
+                    </td>
+                  </tr>
+                </Fragment>
+              );
+            })}
           </tbody>
-
-          <>
-            <tr>
-              <td colSpan={10}>
-                <Collapse isOpen={nestedTableOpen}>
-                  <Table className="text-center">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Color</th>
-                        <th>Order Qty</th>
-                        <th>Extra</th>
-                        <th>With Extra</th>
-                        <th>Previous</th>
-                        <th>Lay Count</th>
-                        <th>Cut Qty</th>
-                        <th>RC</th>
-                        <th>Balance</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" />
-                        </td>
-                        <td>Red</td>
-                        <td>2000</td>
-                        <td>
-                          <Input
-                            className="text-center"
-                            type="text"
-                            id="extra"
-                            name="extra"
-                            placeholder="0"
-                            bsSize="sm"
-                          />
-                        </td>
-                        <td>2000</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>
-                          <Input
-                            className="text-center"
-                            type="text"
-                            id="cutQuantity"
-                            name="cutQuantity"
-                            placeholder="0"
-                            bsSize="sm"
-                          />
-                        </td>
-                        <td>
-                          <span>
-                            <MoreVertical size={18} id="rcIds" color="purple" />
-                          </span>
-                        </td>
-                        <td>2000</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Collapse>
-              </td>
-            </tr>
-          </>
-
-          {/* <Collapse isOpen={nestedTableOpen}>
-            <Table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Color</th>
-                  <th>Order Qty</th>
-                  <th>Extra</th>
-                  <th>With Extra</th>
-                  <th>Previous</th>
-                  <th>Lay Count</th>
-                  <th>Cut Qty</th>
-                  <th>RC</th>
-                  <th>Balance</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" />
-                  </td>
-                  <td>Red</td>
-                  <td>2000</td>
-                  <td>0</td>
-                  <td>2000</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>
-                    <MoreVertical size={18} id="rcIds" color="purple" />
-                  </td>
-                  <td>2000</td>
-                </tr>
-              </tbody>
-            </Table>
-          </Collapse> */}
         </Table>
       </div>
     </Card>
