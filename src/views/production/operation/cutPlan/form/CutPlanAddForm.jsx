@@ -110,11 +110,21 @@ const CutPlanAddForm = () => {
           layCount: 0,
           cutQuantity: 0,
           balance: 2000
+        },
+        {
+          id: 105,
+          color: 'Green',
+          orderQty: 2000,
+          extra: 0,
+          withExtra: 2000,
+          previous: 0,
+          layCount: 0,
+          cutQuantity: 0,
+          balance: 2000
         }
       ]
     }
   ];
-
   // eslint-disable-next-line no-unused-vars
   const [orderDetails, setOrderDetails] = useState(
     // data.map(item => ({
@@ -130,13 +140,7 @@ const CutPlanAddForm = () => {
     })
   );
 
-  console.log(orderDetails);
-
-  // const copyData = [...orderDetails];
-  // console.log(copyData.map(c => c.details.map(p => ({ ...p, check: false }))));
-
-  // const [check] = useState(orderDetails.map(i => i.details.map(c => ({ ...c, isChecked: false }))));
-  // console.log(check);
+  // console.log(orderDetails);
 
   const handleClick = index => {
     const _orderDetails = [...orderDetails];
@@ -146,8 +150,32 @@ const CutPlanAddForm = () => {
     setOrderDetails(_orderDetails);
   };
 
-  const handleCheck = oddId => {
-    console.log(oddId);
+  const handleCheckBoxChange = (e, index, oddId) => {
+    const { checked } = e.target;
+    console.log(checked);
+    const _details = [...orderDetails];
+    const checkedItem = _details.map(m => {
+      if (m.id === index) {
+        m.details.map(n => {
+          if (n.id === oddId) {
+            n.isChecked = checked;
+            // n.isChecked = !n.isChecked;
+          }
+          return n;
+        });
+      }
+      return m;
+    });
+    console.log(checkedItem);
+    setOrderDetails(checkedItem);
+
+    // const _details = [...orderDetails];
+    // const clickItem = _details[index];
+    // const checkedItem = [...clickItem.details];
+    // const checkIndex = checkedItem[oddId];
+    // checkIndex.isChecked = !checkIndex.isChecked;
+    // _details[checkIndex] = checkIndex;
+    // setOrderDetails(_details);
   };
 
   const handleCancel = () => {
@@ -452,41 +480,51 @@ const CutPlanAddForm = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {od.details.map((odd, oddId) => (
+                            {od?.details?.map(odd => (
                               <tr key={odd.id}>
                                 <td>
                                   <input
-                                    onClick={() => handleCheck(oddId)}
+                                    // onChange={() => handleCheckBoxChange(index, oddId)}
+                                    onChange={e => handleCheckBoxChange(e, od.id, odd.id)}
                                     type="checkbox"
                                     id="checkbox"
+                                    checked={odd.isChecked}
+                                    // checked={odd.isChecked ? 'checked' : ''}
                                     name="checkbox"
-                                    value="checkbox"
                                   />
                                 </td>
                                 <td>{odd.color}</td>
                                 <td>{odd.orderQty}</td>
                                 <td>
-                                  <Input
-                                    className="text-center"
-                                    type="text"
-                                    id="extra"
-                                    name="extra"
-                                    placeholder="0"
-                                    bsSize="sm"
-                                  />
+                                  {odd.isChecked ? (
+                                    <Input
+                                      className="text-center"
+                                      type="text"
+                                      id="extra"
+                                      name="extra"
+                                      placeholder="0"
+                                      bsSize="sm"
+                                    />
+                                  ) : (
+                                    odd.extra
+                                  )}
                                 </td>
                                 <td>{odd.withExtra}</td>
                                 <td>{odd.previous}</td>
                                 <td>{odd.layCount}</td>
                                 <td>
-                                  <Input
-                                    className="text-center"
-                                    type="text"
-                                    id="cutQuantity"
-                                    name="cutQuantity"
-                                    placeholder="0"
-                                    bsSize="sm"
-                                  />
+                                  {odd.isChecked ? (
+                                    <Input
+                                      className="text-center"
+                                      type="text"
+                                      id="cutQuantity"
+                                      name="cutQuantity"
+                                      placeholder="0"
+                                      bsSize="sm"
+                                    />
+                                  ) : (
+                                    odd.cutQuantity
+                                  )}
                                 </td>
                                 <td>
                                   <span>
