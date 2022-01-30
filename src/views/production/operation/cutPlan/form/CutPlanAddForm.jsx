@@ -125,6 +125,28 @@ const CutPlanAddForm = () => {
       ]
     }
   ];
+  const sizeData = {
+    width: '',
+    length: '',
+    total: 0,
+    sizeDetails: [
+      {
+        id: 1,
+        size: 'S',
+        quantity: 0
+      },
+      {
+        id: 2,
+        size: 'M',
+        quantity: 0
+      },
+      {
+        id: 3,
+        size: 'L',
+        quantity: 0
+      }
+    ]
+  };
   // eslint-disable-next-line no-unused-vars
   const [orderDetails, setOrderDetails] = useState(
     // data.map(item => ({
@@ -140,7 +162,56 @@ const CutPlanAddForm = () => {
     })
   );
 
-  // console.log(orderDetails);
+  const [sizeInfo, setSizeInfo] = useState(sizeData);
+
+  const onSizeInfoChange = (e, idx) => {
+    const { value } = e.target;
+    const clickItem = [...sizeInfo.sizeDetails];
+    const detailsIndex = clickItem[idx];
+    detailsIndex.quantity = value;
+    const totalQty = clickItem.reduce((acc, curr) => {
+      // acc += +curr.quantity;
+      acc += Number(curr.quantity);
+      // acc = acc + Number(curr.quantity);
+      return acc;
+    }, 0);
+    setSizeInfo({
+      ...sizeInfo,
+      detailsIndex,
+      total: totalQty
+    });
+  };
+  // const onCutQuantityChange = (e, index, oddId) => {
+  //   const { value } = e.target;
+  //   const _cutQuantityDetails = [...orderDetails];
+  //   const clickItem = _cutQuantityDetails[index];
+  //   const checkedItem = [...clickItem.details];
+  //   const checkIndex = checkedItem[oddId];
+  //   checkIndex.cutQuantity = Number(value);
+  //   // const withExtraBalance = checkIndex.orderQty + checkIndex.withExtra;
+  //   // console.log(withExtraBalance);
+  //   checkIndex.balance = checkIndex.balance - checkIndex.cutQuantity;
+  //   _cutQuantityDetails[checkIndex] = checkedItem;
+  //   setOrderDetails(_cutQuantityDetails);
+  //   console.log(checkIndex);
+  //   console.log(index);
+  //   console.log(oddId);
+  // };
+
+  const onDetailsExtraValueChange = (e, index, oddId) => {
+    const { value } = e.target;
+    const _extraDetails = [...orderDetails];
+    const clickItem = _extraDetails[index];
+    const checkItem = [...clickItem.details];
+    const checkIndex = checkItem[oddId];
+    checkIndex.extra = Number(value);
+    checkIndex.withExtra = checkIndex.orderQty + (checkIndex.orderQty * checkIndex.extra) / 100;
+    const _blance = checkIndex.withExtra - checkIndex.cutQuantity;
+    checkIndex.balance = _blance;
+    // _extraDetails[checkIndex] = checkItem;
+    setOrderDetails(_extraDetails);
+    console.log(checkIndex);
+  };
 
   const handleClick = index => {
     const _orderDetails = [...orderDetails];
@@ -150,32 +221,30 @@ const CutPlanAddForm = () => {
     setOrderDetails(_orderDetails);
   };
 
-  const handleCheckBoxChange = (e, index, oddId) => {
-    const { checked } = e.target;
-    console.log(checked);
+  const handleCheckBoxChange = (index, oddId) => {
     const _details = [...orderDetails];
-    const checkedItem = _details.map(m => {
-      if (m.id === index) {
-        m.details.map(n => {
-          if (n.id === oddId) {
-            n.isChecked = checked;
-            // n.isChecked = !n.isChecked;
-          }
-          return n;
-        });
-      }
-      return m;
-    });
-    console.log(checkedItem);
-    setOrderDetails(checkedItem);
+    const clickItem = _details[index];
+    const checkedItem = [...clickItem.details];
+    const checkIndex = checkedItem[oddId];
+    checkIndex.isChecked = !checkIndex.isChecked;
+    _details[checkIndex] = checkedItem;
+    setOrderDetails(_details);
 
+    // const { checked } = e.target;
     // const _details = [...orderDetails];
-    // const clickItem = _details[index];
-    // const checkedItem = [...clickItem.details];
-    // const checkIndex = checkedItem[oddId];
-    // checkIndex.isChecked = !checkIndex.isChecked;
-    // _details[checkIndex] = checkIndex;
-    // setOrderDetails(_details);
+    // const checkedItem = _details.map(m => {
+    //   if (m.id === index) {
+    //     m.details.map(n => {
+    //       if (n.id === oddId) {
+    //         n.isChecked = checked;
+    //         // n.isChecked = !n.isChecked;
+    //       }
+    //       return n;
+    //     });
+    //   }
+    //   return m;
+    // });
+    // setOrderDetails(checkedItem);
   };
 
   const handleCancel = () => {
@@ -290,115 +359,70 @@ const CutPlanAddForm = () => {
                 <Badge color="primary">{`Size Wise Ratio`}</Badge>
               </FormGroup>
               <Row className="p-1">
-                <Col lg={6} xl={6} md={6} sm={6} xs={6}>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="size"
-                      type="text"
-                      name="size"
-                      placeholder="Size"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="sSize"
-                      type="text"
-                      name="sSize"
-                      placeholder="S"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="mSize"
-                      type="text"
-                      name="mSize"
-                      placeholder="M"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="lSize"
-                      type="text"
-                      name="lSize"
-                      placeholder="L"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="total"
-                      type="text"
-                      name="total"
-                      placeholder="Total"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="width">Width</Label>
-                    <Input id="width" type="text" name="width" placeholder="Width" />
-                  </FormGroup>
-                </Col>
-                <Col lg={6} xl={6} md={6} sm={6} xs={6}>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="quantity"
-                      type="text"
-                      name="quantity"
-                      placeholder="Quantity"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      id="sSize"
-                      type="number"
-                      name="sSize"
-                      placeholder="0"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      id="mSize"
-                      type="number"
-                      name="mSize"
-                      placeholder="0"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      id="lSize"
-                      type="text"
-                      name="lSize"
-                      placeholder="0"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      className="text-center"
-                      disabled
-                      id="total"
-                      type="number"
-                      name="total"
-                      placeholder="0"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="length">Length</Label>
-                    <Input id="length" type="text" name="length" placeholder="Length" />
-                  </FormGroup>
-                </Col>
+                <FormGroup tag={Col} xs={6}>
+                  <Input
+                    className="text-center"
+                    disabled
+                    id="size"
+                    type="text"
+                    name="size"
+                    placeholder="Size"
+                  />
+                </FormGroup>
+                <FormGroup tag={Col} xs={6}>
+                  <Input
+                    className="text-center"
+                    disabled
+                    id="quantity"
+                    type="text"
+                    name="quantity"
+                    placeholder="Quantity"
+                  />
+                </FormGroup>
+
+                {sizeInfo.sizeDetails.map((m, idx) => (
+                  <Fragment key={m.id}>
+                    <FormGroup tag={Col} xs={6}>
+                      <Input
+                        className="text-center"
+                        disabled
+                        id="size"
+                        type="text"
+                        value={m.size}
+                      />
+                    </FormGroup>
+                    <FormGroup tag={Col} xs={6}>
+                      <Input
+                        className="text-center"
+                        id="quantity"
+                        type="number"
+                        value={m.quantity}
+                        onChange={e => onSizeInfoChange(e, idx)}
+                        onFocus={e => e.target.select()}
+                      />
+                    </FormGroup>
+                  </Fragment>
+                ))}
+
+                <FormGroup tag={Col} xs={6}>
+                  <Input
+                    className="text-center"
+                    disabled
+                    id="total"
+                    type="text"
+                    name="total"
+                    placeholder="Total"
+                  />
+                </FormGroup>
+                <FormGroup tag={Col} xs={6}>
+                  <Input
+                    className="text-center"
+                    disabled
+                    id="lSize"
+                    type="text"
+                    value={sizeInfo.total}
+                  />
+                </FormGroup>
               </Row>
             </div>
           </Col>
@@ -480,12 +504,12 @@ const CutPlanAddForm = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {od?.details?.map(odd => (
+                            {od?.details?.map((odd, oddId) => (
                               <tr key={odd.id}>
                                 <td>
                                   <input
-                                    // onChange={() => handleCheckBoxChange(index, oddId)}
-                                    onChange={e => handleCheckBoxChange(e, od.id, odd.id)}
+                                    onChange={() => handleCheckBoxChange(index, oddId)}
+                                    // onChange={e => handleCheckBoxChange(e, od.id, odd.id)}
                                     type="checkbox"
                                     id="checkbox"
                                     checked={odd.isChecked}
@@ -499,11 +523,12 @@ const CutPlanAddForm = () => {
                                   {odd.isChecked ? (
                                     <Input
                                       className="text-center"
-                                      type="text"
+                                      type="number"
                                       id="extra"
-                                      name="extra"
-                                      placeholder="0"
                                       bsSize="sm"
+                                      value={odd.extra}
+                                      onFocus={e => e.target.select()}
+                                      onChange={e => onDetailsExtraValueChange(e, index, oddId)}
                                     />
                                   ) : (
                                     odd.extra
@@ -516,11 +541,12 @@ const CutPlanAddForm = () => {
                                   {odd.isChecked ? (
                                     <Input
                                       className="text-center"
-                                      type="text"
+                                      type="number"
                                       id="cutQuantity"
-                                      name="cutQuantity"
-                                      placeholder="0"
                                       bsSize="sm"
+                                      value={odd.cutQuantity}
+                                      onFocus={e => e.target.select()}
+                                      onChange={e => onDetailsExtraValueChange(e, index, oddId)}
                                     />
                                   ) : (
                                     odd.cutQuantity
