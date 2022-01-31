@@ -27,6 +27,7 @@ import {
   Row,
   Table
 } from 'reactstrap';
+import { notify } from 'utility/custom/notifications';
 
 const dropDownStyle = [
   {
@@ -59,6 +60,7 @@ const CutPlanAddForm = () => {
           orderQty: 2000,
           extra: 0,
           withExtra: 2000,
+          hasError: false,
           previous: 0,
           layCount: 0,
           cutQuantity: 0,
@@ -70,6 +72,8 @@ const CutPlanAddForm = () => {
           orderQty: 2000,
           extra: 0,
           withExtra: 2000,
+          hasError: false,
+
           previous: 0,
           layCount: 0,
           cutQuantity: 0,
@@ -95,6 +99,8 @@ const CutPlanAddForm = () => {
           orderQty: 2000,
           extra: 0,
           withExtra: 2000,
+          hasError: false,
+
           previous: 0,
           layCount: 0,
           cutQuantity: 0,
@@ -106,6 +112,8 @@ const CutPlanAddForm = () => {
           orderQty: 2000,
           extra: 0,
           withExtra: 2000,
+          hasError: false,
+
           previous: 0,
           layCount: 0,
           cutQuantity: 0,
@@ -117,6 +125,8 @@ const CutPlanAddForm = () => {
           orderQty: 2000,
           extra: 0,
           withExtra: 2000,
+          hasError: false,
+
           previous: 0,
           layCount: 0,
           cutQuantity: 0,
@@ -156,7 +166,7 @@ const CutPlanAddForm = () => {
     // }))
     data.map(item => {
       const _item = { ...item };
-      _item.isOpen = false;
+      _item.isOpen = true;
       _item.details = _item.details.map(m => ({ ...m, isChecked: false }));
       return _item;
     })
@@ -181,22 +191,66 @@ const CutPlanAddForm = () => {
       total: totalQty
     });
   };
-  // const onCutQuantityChange = (e, index, oddId) => {
-  //   const { value } = e.target;
-  //   const _cutQuantityDetails = [...orderDetails];
-  //   const clickItem = _cutQuantityDetails[index];
-  //   const checkedItem = [...clickItem.details];
-  //   const checkIndex = checkedItem[oddId];
-  //   checkIndex.cutQuantity = Number(value);
-  //   // const withExtraBalance = checkIndex.orderQty + checkIndex.withExtra;
-  //   // console.log(withExtraBalance);
-  //   checkIndex.balance = checkIndex.balance - checkIndex.cutQuantity;
-  //   _cutQuantityDetails[checkIndex] = checkedItem;
-  //   setOrderDetails(_cutQuantityDetails);
-  //   console.log(checkIndex);
-  //   console.log(index);
-  //   console.log(oddId);
-  // };
+  const onCutQuantityChange = (e, index, oddId) => {
+    const { value } = e.target;
+    const _cutQuantityDetails = [...orderDetails];
+    const clickItem = _cutQuantityDetails[index];
+    const checkedItem = [...clickItem.details];
+    const checkIndex = checkedItem[oddId];
+
+    checkIndex.hasError = false;
+    let cutQty = value ? Number(value) : 0;
+    // let cutQty = value ? +value : 0;
+
+    // if (cutQty > checkIndex.withExtra) {
+    //   notify('warning', 'limit exceds');
+    //   checkIndex.hasError = !checkIndex.hasError;
+    //   cutQty = 0;
+    // }
+    if (sizeInfo.total === 0) {
+      notify('warning', 'Size info not found!!!');
+    } else if (cutQty > checkIndex.withExtra) {
+      notify('warning', 'limit exceds');
+      checkIndex.hasError = !checkIndex.hasError;
+      cutQty = 0;
+    }
+
+    checkIndex.layCount = !Number.isInteger(cutQty / sizeInfo.total)
+      ? checkIndex.layCount
+      : cutQty / sizeInfo.total;
+
+    checkIndex.cutQuantity = cutQty;
+    checkIndex.balance = checkIndex.withExtra - checkIndex.cutQuantity;
+
+    // let cutQtyInputValue = value ? Number(value) : 0;
+    // if (cutQtyInputValue > checkIndex.withExtra) {
+    //   notify('warning', 'limit exceds');
+    //   cutQtyInputValue = 0;
+    // }
+    // checkIndex.cutQuantity = cutQtyInputValue;
+    // checkIndex.balance = checkIndex.withExtra - checkIndex.cutQuantity;
+
+    // checkIndex.balance =
+    //   checkIndex.withExtra - checkIndex.cutQuantity < 0
+    //     ? checkIndex.withExtra
+    //     : checkIndex.withExtra - checkIndex.cutQuantity;
+
+    // checkIndex.cutQuantity =
+    //   checkIndex.withExtra - checkIndex.cutQuantity < 0
+    //     ? checkIndex.cutQuantity === 0 && alert('limit exceds')
+    //     : checkIndex.cutQuantity;
+
+    // const checkedItemValueCheck = () => {
+    //   if (checkIndex.balance < 0) {
+    //     checkIndex.balance = checkIndex.withExtra;
+    //     checkIndex.cutQuantity == 0;
+    //   }
+    // };
+    // console.log(checkedItemValueCheck);
+
+    _cutQuantityDetails[checkIndex] = checkedItem;
+    setOrderDetails(_cutQuantityDetails);
+  };
 
   const onDetailsExtraValueChange = (e, index, oddId) => {
     const { value } = e.target;
@@ -210,7 +264,6 @@ const CutPlanAddForm = () => {
     checkIndex.balance = _blance;
     // _extraDetails[checkIndex] = checkItem;
     setOrderDetails(_extraDetails);
-    console.log(checkIndex);
   };
 
   const handleClick = index => {
@@ -546,7 +599,7 @@ const CutPlanAddForm = () => {
                                       bsSize="sm"
                                       value={odd.cutQuantity}
                                       onFocus={e => e.target.select()}
-                                      onChange={e => onDetailsExtraValueChange(e, index, oddId)}
+                                      onChange={e => onCutQuantityChange(e, index, oddId)}
                                     />
                                   ) : (
                                     odd.cutQuantity
